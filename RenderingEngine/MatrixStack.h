@@ -15,7 +15,7 @@ public:
 	glm::mat4 top() const;
 
 	//operations done on stack top
-	void rotate(float angle, const glm::vec3 &axsis);
+	void rotate(float angle, const glm::vec3 &axis);
 	void translate(const glm::vec3 &translation);
 	void scale(const glm::vec3 &factor);
 

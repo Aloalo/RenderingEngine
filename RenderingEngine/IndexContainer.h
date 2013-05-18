@@ -16,7 +16,7 @@ public:
 
 private:
 	template <class T>
-	void cast(const std::vector<unsigned int> &indexData, T x);
+	void cast(const std::vector<unsigned int> &indexData);
 	void *data;
 	int indexCount;
 	int sizeInBytes;

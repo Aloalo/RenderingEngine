@@ -30,9 +30,9 @@ glm::mat4 MatrixStack::top() const
 	return matrixStack.top();
 }
 
-void MatrixStack::rotate(float angle, const glm::vec3 &axsis)
+void MatrixStack::rotate(float angle, const glm::vec3 &axis)
 {
-	matrixStack.top() = glm::rotate(matrixStack.top(), angle, axsis);
+	matrixStack.top() = glm::rotate(matrixStack.top(), angle, axis);
 }
 
 void MatrixStack::translate(const glm::vec3 &translation)
