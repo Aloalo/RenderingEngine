@@ -30,7 +30,7 @@ int _tmain(int argc, char* argv[])
 	MeshTester *test = new MeshTester();
 	e->addToDisplayList(std::shared_ptr<Drawable>(test));
 	test = NULL;
-
+	 
 	e->start();
 	return 0;
 }
