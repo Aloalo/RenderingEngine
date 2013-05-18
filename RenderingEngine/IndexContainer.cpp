@@ -4,11 +4,11 @@ IndexContainer::IndexContainer(const std::vector<unsigned int> &indexData)
 {
 	indexCount = indexData.size();
 	if(indexCount <= UCHAR_MAX)
-		cast(indexData, (unsigned char)0);
+		cast<unsigned char>(indexData);
 	else if(indexCount <= USHRT_MAX)
-		cast(indexData, (unsigned short)0);
+		cast<unsigned short>(indexData);
 	else
-		cast(indexData, (unsigned int)0);
+		cast<unsigned int>(indexData);
 }
 
 IndexContainer::IndexContainer(void)
@@ -38,7 +38,7 @@ const void* IndexContainer::getData() const
 
 
 template <class T>
-void IndexContainer::cast(const std::vector<unsigned int> &indexData, T x)
+void IndexContainer::cast(const std::vector<unsigned int> &indexData)
 {
 	data = new T[indexCount];
 	for(int i = 0; i < indexCount; i++)
