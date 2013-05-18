@@ -25,9 +25,11 @@ int _tmain(int argc, char* argv[])
 
 	MySphere *s = new MySphere(32, 32, 1.0f);
 	e->addToDisplayList(std::shared_ptr<Drawable>(s));
+	s = NULL;
 
 	MeshTester *test = new MeshTester();
 	e->addToDisplayList(std::shared_ptr<Drawable>(test));
+	test = NULL;
 
 	e->start();
 	return 0;
