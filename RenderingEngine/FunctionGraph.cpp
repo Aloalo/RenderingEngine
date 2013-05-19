@@ -39,7 +39,7 @@ void FunctionGraph::catchData(const glm::vec2 x[3])
 
 void FunctionGraph::subdivide(const glm::vec2 x[3], int depth, float cutoff)
 {
-	if(depth == 0)
+	if(depth == 0 || (f->curvature(x[0]) < cutoff && f->curvature(x[1]) < cutoff && f->curvature(x[2]) < cutoff))
 	{
 		catchData(x);
 		return;
