@@ -16,7 +16,7 @@ public:
 	~NormalDrawer(void);
 
 	void initDrawing();
-	void draw(const glm::mat4 &ViewProjection);
+	void draw(const glm::mat4 &View, const glm::mat4 &Projection);
 
 private:
 	void init(const Mesh *mesh);

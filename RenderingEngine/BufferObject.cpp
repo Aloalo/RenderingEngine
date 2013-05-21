@@ -15,11 +15,18 @@ BufferObject::BufferObject(GLenum _target, GLenum _usage, const GLvoid *data, GL
 	setData(data, size);
 }
 
+BufferObject::BufferObject()
+{
+}
+
 BufferObject::~BufferObject(void)
+{
+}
+
+void BufferObject::destroy()
 {
 	glDeleteBuffers(1, &ID);
 }
-
 
 void BufferObject::unBind() const
 {

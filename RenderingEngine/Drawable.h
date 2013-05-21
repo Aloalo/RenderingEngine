@@ -10,6 +10,6 @@ public:
 	virtual ~Drawable(void);
 
 	virtual void initDrawing() = 0;
-	virtual void draw(const glm::mat4 &ViewProjection) = 0;
+	virtual void draw(const glm::mat4 &View, const glm::mat4 &Projection) = 0;
 };
 

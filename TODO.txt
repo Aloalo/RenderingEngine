@@ -1,0 +1,11 @@
+TO implement:
+
+-neka vrsta collision supporta
+-texture
+-light/shading
+-2D text
+-fps counter
+
+TO fix
+- vertex
+- mesh orientation

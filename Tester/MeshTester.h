@@ -16,15 +16,15 @@ public:
 	~MeshTester(void);
 
 	void initDrawing();
-	void draw(const glm::mat4 &ViewProjection);
+	void draw(const glm::mat4 &View, const glm::mat4 &Projection);
 
 private:
 	Mesh *mesh;
 	Program *p;
-	VertexAttribArray *attrib;
-	VertexArrayObject *triangleVAO;
-	BufferObject *vertices;
-	BufferObject *indices;
+	VertexAttribArray attrib;
+	VertexArrayObject triangleVAO;
+	BufferObject vertices;
+	BufferObject indices;
 
 	glm::mat4 Model;
 };

@@ -42,9 +42,9 @@ void NormalDrawer::initDrawing()
 	norAttrib->attribPointer();
 }
 
-void NormalDrawer::draw(const glm::mat4 &ViewProjection)
+void NormalDrawer::draw(const glm::mat4 &View, const glm::mat4 &Projection)
 {
-	glm::mat4 VP = ViewProjection * Model;
+	glm::mat4 VP = Projection * View * Model;
 
 	p->use();
 	p->setUniform("MVP", 1, &VP);

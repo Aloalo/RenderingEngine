@@ -11,6 +11,7 @@ public:
 
 	static void unBind();
 
+	void destroy();
 	void bind() const;
 	GLuint get() const;
 

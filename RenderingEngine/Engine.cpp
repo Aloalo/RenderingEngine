@@ -1,6 +1,7 @@
 #include "Engine.h"
 #include <GL/glfw.h>
 #include "Input.h"
+#include "UniformBlockHandler.h"
 
 int Engine::windowWidth = 1024;
 int Engine::windowHeight = 768;
@@ -141,13 +142,14 @@ inline void Engine::nextFrame()
 		(*i)->update(deltaTime);
 	}
 
-	glm::mat4 VPmatrix = getViewProjectionMatrix();
+	glm::mat4 ViewMatrix = cam->getViewMatrix();
+	glm::mat4 ProjectionMatrix = cam->getProjectionMatrix();
 
 	for(std::list<std::shared_ptr<Drawable> >::iterator i = displayList.begin(); i != displayList.end(); i++)
 	{
 		if(*i == NULL)
 			displayList.erase(i);
-		(*i)->draw(VPmatrix);
+		(*i)->draw(ViewMatrix, ProjectionMatrix);
 	}
 
 	glfwSwapBuffers();
@@ -156,9 +158,4 @@ inline void Engine::nextFrame()
 void Engine::setBackgroundColor(glm::vec4 color)
 {
 	backgroundColor = color;
-}
-
-glm::mat4 Engine::getViewProjectionMatrix()
-{
-	return cam->getProjectionMatrix() * cam->getViewMatrix();
 }

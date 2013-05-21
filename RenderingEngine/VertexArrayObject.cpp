@@ -9,7 +9,6 @@ VertexArrayObject::VertexArrayObject(void)
 
 VertexArrayObject::~VertexArrayObject(void)
 {
-	glDeleteVertexArrays(1, &ID);
 }
 
 void VertexArrayObject::bind() const
@@ -25,4 +24,9 @@ GLuint VertexArrayObject::get() const
 void VertexArrayObject::unBind()
 {
 	glBindVertexArray(0);
+}
+
+void VertexArrayObject::destroy()
+{
+	glDeleteVertexArrays(1, &ID);
 }
