@@ -22,6 +22,10 @@ MeshTester::MeshTester(void)
 	FunctionGraph graph(new SineCosine());
 	graph.generateGraph(x, 7, -1000.0f, mesh);
 	graph.generateGraph(x+3, 7, -1000.0f, mesh);
+
+	mesh->setOrientation(GL_CCW);
+	mesh->calculateNormals();
+	mesh->interpolateNormals();
 	mesh->applyIndexing();
 
 	Engine::addToDisplayList(std::shared_ptr<Drawable>(new NormalDrawer(mesh, Model)));

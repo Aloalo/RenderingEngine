@@ -26,25 +26,8 @@ namespace MathFunctions
 		return glm::normalize(lerp(start, end, factor));
 	}
 
-
-	
-
-/*	template <class T>
-	void MathFunctions<T>::subdivide(const T x[4], int depth, float cutoff, void (*atEndDepth)(const T x[4]))
+	float ccw(const glm::vec3 &a, const glm::vec3 &b, const glm::vec3 &c)
 	{
-		if(depth == 0)
-		{
-			atEndDepth(x);
-			return;
-		}
-
-		T x12 = (x1 + x2) / 2.0f;
-		T x23 = (x2 + x3) / 2.0f;
-		T x31 = (x3 + x1) / 2.0f;
-
-		subdivide(x1, x12, x31, depth-1, cutoff, atEndDepth);
-		subdivide(x2, x23, x12, depth-1, cutoff, atEndDepth);
-		subdivide(x3, x31, x23, depth-1, cutoff, atEndDepth);
-		subdivide(x12, x23, x31, depth-1, cutoff, atEndDepth);
-	}*/
+		return glm::dot(a, glm::cross(b, c));
+	}
 }

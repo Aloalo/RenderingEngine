@@ -12,6 +12,7 @@ namespace MathFunctions
 	glm::vec3 sLerp(const glm::vec3 &start, const glm::vec3 &end, float factor);
 	glm::vec3 lerp(const glm::vec3 &start, const glm::vec3 &end, float factor);
 	glm::vec3 nLerp(const glm::vec3 &start, const glm::vec3 &end, float factor);
+	float ccw(const glm::vec3 &a, const glm::vec3 &b, const glm::vec3 &c);
 }
 
 

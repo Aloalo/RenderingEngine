@@ -14,6 +14,6 @@ public:
 	//curvature = (Fxx * Fyy - Fxy^2) / (1 + Fx + Fy)^2
 	virtual float curvature(const glm::vec2 &x) const = 0;
 
-	float operator[] (const glm::vec2 &x) const;
+	float operator() (const glm::vec2 &x) const;
 };
 

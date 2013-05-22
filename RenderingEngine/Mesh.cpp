@@ -4,28 +4,25 @@
 #include <algorithm>
 #include <GL/glew.h>
 #include "glm/gtc/swizzle.hpp"
+#include "MathFunctions.h"
 
 Mesh::Mesh(const std::vector<glm::vec3> &_vertexData)
 	: vertexData(_vertexData)
 {
-	orientation = 1.0f;
 }
 
 Mesh::Mesh(const std::vector<glm::vec3> &_vertexData, const std::vector<glm::vec3> &_normalData)
 	: vertexData(_vertexData), normalData(_normalData)
 {
-	orientation = 1.0f;
 }
 
 Mesh::Mesh(const std::vector<glm::vec3> &_vertexData, const std::vector<glm::vec3> &_normalData, const std::vector<glm::vec2> &_uvData)
 	: vertexData(_vertexData), normalData(_normalData), uvData(_uvData)
 {
-	orientation = 1.0f;
 }
 
 Mesh::Mesh()
 {
-	orientation = 1.0f;
 }
 
 Mesh::~Mesh(void)
@@ -64,14 +61,15 @@ void Mesh::calculateNormals()
 {
 	normalData.clear();
 	int n = vertexData.size();
+	float flip = orientation == GL_CCW ? 1.0f : -1.0f;
 	for(int i = 0; i < n; i += 3)
 	{
 		glm::vec3 normal = -glm::cross(vertexData[i + 1] - vertexData[i], vertexData[i + 2] - vertexData[i]);
 		normal = glm::normalize(normal);
 
-		normalData.push_back(orientation * normal);
-		normalData.push_back(orientation * normal);
-		normalData.push_back(orientation * normal);
+		normalData.push_back(flip * normal);
+		normalData.push_back(flip * normal);
+		normalData.push_back(flip * normal);
 	}
 }
 
@@ -156,18 +154,12 @@ void Mesh::applyIndexing()
 
 void Mesh::flipOrientation()
 {
-}
-
-void Mesh::orientate()
-{
+	orientation == GL_CCW ? orientation = GL_CW : orientation = GL_CCW;
 }
 
 void Mesh::setOrientation(unsigned int _orientation)
 {
-	if(_orientation == GL_CCW)
-		orientation = 1.0f;
-	else if(_orientation == GL_CW)
-		orientation = -1.0f;
+	orientation = _orientation;
 }
 
 const glm::vec3* Mesh::getVertexData() const

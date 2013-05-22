@@ -13,6 +13,7 @@ MySphere::MySphere(int slices, int stacks, float radius)
 	sphereMesh = new Mesh(sphere->generate(4));
 	delete sphere;
 
+	sphereMesh->setOrientation(GL_CCW);
 	sphereMesh->calculateNormals();
 	sphereMesh->interpolateNormals();
 	sphereMesh->applyIndexing();
