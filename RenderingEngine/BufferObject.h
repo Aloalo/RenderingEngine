@@ -5,10 +5,12 @@
 class BufferObject
 {
 public:
+	BufferObject();
 	BufferObject(GLenum _target, GLenum _usage);
 	BufferObject(GLenum _target, GLenum _usage, const GLvoid *data, GLsizei size);
 	~BufferObject(void);
 
+	void destroy();
 	void unBind() const;
 	void bind() const;
 	void bindBufferBase(GLuint bindingPoint) const;

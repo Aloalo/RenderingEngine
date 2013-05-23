@@ -29,8 +29,6 @@ public:
 	static void setBufferClearMask(GLbitfield _mask);
 	static void setBackgroundColor(glm::vec4 color);
 
-	static glm::mat4 getViewProjectionMatrix();
-
 private:
 	static void initalizeLists();
 

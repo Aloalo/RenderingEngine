@@ -24,14 +24,14 @@ void FunctionGraph::catchData(const glm::vec2 x[3])
 {
 	const glm::vec3 triangle[] =
 	{
-		glm::vec3(x[0].x, (*f)[x[0]], x[0].y),
-		glm::vec3(x[1].x, (*f)[x[1]], x[1].y),
-		glm::vec3(x[2].x, (*f)[x[2]], x[2].y)
+		glm::vec3(x[1].x, (*f)(x[1]), x[1].y),
+		glm::vec3(x[0].x, (*f)(x[0]), x[0].y),
+		glm::vec3(x[2].x, (*f)(x[2]), x[2].y)
 	};
 	const glm::vec3 normals[] =
 	{
-		f->normal(x[0]),
 		f->normal(x[1]),
+		f->normal(x[0]),
 		f->normal(x[2])
 	};
 	out->addTriangle(triangle, normals);
@@ -39,7 +39,7 @@ void FunctionGraph::catchData(const glm::vec2 x[3])
 
 void FunctionGraph::subdivide(const glm::vec2 x[3], int depth, float cutoff)
 {
-	if(depth == 0)
+	if(depth == 0 || (f->curvature(x[0]) < cutoff && f->curvature(x[1]) < cutoff && f->curvature(x[2]) < cutoff))
 	{
 		catchData(x);
 		return;

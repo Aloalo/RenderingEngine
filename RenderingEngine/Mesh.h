@@ -23,7 +23,6 @@ public:
 	void interpolateNormals();
 	void applyIndexing();
 	void flipOrientation();
-	void orientate();
 
 	void setOrientation(unsigned int _orientation);
 
@@ -50,6 +49,6 @@ private:
 
 	IndexContainer *indexData;
 
-	float orientation;
+	unsigned int orientation;
 };
 

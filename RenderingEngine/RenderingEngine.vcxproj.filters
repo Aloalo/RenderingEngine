@@ -55,15 +55,33 @@
     <Filter Include="Header Files\Engine\Camera">
       <UniqueIdentifier>{90a32d6b-22f8-4a7d-8761-de65d51be5c2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Light">
-      <UniqueIdentifier>{032e08bb-fa14-4e6b-bb5e-e789dde9441b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Light">
-      <UniqueIdentifier>{1ef3e68b-c0bb-4142-8fe9-93335dd113e6}</UniqueIdentifier>
+    <Filter Include="Header Files\Stock\Shaders">
+      <UniqueIdentifier>{73ca07d5-d897-470f-a6a7-bf0a804d9cd2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
+    <None Include="StockShaders\Simple.vert">
+      <Filter>Header Files\Stock\Shaders</Filter>
+    </None>
+    <None Include="StockShaders\Simple.frag">
+      <Filter>Header Files\Stock\Shaders</Filter>
+    </None>
+    <None Include="StockShaders\NormalShader.vert">
+      <Filter>Header Files\Stock\Shaders</Filter>
+    </None>
+    <None Include="StockShaders\NormalShader.geom">
+      <Filter>Header Files\Stock\Shaders</Filter>
+    </None>
+    <None Include="StockShaders\NormalShader.frag">
+      <Filter>Header Files\Stock\Shaders</Filter>
+    </None>
+    <None Include="StockShaders\ADS.vert">
+      <Filter>Header Files\Stock\Shaders</Filter>
+    </None>
+    <None Include="StockShaders\ADS.frag">
+      <Filter>Header Files\Stock\Shaders</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="VertexAttribArray.cpp">
@@ -156,14 +174,8 @@
     <ClCompile Include="CameraHandler.cpp">
       <Filter>Source Files\Engine\Camera</Filter>
     </ClCompile>
-    <ClCompile Include="Light.cpp">
-      <Filter>Source Files\Light</Filter>
-    </ClCompile>
-    <ClCompile Include="LightHandler.cpp">
-      <Filter>Source Files\Light</Filter>
-    </ClCompile>
-    <ClCompile Include="UniformBufferList.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="UniformBlockHandler.cpp">
+      <Filter>Source Files\Engine</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -257,14 +269,8 @@
     <ClInclude Include="CameraHandler.h">
       <Filter>Header Files\Engine\Camera</Filter>
     </ClInclude>
-    <ClInclude Include="LightHandler.h">
-      <Filter>Header Files\Light</Filter>
-    </ClInclude>
-    <ClInclude Include="Light.h">
-      <Filter>Header Files\Light</Filter>
-    </ClInclude>
-    <ClInclude Include="UniformBufferList.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="UniformBlockHandler.h">
+      <Filter>Header Files\Engine</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

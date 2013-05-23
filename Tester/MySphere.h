@@ -16,13 +16,13 @@ public:
 	~MySphere(void);
 
 	void initDrawing();
-	void draw(const glm::mat4 &ViewProjection);
+	void draw(const glm::mat4 &View, const glm::mat4 &Projection);
 
 private:
-	VertexArrayObject *sphereVAO;
-	BufferObject *vertexBuffer;
-	BufferObject *indexBuffer;
-	VertexAttribArray *attrib;
+	VertexArrayObject sphereVAO;
+	BufferObject vertexBuffer;
+	BufferObject indexBuffer;
+	VertexAttribArray attrib;
 	Program *p;
 
 	Mesh *sphereMesh;

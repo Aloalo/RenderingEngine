@@ -19,13 +19,13 @@ public:
 	void update(float deltaTime);
 
 	void initDrawing();
-	void draw(const glm::mat4 &ViewProjection);
+	void draw(const glm::mat4 &View, const glm::mat4 &Projection);
 
 private:
 	Program *p;
-	VertexAttribArray *attrib;
-	VertexArrayObject *triangleVAO;
-	BufferObject *vertices;
+	VertexAttribArray attrib;
+	VertexArrayObject triangleVAO;
+	BufferObject vertices;
 
 	float angle;
 	float angularVel;

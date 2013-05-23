@@ -85,6 +85,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
+    <None Include="StockShaders\ADS.frag" />
+    <None Include="StockShaders\ADS.vert" />
+    <None Include="StockShaders\NormalShader.frag" />
+    <None Include="StockShaders\NormalShader.geom" />
+    <None Include="StockShaders\NormalShader.vert" />
+    <None Include="StockShaders\Simple.frag" />
+    <None Include="StockShaders\Simple.vert" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BufferObject.cpp" />
@@ -99,8 +106,6 @@
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="InputObserver.cpp" />
     <ClCompile Include="Function.cpp" />
-    <ClCompile Include="Light.cpp" />
-    <ClCompile Include="LightHandler.cpp" />
     <ClCompile Include="MathFunctions.cpp" />
     <ClCompile Include="MatrixStack.cpp" />
     <ClCompile Include="Mesh.cpp" />
@@ -112,7 +117,7 @@
     <ClCompile Include="Sphere.cpp" />
     <ClCompile Include="StockCameraHandler.cpp" />
     <ClCompile Include="Texture.cpp" />
-    <ClCompile Include="UniformBufferList.cpp" />
+    <ClCompile Include="UniformBlockHandler.cpp" />
     <ClCompile Include="Updateable.cpp" />
     <ClCompile Include="Vertex.cpp" />
     <ClCompile Include="VertexArrayObject.cpp" />
@@ -134,8 +139,6 @@
     <ClInclude Include="Input.h" />
     <ClInclude Include="InputObserver.h" />
     <ClInclude Include="Function.h" />
-    <ClInclude Include="Light.h" />
-    <ClInclude Include="LightHandler.h" />
     <ClInclude Include="MathFunctions.h" />
     <ClInclude Include="MatrixStack.h" />
     <ClInclude Include="Mesh.h" />
@@ -147,7 +150,7 @@
     <ClInclude Include="Sphere.h" />
     <ClInclude Include="StockCameraHandler.h" />
     <ClInclude Include="Texture.h" />
-    <ClInclude Include="UniformBufferList.h" />
+    <ClInclude Include="UniformBlockHandler.h" />
     <ClInclude Include="Updateable.h" />
     <ClInclude Include="Vertex.h" />
     <ClInclude Include="VertexArrayObject.h" />

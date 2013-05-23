@@ -7,13 +7,10 @@
 
 
 MeshTester::MeshTester(void)
+	: p(new Program("../RenderingEngine/StockShaders/Simple")),
+	triangleVAO(), vertices(GL_ARRAY_BUFFER, GL_STATIC_DRAW),
+	attrib(0, 3, GL_FLOAT, GL_FALSE), indices(GL_ELEMENT_ARRAY_BUFFER, GL_STATIC_DRAW)
 {
-	p = new Program("../RenderingEngine/StockShaders/Simple");
-	triangleVAO = new VertexArrayObject();
-	vertices = new BufferObject(GL_ARRAY_BUFFER, GL_STATIC_DRAW);
-	attrib = new VertexAttribArray(0, 3, GL_FLOAT, GL_FALSE);
-	indices = new BufferObject(GL_ELEMENT_ARRAY_BUFFER, GL_STATIC_DRAW);
-
 	Model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, -10.0f, 0.0f));
 
 	glm::vec2 x[] = 
@@ -25,6 +22,10 @@ MeshTester::MeshTester(void)
 	FunctionGraph graph(new SineCosine());
 	graph.generateGraph(x, 7, -1000.0f, mesh);
 	graph.generateGraph(x+3, 7, -1000.0f, mesh);
+
+	mesh->setOrientation(GL_CCW);
+	mesh->calculateNormals();
+	mesh->interpolateNormals();
 	mesh->applyIndexing();
 
 	Engine::addToDisplayList(std::shared_ptr<Drawable>(new NormalDrawer(mesh, Model)));
@@ -33,30 +34,30 @@ MeshTester::MeshTester(void)
 
 MeshTester::~MeshTester(void)
 {
-	delete triangleVAO;
-	delete vertices;
-	delete indices;
+	triangleVAO.destroy();
+	vertices.destroy();
+	indices.destroy();
 	delete mesh;
 }
 
 void MeshTester::initDrawing()
 {
-	triangleVAO->bind();
-	vertices->bind();
-	vertices->setData(mesh->getVertexData(), mesh->getVertexDataSize());
-	attrib->enable();
-	attrib->attribPointer();
+	triangleVAO.bind();
+	vertices.bind();
+	vertices.setData(mesh->getVertexData(), mesh->getVertexDataSize());
+	attrib.enable();
+	attrib.attribPointer();
 
-	indices->bind();
-	indices->setData(mesh->getIndexData(), mesh->getIndexDataSize());
+	indices.bind();
+	indices.setData(mesh->getIndexData(), mesh->getIndexDataSize());
 }
 
-void MeshTester::draw(const glm::mat4 &ViewProjection)
+void MeshTester::draw(const glm::mat4 &View, const glm::mat4 &Projection)
 {
-	glm::mat4 MVP = ViewProjection * Model;
+	glm::mat4 MVP = Projection * View * Model;
 
 	p->use();
 	p->setUniform("MVPmatrix", 1, &MVP);
-	triangleVAO->bind();
+	triangleVAO.bind();
 	glDrawElements(GL_TRIANGLES, mesh->numOfIndices(), mesh->getIndexDataType(), 0);
 }
