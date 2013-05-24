@@ -27,7 +27,7 @@ public:
  	void setUniform(const char *name, int cnt, const glm::vec4 *x);
 	void setUniform(const char *name, int cnt, const glm::mat4 *x);
 
-	void uniformBlockIndex(const char *blockName);
+	unsigned int uniformBlockIndex(const char *blockName);
 	void assignToBindingPoint(int bindingPoint, int blockIndex);
 
 private:

@@ -103,7 +103,7 @@ void Program::assignToBindingPoint(int bindingPoint, int blockIndex)
 	glUniformBlockBinding(id, blockIndex, bindingPoint);
 }
 
-void Program::uniformBlockIndex(const char *blockName)
+unsigned int Program::uniformBlockIndex(const char *blockName)
 {
-	glGetUniformBlockIndex(id, blockName);
+	return glGetUniformBlockIndex(id, blockName);
 }
