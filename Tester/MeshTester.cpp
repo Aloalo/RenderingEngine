@@ -24,8 +24,6 @@ MeshTester::MeshTester(void)
 	graph.generateGraph(x+3, 7, -1000.0f, mesh);
 
 	mesh->setOrientation(GL_CCW);
-	mesh->calculateNormals();
-	mesh->interpolateNormals();
 	mesh->applyIndexing();
 
 	Engine::addToDisplayList(std::shared_ptr<Drawable>(new NormalDrawer(mesh, Model)));
