@@ -1,5 +1,5 @@
-
 #include "Program.h"
+#include <cstring>
 
 using namespace glm;
 
@@ -15,7 +15,24 @@ Program::Program(const VertexShader &vs, const FragmentShader &fs)
 
 Program::Program(const char *name)
 {
-	init(&VertexShader(name), &GeometryShader(name), &FragmentShader(name));
+	char sn[64];
+	strcpy(sn, name);
+	strcat(sn, ".geom");
+	FILE *f = fopen(sn, "r");
+	if(f)
+		init(&VertexShader(name), &GeometryShader(name), &FragmentShader(name));
+	else
+		init(&VertexShader(name), 0, &FragmentShader(name));
+}
+
+Program::Program(int vs, int gs, int fs, const char *name)
+{
+	init(&VertexShader(vs, name), &GeometryShader(gs, name), &FragmentShader(fs, name));
+}
+
+Program::Program(int vs, int fs, const char *name)
+{
+	init(&VertexShader(vs, name), 0, &FragmentShader(fs, name));
 }
 
 Program::~Program(void)
@@ -25,10 +42,10 @@ Program::~Program(void)
 void Program::init(const VertexShader *vs, const GeometryShader *gs, const FragmentShader *fs)
 {
 	id = glCreateProgram();
-	glAttachShader(id, vs->id);
+	attach(*vs);
 	if(gs)
-		glAttachShader(id, gs->id);
-	glAttachShader(id, fs->id);
+		attach(*gs);
+	attach(*fs);
 	glLinkProgram(id);
 	int status;
 	glGetProgramiv(id, GL_LINK_STATUS, &status);
@@ -40,12 +57,12 @@ void Program::init(const VertexShader *vs, const GeometryShader *gs, const Fragm
 		GLchar *strInfoLog = new GLchar[infoLogLength+1];
 		glGetProgramInfoLog(id, infoLogLength, NULL, strInfoLog);
 		printf("Linking failure:\n%s\n", strInfoLog);
-		delete[] strInfoLog;
+		delete [] strInfoLog;
 	}
-	glDetachShader(id, vs->id);
+	detach(*vs);
 	if(gs)
-		glDetachShader(id, gs->id);
-	glDetachShader(id, fs->id);
+		detach(*gs);
+	detach(*fs);
 }
 
 void Program::use()
@@ -53,57 +70,72 @@ void Program::use()
 	glUseProgram(id);
 }
 
+int Program::getUniformLocation(const char *name)
+{
+	return glGetUniformLocation(id, name);
+}
+
+int Program::getUniformBlockLocation(const char *name)
+{
+	return glGetUniformBlockIndex(id, name);
+}
+
+void Program::setUniformBlockBinding(const char *name, int bindingPoint)
+{
+	glUniformBlockBinding(id, getUniformBlockLocation(name), bindingPoint);
+}
+
 void Program::setUniform(const char *name, const float &x)
 {
-	glProgramUniform1f(id, glGetUniformLocation(id, name), x);
+	glProgramUniform1f(id, getUniformLocation(name), x);
 }
 
 void Program::setUniform(const char *name, const vec2 &x)
 {
-	glProgramUniform2f(id, glGetUniformLocation(id, name), x.x, x.y);
+	glProgramUniform2f(id, getUniformLocation(name), x.x, x.y);
 }
 
 void Program::setUniform(const char *name, const vec3 &x)
 {
-	glProgramUniform3f(id, glGetUniformLocation(id, name), x.x, x.y, x.z);
+	glProgramUniform3f(id, getUniformLocation(name), x.x, x.y, x.z);
 }
 
 void Program::setUniform(const char *name, const vec4 &x)
 {
-	glProgramUniform4f(id, glGetUniformLocation(id, name), x.x, x.y, x.z, x.w);
+	glProgramUniform4f(id, getUniformLocation(name), x.x, x.y, x.z, x.w);
+}
+
+void Program::setUniform(const char *name, const mat4 &x)
+{
+	glProgramUniformMatrix4fv(id, glGetUniformLocation(id, name), 1, GL_FALSE, (float*)&x);
 }
 
 void Program::setUniform(const char *name, int cnt, const float *x)
 {
-	glProgramUniform1fv(id, glGetUniformLocation(id, name), cnt, x);
+	glProgramUniform1fv(id, getUniformLocation(name), cnt, x);
 }
 
 void Program::setUniform(const char *name, int cnt, const vec2 *x)
 {
-	glProgramUniform2fv(id, glGetUniformLocation(id, name), cnt, (float*)x);
+	glProgramUniform2fv(id, getUniformLocation(name), cnt, (float*)x);
 }
 
 void Program::setUniform(const char *name, int cnt, const vec3 *x)
 {
-	glProgramUniform3fv(id, glGetUniformLocation(id, name), cnt, (float*)x);
+	glProgramUniform3fv(id, getUniformLocation(name), cnt, (float*)x);
 }
 
 void Program::setUniform(const char *name, int cnt, const vec4 *x)
 {
-	glProgramUniform4fv(id, glGetUniformLocation(id, name), cnt, (float*)x);
+	glProgramUniform4fv(id, getUniformLocation(name), cnt, (float*)x);
 }
 
-void Program::setUniform(const char *name, int cnt, const mat4 *x)
+void Program::attach(const Shader &sh)
 {
-	glProgramUniformMatrix4fv(id, glGetUniformLocation(id, name), cnt, GL_FALSE, (float*)x);
+	glAttachShader(id, sh.id);
 }
 
-void Program::assignToBindingPoint(int bindingPoint, int blockIndex)
+void Program::detach(const Shader &sh)
 {
-	glUniformBlockBinding(id, blockIndex, bindingPoint);
-}
-
-unsigned int Program::uniformBlockIndex(const char *blockName)
-{
-	return glGetUniformBlockIndex(id, blockName);
+	glDetachShader(id, sh.id);
 }

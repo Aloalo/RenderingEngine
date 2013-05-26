@@ -7,6 +7,7 @@ class GeometryShader :
 {
 public:
 	GeometryShader(const char *name);
+	GeometryShader(int idr, const char *name);
 	~GeometryShader(void);
 
 	virtual const char* getExtension();

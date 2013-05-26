@@ -7,8 +7,6 @@ MySphere::MySphere(int slices, int stacks, float radius)
 	sphereVAO(), vertexBuffer(GL_ARRAY_BUFFER, GL_STATIC_DRAW),
 	attrib(0, 3, GL_FLOAT, GL_FALSE), indexBuffer(GL_ELEMENT_ARRAY_BUFFER, GL_STATIC_DRAW)
 {
-	p = new Program("../RenderingEngine/StockShaders/Simple");
-
 	Sphere *sphere = new Sphere(1.0f, glm::vec3(0.0f));
 	sphereMesh = new Mesh(sphere->generate(4));
 	delete sphere;
@@ -43,7 +41,7 @@ void MySphere::initDrawing()
 void MySphere::draw(const glm::mat4 &View, const glm::mat4 &Projection)
 {
 	p->use();
-	p->setUniform("MVPmatrix", 1, &(Projection * View));
+	p->setUniform("MVPmatrix", Projection * View);
 	sphereVAO.bind();
 	glDrawElements(GL_TRIANGLES, sphereMesh->numOfIndices(), sphereMesh->getIndexDataType(), 0);
 }

@@ -47,7 +47,7 @@ void NormalDrawer::draw(const glm::mat4 &View, const glm::mat4 &Projection)
 	glm::mat4 VP = Projection * View * Model;
 
 	p->use();
-	p->setUniform("MVP", 1, &VP);
+	p->setUniform("MVP", VP);
 	normalVAO->bind();
 	glDrawArrays(GL_TRIANGLES, 0, vertexNum);
 }

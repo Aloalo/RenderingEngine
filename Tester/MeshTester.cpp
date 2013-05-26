@@ -55,7 +55,7 @@ void MeshTester::draw(const glm::mat4 &View, const glm::mat4 &Projection)
 	glm::mat4 MVP = Projection * View * Model;
 
 	p->use();
-	p->setUniform("MVPmatrix", 1, &MVP);
+	p->setUniform("MVPmatrix", MVP);
 	triangleVAO.bind();
 	glDrawElements(GL_TRIANGLES, mesh->numOfIndices(), mesh->getIndexDataType(), 0);
 }

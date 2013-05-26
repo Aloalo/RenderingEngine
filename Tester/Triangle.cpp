@@ -31,7 +31,7 @@ void Triangle::draw(const glm::mat4 &View, const glm::mat4 &Projection)
 		glm::mat4 MVP = Projection * View * model.top();
 
 		p->use();
-		p->setUniform("MVPmatrix", 1, &MVP);
+		p->setUniform("MVPmatrix", MVP);
 		triangleVAO.bind();
 		glDrawArrays(GL_TRIANGLES, 0, 3);
 	model.popMatrix();

@@ -7,6 +7,7 @@ class FragmentShader :
 {
 public:
 	FragmentShader(const char *name);
+	FragmentShader(int idr, const char *name);
 	~FragmentShader(void);
 
 	virtual const char* getExtension();
