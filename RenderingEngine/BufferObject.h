@@ -11,15 +11,15 @@ public:
 	~BufferObject(void);
 
 	void destroy();
-	void unBind() const;
 	void bind() const;
-	void bindBufferBase(GLuint bindingPoint) const;
 	void setData(const GLvoid *data, GLsizei size);
 	void reSetData(const GLvoid *data, GLuint offset, GLuint size);
 
 	GLuint get() const;
 
-private:
+protected:
+	static BufferObject *boundBuffer;
+
 	GLenum target;
 	GLenum usage;
 

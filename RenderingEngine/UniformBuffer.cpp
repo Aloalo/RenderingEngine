@@ -2,50 +2,25 @@
 #include "UniformBuffer.h"
 
 UniformBuffer::UniformBuffer(void)
+	: BufferObject(GL_UNIFORM_BUFFER, GL_DYNAMIC_DRAW)
 {
-	glGenBuffers(1, &id);
 }
 
-UniformBuffer::UniformBuffer(int size)
+UniformBuffer::UniformBuffer(int _size)
+	: BufferObject(GL_UNIFORM_BUFFER, GL_DYNAMIC_DRAW, 0, _size)
 {
-	glGenBuffers(1, &id);
-	setData(size, 0);
 }
 
-UniformBuffer::UniformBuffer(int size, void *data)
+UniformBuffer::UniformBuffer(int _size, void *_data)
+	: BufferObject(GL_UNIFORM_BUFFER, GL_DYNAMIC_DRAW, _data, _size)
 {
-	glGenBuffers(1, &id);
-	setData(size, data);
 }
 
 UniformBuffer::~UniformBuffer(void)
 {
 }
 
-void UniformBuffer::bind()
-{
-	if(boundBuffer != this)
-	{
-		boundBuffer = this;
-		glBindBuffer(GL_UNIFORM_BUFFER, id);
-	}
-}
-
-void UniformBuffer::setData(int size, void *data, int usage)
-{
-	bind();
-	glBufferData(GL_UNIFORM_BUFFER, size, data, usage);
-}
-
-void UniformBuffer::setSubData(int offset, int size, void *data)
-{
-	bind();
-	glBufferSubData(GL_UNIFORM_BUFFER, offset, size, data);
-}
-
 void UniformBuffer::bindToPoint(int point)
 {
-	glBindBufferBase(GL_UNIFORM_BUFFER, point, id);
+	glBindBufferBase(target, point, ID);
 }
-
-UniformBuffer *UniformBuffer::boundBuffer = 0;
