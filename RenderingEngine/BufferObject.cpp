@@ -1,5 +1,8 @@
 #include "BufferObject.h"
 
+
+BufferObject *BufferObject::boundBuffer = 0;
+
 BufferObject::BufferObject(GLenum _target, GLenum _usage)
 	: target(_target), usage(_usage)
 {
@@ -11,7 +14,6 @@ BufferObject::BufferObject(GLenum _target, GLenum _usage, const GLvoid *data, GL
 	: target(_target), usage(_usage)
 {
 	glGenBuffers(1, &ID);
-	bind();
 	setData(data, size);
 }
 
@@ -28,32 +30,28 @@ void BufferObject::destroy()
 	glDeleteBuffers(1, &ID);
 }
 
-void BufferObject::unBind() const
-{
-	glBindBuffer(target, 0);
-}
-
 void BufferObject::bind() const
 {
-	glBindBuffer(target, ID);
+	if(boundBuffer != this)
+	{
+		boundBuffer = (BufferObject*) this;
+		glBindBuffer(target, ID);
+	}
 }
 
 void BufferObject::setData(const GLvoid *data, GLsizei size)
 {
+	bind();
 	glBufferData(target, size, data, usage);
 }
 
 void BufferObject::reSetData(const GLvoid *data, GLuint offset, GLuint size)
 {
+	bind();
 	glBufferSubData(target, offset, size, data);
 }
 
 GLuint BufferObject::get() const
 {
 	return ID;
-}
-
-void BufferObject::bindBufferBase(GLuint bindingPoint) const
-{
-	glBindBufferBase(target, bindingPoint, ID);
 }

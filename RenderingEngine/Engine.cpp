@@ -1,7 +1,6 @@
 #include "Engine.h"
 #include <GL/glfw.h>
 #include "Input.h"
-#include "UniformBlockHandler.h"
 
 int Engine::windowWidth = 1024;
 int Engine::windowHeight = 768;
