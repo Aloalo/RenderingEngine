@@ -13,5 +13,9 @@ public:
 
 protected:
 	void init(const char *name);
+	void init(int idr, const char *name);
+
+private:
+	void init2(const char *src, const char *name, int len = 0);
 };
 

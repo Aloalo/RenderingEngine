@@ -1,9 +1,13 @@
-
 #include "GeometryShader.h"
 
 GeometryShader::GeometryShader(const char *name)
 {
 	init(name);
+}
+
+GeometryShader::GeometryShader(int idr, const char *name)
+{
+	init(idr, name);
 }
 
 GeometryShader::~GeometryShader(void)

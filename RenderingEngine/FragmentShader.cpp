@@ -1,9 +1,13 @@
-
 #include "FragmentShader.h"
 
 FragmentShader::FragmentShader(const char *name)
 {
 	init(name);
+}
+
+FragmentShader::FragmentShader(int idr, const char *name)
+{
+	init(idr, name);
 }
 
 FragmentShader::~FragmentShader(void)

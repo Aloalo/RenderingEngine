@@ -118,6 +118,7 @@
     <ClCompile Include="StockCameraHandler.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="UniformBlockHandler.cpp" />
+    <ClCompile Include="UniformBuffer.cpp" />
     <ClCompile Include="Updateable.cpp" />
     <ClCompile Include="Vertex.cpp" />
     <ClCompile Include="VertexArrayObject.cpp" />
@@ -151,6 +152,7 @@
     <ClInclude Include="StockCameraHandler.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="UniformBlockHandler.h" />
+    <ClInclude Include="UniformBuffer.h" />
     <ClInclude Include="Updateable.h" />
     <ClInclude Include="Vertex.h" />
     <ClInclude Include="VertexArrayObject.h" />

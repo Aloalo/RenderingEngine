@@ -1,9 +1,13 @@
-
 #include "VertexShader.h"
 
 VertexShader::VertexShader(const char *name)
 {
 	init(name);
+}
+
+VertexShader::VertexShader(int idr, const char *name)
+{
+	init(idr, name);
 }
 
 VertexShader::~VertexShader(void)

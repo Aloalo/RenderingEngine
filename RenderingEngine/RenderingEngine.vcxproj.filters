@@ -19,9 +19,6 @@
     <Filter Include="Header Files\GLobjectWrappers">
       <UniqueIdentifier>{f346c48d-6b48-48c6-92b1-aa6532572e4f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Program">
-      <UniqueIdentifier>{76b09259-1d3b-4900-8c30-a0b2637027a9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\GLobjectWrappers">
       <UniqueIdentifier>{06a21ece-50f8-4ee8-94b8-1c252e6e9c93}</UniqueIdentifier>
     </Filter>
@@ -33,9 +30,6 @@
     </Filter>
     <Filter Include="Source Files\Utilities">
       <UniqueIdentifier>{f6ce46c3-6fef-4049-bddc-5edad117f374}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Program">
-      <UniqueIdentifier>{01ae5767-c9e2-42fc-8ac8-b58a0d512529}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\Stock">
       <UniqueIdentifier>{4b12af9f-28dd-49d2-b00d-84c7486f3888}</UniqueIdentifier>
@@ -57,6 +51,12 @@
     </Filter>
     <Filter Include="Header Files\Stock\Shaders">
       <UniqueIdentifier>{73ca07d5-d897-470f-a6a7-bf0a804d9cd2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GLobjectWrappers\Program">
+      <UniqueIdentifier>{76b09259-1d3b-4900-8c30-a0b2637027a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GLobjectWrappers\Program">
+      <UniqueIdentifier>{01ae5767-c9e2-42fc-8ac8-b58a0d512529}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -115,19 +115,19 @@
       <Filter>Source Files\Utilities</Filter>
     </ClCompile>
     <ClCompile Include="VertexShader.cpp">
-      <Filter>Source Files\Program</Filter>
+      <Filter>Source Files\GLobjectWrappers\Program</Filter>
     </ClCompile>
     <ClCompile Include="Shader.cpp">
-      <Filter>Source Files\Program</Filter>
+      <Filter>Source Files\GLobjectWrappers\Program</Filter>
     </ClCompile>
     <ClCompile Include="Program.cpp">
-      <Filter>Source Files\Program</Filter>
+      <Filter>Source Files\GLobjectWrappers\Program</Filter>
     </ClCompile>
     <ClCompile Include="GeometryShader.cpp">
-      <Filter>Source Files\Program</Filter>
+      <Filter>Source Files\GLobjectWrappers\Program</Filter>
     </ClCompile>
     <ClCompile Include="FragmentShader.cpp">
-      <Filter>Source Files\Program</Filter>
+      <Filter>Source Files\GLobjectWrappers\Program</Filter>
     </ClCompile>
     <ClCompile Include="StockCameraHandler.cpp">
       <Filter>Source Files\Stock</Filter>
@@ -177,6 +177,9 @@
     <ClCompile Include="UniformBlockHandler.cpp">
       <Filter>Source Files\Engine</Filter>
     </ClCompile>
+    <ClCompile Include="UniformBuffer.cpp">
+      <Filter>Source Files\GLobjectWrappers\Program</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine.h">
@@ -210,19 +213,19 @@
       <Filter>Header Files\Utilities</Filter>
     </ClInclude>
     <ClInclude Include="VertexShader.h">
-      <Filter>Header Files\Program</Filter>
+      <Filter>Header Files\GLobjectWrappers\Program</Filter>
     </ClInclude>
     <ClInclude Include="Shader.h">
-      <Filter>Header Files\Program</Filter>
+      <Filter>Header Files\GLobjectWrappers\Program</Filter>
     </ClInclude>
     <ClInclude Include="Program.h">
-      <Filter>Header Files\Program</Filter>
+      <Filter>Header Files\GLobjectWrappers\Program</Filter>
     </ClInclude>
     <ClInclude Include="GeometryShader.h">
-      <Filter>Header Files\Program</Filter>
+      <Filter>Header Files\GLobjectWrappers\Program</Filter>
     </ClInclude>
     <ClInclude Include="FragmentShader.h">
-      <Filter>Header Files\Program</Filter>
+      <Filter>Header Files\GLobjectWrappers\Program</Filter>
     </ClInclude>
     <ClInclude Include="StockCameraHandler.h">
       <Filter>Header Files\Stock</Filter>
@@ -271,6 +274,9 @@
     </ClInclude>
     <ClInclude Include="UniformBlockHandler.h">
       <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="UniformBuffer.h">
+      <Filter>Header Files\GLobjectWrappers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
