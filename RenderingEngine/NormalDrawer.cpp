@@ -35,19 +35,17 @@ void NormalDrawer::initDrawing()
 {
 	normalVAO->bind();
 	vertices->bind();
-	vertAttrib->enable();
 	vertAttrib->attribPointer();
 	normals->bind();
-	norAttrib->enable();
 	norAttrib->attribPointer();
 }
 
 void NormalDrawer::draw(const glm::mat4 &View, const glm::mat4 &Projection)
 {
-	glm::mat4 VP = Projection * View * Model;
+	glm::mat4 MVP = Projection * View * Model;
 
 	p->use();
-	p->setUniform("MVP", VP);
+	p->setUniform("MVP", MVP);
 	normalVAO->bind();
 	glDrawArrays(GL_TRIANGLES, 0, vertexNum);
 }

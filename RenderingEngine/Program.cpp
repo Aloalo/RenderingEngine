@@ -105,6 +105,11 @@ void Program::setUniform(const char *name, const vec4 &x)
 	glProgramUniform4f(id, getUniformLocation(name), x.x, x.y, x.z, x.w);
 }
 
+void Program::setUniform(const char *name, const glm::mat3 &x)
+{
+	glProgramUniformMatrix3fv(id, glGetUniformLocation(id, name), 1, GL_FALSE, (float*)&x);
+}
+
 void Program::setUniform(const char *name, const mat4 &x)
 {
 	glProgramUniformMatrix4fv(id, glGetUniformLocation(id, name), 1, GL_FALSE, (float*)&x);

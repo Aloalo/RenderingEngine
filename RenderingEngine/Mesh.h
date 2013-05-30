@@ -43,6 +43,8 @@ public:
 	int getNormalDataSize() const;
 
 private:
+	void flip();
+
 	std::vector<glm::vec3> vertexData;
 	std::vector<glm::vec3> normalData;
 	std::vector<glm::vec2> uvData;

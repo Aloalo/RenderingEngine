@@ -58,6 +58,12 @@
     <Filter Include="Source Files\GLobjectWrappers\Program">
       <UniqueIdentifier>{01ae5767-c9e2-42fc-8ac8-b58a0d512529}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Engine\Light">
+      <UniqueIdentifier>{c43c0f2e-8200-4bf8-a5c8-85bfd6fd0511}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine\Light">
+      <UniqueIdentifier>{3d39a683-4b1e-40dc-9179-2f6233de3eb0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
@@ -177,6 +183,27 @@
     <ClCompile Include="UniformBuffer.cpp">
       <Filter>Source Files\GLobjectWrappers</Filter>
     </ClCompile>
+    <ClCompile Include="Renderer.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="LitObject.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="UnLitObject.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="PointLight.cpp">
+      <Filter>Source Files\Engine\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="Light.cpp">
+      <Filter>Source Files\Engine\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="DiffuseLight.cpp">
+      <Filter>Source Files\Engine\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="AmbientLight.cpp">
+      <Filter>Source Files\Engine\Light</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine.h">
@@ -271,6 +298,27 @@
     </ClInclude>
     <ClInclude Include="UniformBuffer.h">
       <Filter>Header Files\GLobjectWrappers</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="LitObject.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="UnLitObject.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="PointLight.h">
+      <Filter>Header Files\Engine\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="Light.h">
+      <Filter>Header Files\Engine\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="DiffuseLight.h">
+      <Filter>Header Files\Engine\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="AmbientLight.h">
+      <Filter>Header Files\Engine\Light</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
