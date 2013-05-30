@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Drawable.h"
+#include "UnLitObject.h"
 #include "Program.h"
 #include "VertexArrayObject.h"
 #include "BufferObject.h"
@@ -8,7 +8,7 @@
 #include "Mesh.h"
 
 class NormalDrawer :
-	public Drawable
+	public UnLitObject
 {
 public:
 	NormalDrawer(const Mesh* mesh);

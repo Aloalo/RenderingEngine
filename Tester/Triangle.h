@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Drawable.h"
+#include "UnLitObject.h"
 #include "Program.h"
 #include "VertexArrayObject.h"
 #include "BufferObject.h"
@@ -9,7 +9,7 @@
 #include "MatrixStack.h"
 
 class Triangle :
-	public Drawable, public Updateable
+	public UnLitObject, public Updateable
 {
 public:
 	Triangle(void);

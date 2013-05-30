@@ -6,7 +6,7 @@ int Engine::windowWidth = 1024;
 int Engine::windowHeight = 768;
 float Engine::updateInterval = 1. / 60.;
 std::shared_ptr<CameraHandler> Engine::cam;
-std::list<std::shared_ptr<Drawable> > Engine::displayList;
+Renderer Engine::renderer;
 std::list<std::shared_ptr<Updateable> > Engine::updateList;
 GLbitfield Engine::mask = GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT;
 glm::vec4 Engine::backgroundColor = glm::vec4(0.4);
@@ -17,6 +17,7 @@ Engine::Engine(float _updateInterval, int _windowWidth, int _windowHeight)
 	updateInterval = _updateInterval;
 	windowWidth = _windowWidth;
 	windowHeight = _windowHeight;
+	initialize();
 }
 
 Engine::~Engine()
@@ -28,7 +29,7 @@ Engine::~Engine()
 void Engine::stop()
 {
 	updateList.clear();
-	displayList.clear();
+	renderer.clear();
 }
 
 void Engine::useStockCamera(const glm::vec3 &position, const glm::vec3 &direction, float FoV)
@@ -50,19 +51,19 @@ void Engine::setCamera(std::shared_ptr<CameraHandler> _cam)
 	cam = _cam;
 }
 
-void Engine::addToDisplayList(std::shared_ptr<Drawable> d)
+void Engine::addToDisplayList(std::shared_ptr<Drawable> &d)
 {
-	displayList.push_back(d);
+	renderer.addObject(d);
 }
 
-void Engine::addToUpdateList(std::shared_ptr<Updateable> u)
+void Engine::addToUpdateList(std::shared_ptr<Updateable> &u)
 {
+	u->initState();
 	updateList.push_back(u);
 }
 
 void Engine::start()
 {
-	initalizeLists();
 	renderingLoop();
 }
 
@@ -109,15 +110,6 @@ void Engine::setBufferClearMask(GLbitfield _mask)
 	mask = _mask;
 }
 
-void Engine::initalizeLists()
-{
-	for(std::list<std::shared_ptr<Drawable> >::iterator i = displayList.begin(); i != displayList.end(); i++)
-		(*i)->initDrawing();
-
-	for(std::list<std::shared_ptr<Updateable> >::iterator i = updateList.begin(); i != updateList.end(); i++)
-		(*i)->initState();
-}
-
 void Engine::renderingLoop()
 {
 	while(true)
@@ -144,12 +136,7 @@ inline void Engine::nextFrame()
 	glm::mat4 ViewMatrix = cam->getViewMatrix();
 	glm::mat4 ProjectionMatrix = cam->getProjectionMatrix();
 
-	for(std::list<std::shared_ptr<Drawable> >::iterator i = displayList.begin(); i != displayList.end(); i++)
-	{
-		if(*i == NULL)
-			displayList.erase(i);
-		(*i)->draw(ViewMatrix, ProjectionMatrix);
-	}
+	renderer.draw(ViewMatrix, ProjectionMatrix);
 
 	glfwSwapBuffers();
 }
@@ -157,4 +144,19 @@ inline void Engine::nextFrame()
 void Engine::setBackgroundColor(glm::vec4 color)
 {
 	backgroundColor = color;
+}
+
+glm::mat4 Engine::getProjectionMatrix()
+{
+	return cam->getProjectionMatrix();
+}
+
+glm::mat4 Engine::getViewMatrix()
+{
+	return cam->getViewMatrix();
+}
+
+void Engine::addLight(std::shared_ptr<Light> &light)
+{
+	renderer.addLight(light);
 }

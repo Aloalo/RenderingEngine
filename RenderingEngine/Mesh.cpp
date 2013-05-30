@@ -61,7 +61,7 @@ void Mesh::calculateNormals()
 {
 	normalData.clear();
 	int n = vertexData.size();
-	float flip = orientation == GL_CCW ? 1.0f : -1.0f;
+	float flip = orientation == GL_CCW ? -1.0f : 1.0f;
 	for(int i = 0; i < n; i += 3)
 	{
 		glm::vec3 normal = -glm::cross(vertexData[i + 1] - vertexData[i], vertexData[i + 2] - vertexData[i]);
@@ -155,11 +155,15 @@ void Mesh::applyIndexing()
 void Mesh::flipOrientation()
 {
 	orientation == GL_CCW ? orientation = GL_CW : orientation = GL_CCW;
+	flip();
 }
 
 void Mesh::setOrientation(unsigned int _orientation)
 {
 	orientation = _orientation;
+	if(!((orientation == GL_CCW && MathFunctions::ccw(vertexData[0], vertexData[1], vertexData[2]) > 0)
+		|| (orientation == GL_CW && MathFunctions::ccw(vertexData[0], vertexData[1], vertexData[2]) < 0)))
+		flip();
 }
 
 const glm::vec3* Mesh::getVertexData() const
@@ -226,4 +230,17 @@ int Mesh::getUVDataSize() const
 int Mesh::getNormalDataSize() const
 {
 	return normalData.size() * sizeof(normalData[0]);
+}
+
+void Mesh::flip()
+{
+	int n = vertexData.size();
+	for(int i = 0; i < n; i += 3)
+	{
+		std::swap(vertexData[i], vertexData[i + 1]);
+		if(normalData.size())
+			std::swap(normalData[i], normalData[i + 1]);
+		if(uvData.size())
+			std::swap(uvData[i], uvData[i + 1]);
+	}
 }

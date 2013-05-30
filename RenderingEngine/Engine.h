@@ -7,6 +7,7 @@
 #include <list>
 #include <cmath>
 #include <memory>
+#include "Renderer.h"
 
 class Engine
 {
@@ -17,10 +18,10 @@ public:
 	static void useStockCamera(const glm::vec3 &position, const glm::vec3 &direction, float FoV);
 	static void setCamera(std::shared_ptr<CameraHandler> _cam);
 
-	static void addToDisplayList(std::shared_ptr<Drawable> d);
-	static void addToUpdateList(std::shared_ptr<Updateable> u);
+	static void addToDisplayList(std::shared_ptr<Drawable> &d);
+	static void addToUpdateList(std::shared_ptr<Updateable> &u);
+	static void addLight(std::shared_ptr<Light> &light);
 
-	static void initialize();
 	static void start();
 	static void stop();
 
@@ -29,13 +30,16 @@ public:
 	static void setBufferClearMask(GLbitfield _mask);
 	static void setBackgroundColor(glm::vec4 color);
 
+	static glm::mat4 getProjectionMatrix();
+	static glm::mat4 getViewMatrix();
+
 private:
-	static void initalizeLists();
+	static void initialize();
 
 	static void renderingLoop();
 	static inline void nextFrame();
 
-	static std::list<std::shared_ptr<Drawable> > displayList;
+	static Renderer renderer;
 	static std::list<std::shared_ptr<Updateable> > updateList;
 	static std::shared_ptr<CameraHandler> cam;
 

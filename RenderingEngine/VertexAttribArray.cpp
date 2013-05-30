@@ -27,6 +27,7 @@ void VertexAttribArray::disable() const
 
 void VertexAttribArray::attribPointer() const
 {
+	enable();
 	if(norm == -1)
 	{
 		if(type == GL_BYTE || type == GL_UNSIGNED_BYTE || type == GL_SHORT || 
