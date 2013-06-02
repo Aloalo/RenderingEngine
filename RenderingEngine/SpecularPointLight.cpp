@@ -1,8 +1,8 @@
-#include "PointLight.h"
+#include "SpecularPointLight.h"
 
-Program *PointLight::p = NULL;
+Program *SpecularPointLight::p = NULL;
 
-PointLight::PointLight(const glm::vec3 &_position, const glm::vec4 &_intensity, float _attenuation)
+SpecularPointLight::SpecularPointLight(const glm::vec3 &_position, const glm::vec4 &_intensity, float _attenuation)
 	: position(_position), attenuation(_attenuation), Model(1.0f),
 	Light(_intensity)
 {
@@ -10,11 +10,11 @@ PointLight::PointLight(const glm::vec3 &_position, const glm::vec4 &_intensity, 
 		p = new Program(VertexShader("../RenderingEngine/StockShaders/Lighting"), FragmentShader("../RenderingEngine/StockShaders/PhongLighting"));
 }
 
-PointLight::~PointLight(void)
+SpecularPointLight::~SpecularPointLight(void)
 {
 }
 
-void PointLight::renderingSetup(const glm::mat4 &View, const glm::mat4 &Projection)
+void SpecularPointLight::renderingSetup(const glm::mat4 &View, const glm::mat4 &Projection)
 {
 	p->use();
 	p->setUniform("projectionMatrix", Projection);
@@ -23,7 +23,7 @@ void PointLight::renderingSetup(const glm::mat4 &View, const glm::mat4 &Projecti
 	p->setUniform("lightIntensity", intensity);
 }
 
-void PointLight::collectData(std::shared_ptr<LitObject> &obj, const glm::mat4 &View, const glm::mat4 &Projection)
+void SpecularPointLight::collectData(std::shared_ptr<LitObject> &obj, const glm::mat4 &View, const glm::mat4 &Projection)
 {
 	glm::mat4 MV = View * obj->modelMatrix();
 	p->setUniform("mvMatrix", MV);
@@ -32,7 +32,7 @@ void PointLight::collectData(std::shared_ptr<LitObject> &obj, const glm::mat4 &V
 	p->setUniform("shininessFactor", obj->shininessFactor());
 }
 
-glm::mat4& PointLight::modelMatrix()
+glm::mat4& SpecularPointLight::modelMatrix()
 {
 	return Model;
 }

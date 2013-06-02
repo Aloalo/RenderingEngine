@@ -14,7 +14,7 @@ MySphere::MySphere(int slices, int stacks, float radius)
 
 	sphereMesh->setOrientation(GL_CCW);
 	sphereMesh->calculateNormals();
-	sphereMesh->interpolateNormals();
+	//sphereMesh->interpolateNormals();
 	sphereMesh->applyIndexing();
 
 	//Engine::addToDisplayList(std::shared_ptr<Drawable>(new NormalDrawer(sphereMesh)));
@@ -51,7 +51,7 @@ glm::vec4 MySphere::diffuseColor()
 
 glm::vec4 MySphere::specularColor()
 {
-	return glm::vec4(0.2f, 0.1f, 1.0f, 1.0f);
+	return glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
 }
 
 glm::vec4 MySphere::ambientColor()

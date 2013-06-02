@@ -2,7 +2,7 @@
 
 #include "Updateable.h"
 #include <memory>
-#include <PointLight.h>
+#include <SpecularPointLight.h>
 
 class MovingLight :
 	public Updateable
@@ -17,6 +17,6 @@ public:
 private:
 	float angle;
 	float angularVel;
-	std::shared_ptr<PointLight> light;
+	std::shared_ptr<SpecularPointLight> light;
 };
 

@@ -4,7 +4,7 @@
 
 MovingLight::MovingLight(std::shared_ptr<Light> &_light)
 {
-	light = std::dynamic_pointer_cast<PointLight>(_light);
+	light = std::dynamic_pointer_cast<SpecularPointLight>(_light);
 }
 
 
