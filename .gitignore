@@ -19,7 +19,7 @@ Thumbs.db
 *.log
 [Bb]in
 [Dd]ebug*/
-*.lib
+RenderingEngine.lib
 *.sbr
 obj/
 [Rr]elease*/

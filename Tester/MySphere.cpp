@@ -14,7 +14,7 @@ MySphere::MySphere(int slices, int stacks, float radius)
 
 	sphereMesh->setOrientation(GL_CCW);
 	sphereMesh->calculateNormals();
-	//sphereMesh->interpolateNormals();
+	sphereMesh->interpolateNormals();
 	sphereMesh->applyIndexing();
 
 	//Engine::addToDisplayList(std::shared_ptr<Drawable>(new NormalDrawer(sphereMesh)));

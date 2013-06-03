@@ -1,20 +1,18 @@
 #pragma once
 
-#include <GL\glew.h>
-
 class Texture
 {
 public:
-	Texture(GLenum _target);
+	Texture(unsigned int _target);
 	~Texture(void);
 
 	void bind();
 	void load(const char *imagepath);
-	void texParam(GLenum paramName, GLuint param);
-	void texParam(GLenum paramName, GLfloat param);
+	void texParam(unsigned int paramName, unsigned int param);
+	void texParam(unsigned int paramName, float param);
 
 private:
-	GLuint ID;
-	GLenum target;
+	unsigned int ID;
+	unsigned int target;
 };
 
