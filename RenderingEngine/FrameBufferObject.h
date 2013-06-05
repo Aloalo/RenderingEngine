@@ -2,20 +2,18 @@
 
 #include "OGLobject.h"
 
-class VertexArrayObject
+class FrameBufferObject
 	: public OGLobject
 {
 public:
-	/*Also generates the VAO*/
-	VertexArrayObject(void);
-	~VertexArrayObject(void);
-
-	static void unBind();
+	FrameBufferObject(GLenum _target);
+	~FrameBufferObject(void);
 
 	void bind() const;
 	void destroy();
 
 protected:
 	void generate();
+	GLenum target;
 };
 

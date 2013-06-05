@@ -1,7 +1,5 @@
 #pragma once
 
-#include "GL/glew.h"
-#include "glm/glm.hpp"
 #include "BufferObject.h"
 
 #define UNIFORM_MACRO(tp,name,offset) \
@@ -14,7 +12,6 @@ class UniformBuffer
 	: public BufferObject
 {
 public:
-
 	UniformBuffer(void);
 	UniformBuffer(int _size);
 	UniformBuffer(int _size, void *_data);

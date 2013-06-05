@@ -1,8 +1,9 @@
 #pragma once
 
-#include <GL/glew.h>
+#include "OGLobject.h"
 
 class BufferObject
+	: public OGLobject
 {
 public:
 	BufferObject();
@@ -10,20 +11,18 @@ public:
 	BufferObject(GLenum _target, GLenum _usage, const GLvoid *data, GLsizei size);
 	~BufferObject(void);
 
-	void destroy();
 	void bind() const;
+	void destroy();
+
 	void setData(const GLvoid *data, GLsizei size);
 	void reSetData(const GLvoid *data, GLuint offset, GLuint size);
 
-	GLuint get() const;
-
 protected:
+	void generate();
 	static BufferObject *boundBuffer;
 
 	GLenum target;
 	GLenum usage;
-
-	GLuint ID;
 };
 
 

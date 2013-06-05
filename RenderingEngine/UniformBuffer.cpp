@@ -1,4 +1,3 @@
-#include "GL/glew.h"
 #include "UniformBuffer.h"
 
 UniformBuffer::UniformBuffer(void)

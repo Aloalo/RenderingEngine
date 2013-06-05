@@ -1,18 +1,24 @@
 #pragma once
+#include "OGLobject.h"
 
 class Texture
+	: public OGLobject
 {
 public:
-	Texture(unsigned int _target);
+	Texture(GLuint _target);
 	~Texture(void);
 
-	void bind();
-	void load(const char *imagepath);
-	void texParam(unsigned int paramName, unsigned int param);
-	void texParam(unsigned int paramName, float param);
+	void bind() const;
+	void destroy();
+
+	void texParam(GLenum paramName, GLuint param) const;
+	void texParam(GLenum paramName, GLfloat param) const;
+	void texParam(GLenum paramName, const GLuint *param) const;
+	void texParam(GLenum paramName, const GLint *param) const;
+	void texParam(GLenum paramName, const GLfloat *param) const;
 
 private:
-	unsigned int ID;
-	unsigned int target;
+	void generate();
+	GLenum target;
 };
 
