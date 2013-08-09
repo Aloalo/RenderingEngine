@@ -29,11 +29,11 @@ int _tmain(int argc, char* argv[])
 	e->addToDisplayList(std::shared_ptr<Drawable>(test));
 	test = NULL;
 
-	Engine::addLight(std::shared_ptr<Light>(new AmbientLight(glm::vec4(0.5f, 0.5f, 0.5f, 1.0f))));
+	Engine::addLight(std::shared_ptr<Light>(new AmbientLight(glm::vec4(0.3f, 0.3f, 0.3f, 1.0f))));
 	Engine::addLight(std::shared_ptr<Light>(new DiffuseLight(glm::vec3(-1.0f, 1.0f, -1.0f))));
 	Engine::addLight(std::shared_ptr<Light>(new SpecularPointLight(glm::vec3(5.0f, 0.0f, 0.0f), glm::vec4(10.5f, 10.5f, 10.5f, 10.0f), 2.0f)));
 
-	std::shared_ptr<Light> pointLight(new SpecularPointLight(glm::vec3(0.0f, -5.0f, 5.0f), glm::vec4(10.5f, 10.5f, 10.5f, 10.0f), 3.0f));
+	std::shared_ptr<Light> pointLight(new SpecularPointLight(glm::vec3(0.0f, -5.0f, 5.0f), glm::vec4(10.0f, 10.0f, 10.0f, 1.0f), 3.0f));
 	Engine::addLight(pointLight);
 	MovingLight *ptr = new MovingLight(pointLight);
 	e->addToUpdateList(std::shared_ptr<Updateable>(ptr));

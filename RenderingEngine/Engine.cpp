@@ -160,3 +160,13 @@ void Engine::addLight(std::shared_ptr<Light> &light)
 {
 	renderer.addLight(light);
 }
+
+std::shared_ptr<CameraHandler> Engine::getCamera()
+{
+	return cam;
+}
+
+Renderer& Engine::getRenderer()
+{
+	return renderer;
+}

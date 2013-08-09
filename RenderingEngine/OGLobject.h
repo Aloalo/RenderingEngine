@@ -6,7 +6,7 @@ class OGLobject
 {
 public:
 	OGLobject(void);
-	~OGLobject(void);
+	virtual ~OGLobject(void);
 
 	virtual void bind() const = 0;
 	virtual void destroy() = 0;

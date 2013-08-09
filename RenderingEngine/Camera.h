@@ -20,6 +20,8 @@ public:
 	glm::mat4 getProjectionMatrix() const;
 	glm::mat4 getViewMatrix() const;
 
+	void setDirection(glm::vec3 direction);
+
 	glm::vec3 getDirection() const;
 	glm::vec3 getRight() const;
 	glm::vec3 getUp() const;

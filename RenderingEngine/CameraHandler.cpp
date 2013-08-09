@@ -11,3 +11,8 @@ CameraHandler::~CameraHandler(void)
 	delete cam;
 	cam = NULL;
 }
+
+glm::vec3 CameraHandler::getPosition() const
+{
+	return cam->getPosition();
+}

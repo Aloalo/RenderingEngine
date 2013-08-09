@@ -17,6 +17,8 @@ public:
 
 	static void useStockCamera(const glm::vec3 &position, const glm::vec3 &direction, float FoV);
 	static void setCamera(std::shared_ptr<CameraHandler> _cam);
+	static std::shared_ptr<CameraHandler> getCamera();
+	static Renderer& getRenderer();
 
 	static void addToDisplayList(std::shared_ptr<Drawable> &d);
 	static void addToUpdateList(std::shared_ptr<Updateable> &u);

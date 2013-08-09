@@ -17,7 +17,7 @@ MySphere::MySphere(int slices, int stacks, float radius)
 	sphereMesh->interpolateNormals();
 	sphereMesh->applyIndexing();
 
-	//Engine::addToDisplayList(std::shared_ptr<Drawable>(new NormalDrawer(sphereMesh)));
+	Engine::addToDisplayList(std::shared_ptr<Drawable>(new NormalDrawer(sphereMesh)));
 }
 
 MySphere::~MySphere(void)
@@ -61,7 +61,7 @@ glm::vec4 MySphere::ambientColor()
 
 float MySphere::shininessFactor()
 {
-	return 64.0f;
+	return 32.0f;
 }
 
 glm::mat4 MySphere::modelMatrix()

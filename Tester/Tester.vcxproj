@@ -82,6 +82,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MeshTester.h" />
+    <ClInclude Include="Mirror.h" />
     <ClInclude Include="MovingLight.h" />
     <ClInclude Include="MySphere.h" />
     <ClInclude Include="stdafx.h" />
@@ -90,6 +91,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MeshTester.cpp" />
+    <ClCompile Include="Mirror.cpp" />
     <ClCompile Include="MovingLight.cpp" />
     <ClCompile Include="MySphere.cpp" />
     <ClCompile Include="stdafx.cpp" />

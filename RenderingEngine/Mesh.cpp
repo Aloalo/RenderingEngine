@@ -57,6 +57,16 @@ void Mesh::addTriangle(const glm::vec3 vert[3], const glm::vec3 nor[3])
 	normalData.push_back(nor[2]);
 }
 
+void Mesh::addTriangle(const glm::vec3 vert[3], const glm::vec2 uv[3])
+{
+	vertexData.push_back(vert[0]);
+	vertexData.push_back(vert[1]);
+	vertexData.push_back(vert[2]);
+	uvData.push_back(uv[0]);
+	uvData.push_back(uv[1]);
+	uvData.push_back(uv[2]);
+}
+
 void Mesh::calculateNormals()
 {
 	normalData.clear();

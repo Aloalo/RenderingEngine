@@ -18,6 +18,7 @@ public:
 	void clear();
 	void addTriangle(const glm::vec3 vert[3]);
 	void addTriangle(const glm::vec3 vert[3], const glm::vec3 nor[3]);
+	void addTriangle(const glm::vec3 vert[3], const glm::vec2 uv[3]);
 
 	void calculateNormals();
 	void interpolateNormals();

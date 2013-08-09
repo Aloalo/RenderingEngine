@@ -64,6 +64,12 @@
     <Filter Include="Source Files\Engine\Light">
       <UniqueIdentifier>{3d39a683-4b1e-40dc-9179-2f6233de3eb0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\GLobjectWrappers\Texture">
+      <UniqueIdentifier>{25524eac-32c1-472e-bdd7-43499bfb6d75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GLobjectWrappers\Texture">
+      <UniqueIdentifier>{dcdffc8d-43c1-46cd-a51b-7379ba69ff13}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
@@ -138,9 +144,6 @@
     <ClCompile Include="StockCameraHandler.cpp">
       <Filter>Source Files\Stock</Filter>
     </ClCompile>
-    <ClCompile Include="Texture.cpp">
-      <Filter>Source Files\GLobjectWrappers</Filter>
-    </ClCompile>
     <ClCompile Include="Vertex.cpp">
       <Filter>Source Files\Geometry</Filter>
     </ClCompile>
@@ -204,10 +207,25 @@
     <ClCompile Include="SpecularPointLight.cpp">
       <Filter>Source Files\Engine\Light</Filter>
     </ClCompile>
-    <ClCompile Include="FrameBufferObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="OGLobject.cpp">
+      <Filter>Source Files\GLobjectWrappers</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture2D.cpp">
+      <Filter>Source Files\GLobjectWrappers\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Source Files\GLobjectWrappers\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderBufferObject.cpp">
+      <Filter>Source Files\GLobjectWrappers</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameBufferObject.cpp">
+      <Filter>Source Files\GLobjectWrappers</Filter>
+    </ClCompile>
+    <ClCompile Include="Square.cpp">
+      <Filter>Source Files\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="Triangle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -259,9 +277,6 @@
     </ClInclude>
     <ClInclude Include="StockCameraHandler.h">
       <Filter>Header Files\Stock</Filter>
-    </ClInclude>
-    <ClInclude Include="Texture.h">
-      <Filter>Header Files\GLobjectWrappers</Filter>
     </ClInclude>
     <ClInclude Include="Vertex.h">
       <Filter>Header Files\Geometry</Filter>
@@ -326,10 +341,28 @@
     <ClInclude Include="SpecularPointLight.h">
       <Filter>Header Files\Engine\Light</Filter>
     </ClInclude>
-    <ClInclude Include="FrameBufferObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="OGLobject.h">
+      <Filter>Header Files\GLobjectWrappers</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderBufferObject.h">
+      <Filter>Header Files\GLobjectWrappers</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Header Files\GLobjectWrappers\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture2D.h">
+      <Filter>Header Files\GLobjectWrappers\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameBufferObject.h">
+      <Filter>Header Files\GLobjectWrappers</Filter>
+    </ClInclude>
+    <ClInclude Include="OGLobjects.h">
+      <Filter>Header Files\GLobjectWrappers</Filter>
+    </ClInclude>
+    <ClInclude Include="Square.h">
+      <Filter>Header Files\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Triangle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
