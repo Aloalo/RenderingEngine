@@ -15,7 +15,7 @@ public:
 	Engine(float _updateInterval, int _windowWidth, int _windowHeight);
 	~Engine();
 
-	static void useStockCamera(const glm::vec3 &position, const glm::vec3 &direction, float FoV);
+	static void useStockCamera(const glm::vec3 &position, const glm::vec3 &direction, float FoV, float cameraSpeed);
 	static void setCamera(std::shared_ptr<CameraHandler> _cam);
 	static std::shared_ptr<CameraHandler> getCamera();
 	static Renderer& getRenderer();

@@ -32,7 +32,7 @@ void Engine::stop()
 	renderer.clear();
 }
 
-void Engine::useStockCamera(const glm::vec3 &position, const glm::vec3 &direction, float FoV)
+void Engine::useStockCamera(const glm::vec3 &position, const glm::vec3 &direction, float FoV, float cameraSpeed)
 {
 	Camera *c = new Camera(position, (float) windowWidth / (float) windowHeight, FoV);
 	glm::vec3 d = glm::normalize(direction);
@@ -41,7 +41,7 @@ void Engine::useStockCamera(const glm::vec3 &position, const glm::vec3 &directio
 	float phix = atan2(d.x, d.z);
 	c->rotate(phix, phiy);
 
-	cam = std::shared_ptr<CameraHandler>(new StockCameraHandler(c, 3.0f, 0.005f));
+	cam = std::shared_ptr<CameraHandler>(new StockCameraHandler(c, cameraSpeed, 0.005f));
 	Input::addInputObserver(std::shared_ptr<InputObserver>(cam));
 	addToUpdateList(std::shared_ptr<Updateable>(cam));
 }

@@ -27,12 +27,6 @@
     <ClInclude Include="Triangle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MeshTester.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MySphere.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="MovingLight.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -44,16 +38,7 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Tester.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Triangle.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MeshTester.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MySphere.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MovingLight.cpp">
@@ -62,5 +47,6 @@
     <ClCompile Include="Mirror.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Tester.cpp" />
   </ItemGroup>
 </Project>

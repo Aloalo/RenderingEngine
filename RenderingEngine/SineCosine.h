@@ -9,8 +9,8 @@ public:
 	SineCosine(void);
 	~SineCosine(void);
 
-	float f(const glm::vec2 &x) const;
-	glm::vec3 normal(const glm::vec2 &x) const;
-	float curvature(const glm::vec2 &x) const;
+	float f(const glm::vec2 &x);
+	glm::vec3 normal(const glm::vec2 &x);
+	float curvature(const glm::vec2 &x);
 };
 

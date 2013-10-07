@@ -3,13 +3,56 @@
 #include <cstdio>
 
 #include "Engine.h"
-#include "MySphere.h"
-#include "MeshTester.h"
-#include <Input.h>
-#include <SpecularPointLight.h>
-#include <AmbientLight.h>
-#include <DiffuseLight.h>
+#include "Input.h"
+#include "Lights.h"
 #include "MovingLight.h"
+#include "Geometry.h"
+#include "SineCosine.h"
+
+void addSineCosine()
+{
+	glm::mat4 Model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, -10.0f, 0.0f));
+
+	glm::vec2 x[] = 
+	{
+		glm::vec2(-20.0f, -20.0f), glm::vec2(-20.0f, 20.0f), glm::vec2(20.0f, 20.0f),
+		glm::vec2(-20.0f, -20.0f), glm::vec2(20.0f, 20.0f), glm::vec2(20.0f, -20.0f)
+	};
+	Mesh *mesh = new Mesh();
+	FunctionGraph graph(new SineCosine());
+	graph.generateGraph(x, 7, -1000.0f, mesh);
+	graph.generateGraph(x+3, 7, -1000.0f, mesh);
+
+	mesh->setOrientation(GL_CCW);
+	mesh->applyIndexing();
+
+	const Material *mat = new Material(glm::vec4(1.0f, 0.2f, 0.2f, 1.0f), glm::vec4(0.1f, 0.1f, 0.1f, 1.0f), glm::vec4(0.7f, 0.7f, 0.7f, 1.0f), 128.0f);
+
+	Engine::addToDisplayList(std::shared_ptr<Drawable>(new LitTriangleMesh(mesh, mat, Model)));
+
+	mesh = NULL;
+	mat = NULL;
+	//Engine::addToDisplayList(std::shared_ptr<Drawable>(new NormalDrawer(mesh, Model)));
+}
+
+void addSphere()
+{
+	Sphere *sphere = new Sphere(1.0f, glm::vec3(0.0f));
+	Mesh *sphereMesh = new Mesh(sphere->generate(4));
+	delete sphere;
+
+	sphereMesh->setOrientation(GL_CCW);
+	sphereMesh->calculateNormals();
+	sphereMesh->interpolateNormals();
+	sphereMesh->applyIndexing();
+
+	Material *mat = new Material(glm::vec4(0.2f, 0.1f, 1.0f, 1.0f), glm::vec4(0.2f, 0.1f, 1.0f, 1.0f), glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), 32.0f);
+	Engine::addToDisplayList(std::shared_ptr<Drawable>(new LitTriangleMesh(sphereMesh, mat, glm::mat4(1.0f))));
+
+	mat = NULL;
+	sphereMesh = NULL;
+	//Engine::addToDisplayList(std::shared_ptr<Drawable>(new NormalDrawer(sphereMesh)));
+}
 
 int _tmain(int argc, char* argv[])
 {
@@ -19,15 +62,11 @@ int _tmain(int argc, char* argv[])
 	Engine::enableMode(GL_CULL_FACE); 
 
 	input->setMouseMoveCallback();
-	e->useStockCamera(glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.0f, 0.0f, -1.0f), 45.0f);
+	e->useStockCamera(glm::vec3(0.0f, 0.0f, -30.0f), glm::vec3(0.0f, 0.0f, 1.0f), 45.0f, 4.0f);
 
-	MySphere *s = new MySphere(32, 32, 1.0f);
-	e->addToDisplayList(std::shared_ptr<Drawable>(s));
-	s = NULL;
 
-	MeshTester *test = new MeshTester();
-	e->addToDisplayList(std::shared_ptr<Drawable>(test));
-	test = NULL;
+	addSphere();
+	addSineCosine();
 
 	Engine::addLight(std::shared_ptr<Light>(new AmbientLight(glm::vec4(0.3f, 0.3f, 0.3f, 1.0f))));
 	Engine::addLight(std::shared_ptr<Light>(new DiffuseLight(glm::vec3(-1.0f, 1.0f, -1.0f))));

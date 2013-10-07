@@ -225,14 +225,17 @@
     <ClCompile Include="Square.cpp">
       <Filter>Source Files\Geometry</Filter>
     </ClCompile>
+    <ClCompile Include="LitTriangleMesh.cpp">
+      <Filter>Source Files\Stock</Filter>
+    </ClCompile>
     <ClCompile Include="Triangle.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="Material.cpp">
+      <Filter>Source Files\Engine</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Engine.h">
-      <Filter>Header Files\Engine</Filter>
-    </ClInclude>
     <ClInclude Include="Updateable.h">
       <Filter>Header Files\Engine</Filter>
     </ClInclude>
@@ -295,9 +298,6 @@
     </ClInclude>
     <ClInclude Include="IndexContainer.h">
       <Filter>Header Files\Utilities</Filter>
-    </ClInclude>
-    <ClInclude Include="Sphere.h">
-      <Filter>Header Files\Stock</Filter>
     </ClInclude>
     <ClInclude Include="NormalDrawer.h">
       <Filter>Header Files\Stock</Filter>
@@ -363,7 +363,22 @@
       <Filter>Header Files\Geometry</Filter>
     </ClInclude>
     <ClInclude Include="Triangle.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="LitTriangleMesh.h">
+      <Filter>Header Files\Stock</Filter>
+    </ClInclude>
+    <ClInclude Include="Lights.h">
+      <Filter>Header Files\Engine\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry.h">
+      <Filter>Header Files\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Material.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Sphere.h">
+      <Filter>Header Files\Geometry</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

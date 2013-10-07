@@ -1,8 +1,8 @@
 #pragma once
 
 #include "Updateable.h"
+#include "SpecularPointLight.h"
 #include <memory>
-#include <SpecularPointLight.h>
 
 class MovingLight :
 	public Updateable

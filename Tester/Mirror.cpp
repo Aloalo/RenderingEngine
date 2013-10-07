@@ -40,7 +40,7 @@ void Mirror::draw(const glm::mat4 &View, const glm::mat4 &Projection)
 	glm::vec3 dir = glm::reflect(Engine::getCamera()->cam->getDirection(), sq.n);
 	glm::vec3 up = glm::reflect(Engine::getCamera()->cam->getUp(), sq.n);
 	
-	TODO::ZAVRSI;
+//	TODO::ZAVRSI;
 	
 	fbo.unBind();
 }

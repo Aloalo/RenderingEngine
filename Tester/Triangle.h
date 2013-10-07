@@ -1,10 +1,7 @@
 #pragma once
 
 #include "UnLitObject.h"
-#include "Program.h"
-#include "VertexArrayObject.h"
-#include "BufferObject.h"
-#include "VertexAttribArray.h"
+#include "OGLobjects.h"
 #include "Updateable.h"
 #include "MatrixStack.h"
 
