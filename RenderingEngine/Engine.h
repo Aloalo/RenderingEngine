@@ -8,6 +8,7 @@
 #include <cmath>
 #include <memory>
 #include "Renderer.h"
+#include "Mesh.h"
 
 class Engine
 {
@@ -21,6 +22,7 @@ public:
 	static Renderer& getRenderer();
 
 	static void addToDisplayList(std::shared_ptr<Drawable> &d);
+	static void addToDisplayList(Mesh *mesh, const Material *mat, const glm::mat4 &modelMatrix);
 	static void addToUpdateList(std::shared_ptr<Updateable> &u);
 	static void addLight(std::shared_ptr<Light> &light);
 

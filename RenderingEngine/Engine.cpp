@@ -1,6 +1,7 @@
 #include "Engine.h"
 #include <GL/glfw.h>
 #include "Input.h"
+#include "LitTriangleMesh.h"
 
 int Engine::windowWidth = 1024;
 int Engine::windowHeight = 768;
@@ -54,6 +55,11 @@ void Engine::setCamera(std::shared_ptr<CameraHandler> _cam)
 void Engine::addToDisplayList(std::shared_ptr<Drawable> &d)
 {
 	renderer.addObject(d);
+}
+
+void Engine::addToDisplayList(Mesh *mesh, const Material *mat, const glm::mat4 &modelMatrix)
+{
+	addToDisplayList(std::shared_ptr<Drawable>(new LitTriangleMesh(mesh, mat, modelMatrix)));
 }
 
 void Engine::addToUpdateList(std::shared_ptr<Updateable> &u)

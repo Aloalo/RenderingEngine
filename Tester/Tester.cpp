@@ -28,7 +28,7 @@ void addSineCosine()
 
 	const Material *mat = new Material(glm::vec4(1.0f, 0.2f, 0.2f, 1.0f), glm::vec4(0.1f, 0.1f, 0.1f, 1.0f), glm::vec4(0.7f, 0.7f, 0.7f, 1.0f), 128.0f);
 
-	Engine::addToDisplayList(std::shared_ptr<Drawable>(new LitTriangleMesh(mesh, mat, Model)));
+	Engine::addToDisplayList(mesh, mat, Model);
 
 	mesh = NULL;
 	mat = NULL;
@@ -46,8 +46,8 @@ void addSphere()
 	sphereMesh->interpolateNormals();
 	sphereMesh->applyIndexing();
 
-	Material *mat = new Material(glm::vec4(0.2f, 0.1f, 1.0f, 1.0f), glm::vec4(0.2f, 0.1f, 1.0f, 1.0f), glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), 32.0f);
-	Engine::addToDisplayList(std::shared_ptr<Drawable>(new LitTriangleMesh(sphereMesh, mat, glm::mat4(1.0f))));
+	const Material *mat = new Material(glm::vec4(0.2f, 0.1f, 1.0f, 1.0f), glm::vec4(0.2f, 0.1f, 1.0f, 1.0f), glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), 32.0f);
+	Engine::addToDisplayList(sphereMesh, mat, glm::mat4(1.0f));
 
 	mat = NULL;
 	sphereMesh = NULL;

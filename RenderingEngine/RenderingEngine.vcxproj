@@ -150,6 +150,7 @@
     <ClInclude Include="CameraHandler.h" />
     <ClInclude Include="DiffuseLight.h" />
     <ClInclude Include="Drawable.h" />
+    <ClInclude Include="Engine.h" />
     <ClInclude Include="FragmentShader.h" />
     <ClInclude Include="FrameBufferObject.h" />
     <ClInclude Include="FunctionGraph.h" />
