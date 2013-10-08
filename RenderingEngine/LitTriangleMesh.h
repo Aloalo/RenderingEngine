@@ -15,8 +15,8 @@ public:
 	void initDrawing();
 	void draw(const glm::mat4 &View, const glm::mat4 &Projection);
 
-	const Material* getMaterial();
-	glm::mat4 modelMatrix();
+	const Material* getMaterial() const;
+	const glm::mat4& modelMatrix() const;
 
 private:
 	Mesh *mesh;

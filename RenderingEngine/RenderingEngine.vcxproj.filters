@@ -192,9 +192,6 @@
     <ClCompile Include="LitObject.cpp">
       <Filter>Source Files\Engine</Filter>
     </ClCompile>
-    <ClCompile Include="UnLitObject.cpp">
-      <Filter>Source Files\Engine</Filter>
-    </ClCompile>
     <ClCompile Include="Light.cpp">
       <Filter>Source Files\Engine\Light</Filter>
     </ClCompile>
@@ -232,6 +229,9 @@
       <Filter>Source Files\Geometry</Filter>
     </ClCompile>
     <ClCompile Include="Material.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="UnLitObject.cpp">
       <Filter>Source Files\Engine</Filter>
     </ClCompile>
   </ItemGroup>
@@ -326,9 +326,6 @@
     <ClInclude Include="LitObject.h">
       <Filter>Header Files\Engine</Filter>
     </ClInclude>
-    <ClInclude Include="UnLitObject.h">
-      <Filter>Header Files\Engine</Filter>
-    </ClInclude>
     <ClInclude Include="Light.h">
       <Filter>Header Files\Engine\Light</Filter>
     </ClInclude>
@@ -381,6 +378,9 @@
       <Filter>Header Files\Geometry</Filter>
     </ClInclude>
     <ClInclude Include="Engine.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="UnLitObject.h">
       <Filter>Header Files\Engine</Filter>
     </ClInclude>
   </ItemGroup>

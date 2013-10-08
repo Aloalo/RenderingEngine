@@ -1,10 +1,7 @@
 #pragma once
 
 #include "UnLitObject.h"
-#include "Program.h"
-#include "VertexArrayObject.h"
-#include "BufferObject.h"
-#include "VertexAttribArray.h"
+#include "OGLobjects.h"
 #include "Mesh.h"
 
 class NormalDrawer :
@@ -20,7 +17,6 @@ public:
 
 private:
 	void init(const Mesh *mesh);
-
 
 	Program *p;
 	VertexArrayObject *normalVAO;

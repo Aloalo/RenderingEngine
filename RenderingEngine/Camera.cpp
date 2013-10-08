@@ -93,7 +93,7 @@ glm::vec3 Camera::getUp() const
 	return glm::cross(getRight(), getDirection());
 }
 
-glm::vec3 Camera::getPosition() const
+const glm::vec3& Camera::getPosition() const
 {
 	return position;
 }

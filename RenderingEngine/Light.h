@@ -8,7 +8,7 @@
 class Light
 {
 public:
-	Light(const glm::vec4 &_intensity);
+	Light(const glm::vec4 &intensity);
 	~Light(void);
 
 	virtual void renderingSetup(const glm::mat4 &View, const glm::mat4 &Projection) = 0;

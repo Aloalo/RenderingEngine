@@ -12,7 +12,7 @@ CameraHandler::~CameraHandler(void)
 	cam = NULL;
 }
 
-glm::vec3 CameraHandler::getPosition() const
+const glm::vec3& CameraHandler::getPosition() const
 {
 	return cam->getPosition();
 }

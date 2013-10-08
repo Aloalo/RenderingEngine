@@ -42,12 +42,12 @@ void LitTriangleMesh::draw(const glm::mat4 &View, const glm::mat4 &Projection)
 		glDrawArrays(GL_TRIANGLES, 0, mesh->getVertexDataSize() * sizeof(float));
 }
 
-const Material* LitTriangleMesh::getMaterial()
+const Material* LitTriangleMesh::getMaterial() const
 {
 	return mat;
 }
 
-glm::mat4 LitTriangleMesh::modelMatrix()
+const glm::mat4& LitTriangleMesh::modelMatrix() const
 {
 	return Model;
 }
