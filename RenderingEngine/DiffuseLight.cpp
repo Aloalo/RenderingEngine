@@ -26,5 +26,5 @@ void DiffuseLight::collectData(std::shared_ptr<LitObject> &obj, const glm::mat4 
 	glm::mat4 MV = View * obj->modelMatrix();
 	p->setUniform("mvMatrix", MV);
 	p->setUniform("normalMatrix", glm::transpose(glm::inverse(glm::mat3(MV))));
-	p->setUniform("diffuseColor", obj->getMaterial()->diffuseColor);
+	p->setUniform("diffuseColor", obj->getMaterial().diffuseColor);
 }

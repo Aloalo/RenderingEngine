@@ -1,7 +1,8 @@
 #pragma once
 
-#include "PackedVertex.h"
 #include "IndexContainer.h"
+#include "glm/glm.hpp"
+#include <vector>
 
 class Mesh
 {
@@ -50,7 +51,7 @@ private:
 	std::vector<glm::vec3> normalData;
 	std::vector<glm::vec2> uvData;
 
-	IndexContainer *indexData;
+	IndexContainer indexData;
 
 	unsigned int orientation;
 };

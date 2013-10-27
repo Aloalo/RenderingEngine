@@ -6,7 +6,7 @@ class StockCameraHandler :
 	public CameraHandler
 {
 public:
-	StockCameraHandler(Camera *_cam, float _cameraSpeed, float _mouseSpeed);
+	StockCameraHandler(const Camera &cam, float cameraSpeed, float mouseSpeed);
 	~StockCameraHandler(void);
 
 	void keyPress(int key, int action);

@@ -24,6 +24,8 @@ public:
 
 	void setUniformBlockBinding(const char *name, int bindingPoint);
 
+	void setUniform(const char *name, int x);
+
 	void setUniform(const char *name, const float &x);
 	void setUniform(const char *name, const glm::vec2 &x);
  	void setUniform(const char *name, const glm::vec3 &x);

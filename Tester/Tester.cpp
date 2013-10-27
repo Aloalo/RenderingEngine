@@ -8,6 +8,7 @@
 #include "MovingLight.h"
 #include "Geometry.h"
 #include "SineCosine.h"
+#include <NormalDrawer.h>
 
 void addSineCosine()
 {
@@ -26,32 +27,31 @@ void addSineCosine()
 	mesh->setOrientation(GL_CCW);
 	mesh->applyIndexing();
 
-	const Material *mat = new Material(glm::vec4(1.0f, 0.2f, 0.2f, 1.0f), glm::vec4(0.1f, 0.1f, 0.1f, 1.0f), glm::vec4(0.7f, 0.7f, 0.7f, 1.0f), 128.0f);
+	Material mat(glm::vec4(1.0f, 0.2f, 0.2f, 1.0f), glm::vec4(0.1f, 0.1f, 0.1f, 1.0f), glm::vec4(0.7f, 0.7f, 0.7f, 1.0f), 128.0f);
 
 	Engine::addToDisplayList(mesh, mat, Model);
 
 	mesh = NULL;
-	mat = NULL;
 	//Engine::addToDisplayList(std::shared_ptr<Drawable>(new NormalDrawer(mesh, Model)));
 }
 
 void addSphere()
 {
-	Sphere *sphere = new Sphere(1.0f, glm::vec3(0.0f));
-	Mesh *sphereMesh = new Mesh(sphere->generate(4));
-	delete sphere;
+	std::vector<glm::vec3> *vec = Sphere::generate(4, 1.0f, glm::vec3(0.0f));
+	Mesh *sphereMesh = new Mesh(*vec);
+	delete vec;
 
 	sphereMesh->setOrientation(GL_CCW);
 	sphereMesh->calculateNormals();
 	sphereMesh->interpolateNormals();
 	sphereMesh->applyIndexing();
 
-	const Material *mat = new Material(glm::vec4(0.2f, 0.1f, 1.0f, 1.0f), glm::vec4(0.2f, 0.1f, 1.0f, 1.0f), glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), 32.0f);
+	const Material mat(glm::vec4(0.2f, 0.1f, 1.0f, 1.0f), glm::vec4(0.2f, 0.1f, 1.0f, 1.0f), glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), 32.0f);
 	Engine::addToDisplayList(sphereMesh, mat, glm::mat4(1.0f));
 
-	mat = NULL;
+
+	Engine::addToDisplayList(std::shared_ptr<Drawable>(new NormalDrawer(*sphereMesh)));
 	sphereMesh = NULL;
-	//Engine::addToDisplayList(std::shared_ptr<Drawable>(new NormalDrawer(sphereMesh)));
 }
 
 int _tmain(int argc, char* argv[])
@@ -79,6 +79,7 @@ int _tmain(int argc, char* argv[])
 	pointLight = NULL;
 	ptr = NULL;
 
+	Engine::setWindowTitle("Tester");
 	e->start();
 	return 0;
 }

@@ -25,5 +25,5 @@ void AmbientLight::collectData(std::shared_ptr<LitObject> &obj, const glm::mat4 
 {
 	glm::mat4 MV = View * obj->modelMatrix();
 	p->setUniform("mvMatrix", MV);
-	p->setUniform("materialAmbientColor", obj->getMaterial()->ambientColor);
+	p->setUniform("materialAmbientColor", obj->getMaterial().ambientColor);
 }

@@ -5,6 +5,11 @@ Texture2D::Texture2D(GLenum _target)
 {
 }
 
+Texture2D::Texture2D()
+	: Texture()
+{
+}
+
 Texture2D::~Texture2D(void)
 {
 }

@@ -1,17 +1,10 @@
 #include "Sphere.h"
 
-Sphere::Sphere(float _radius, const glm::vec3 &_center)
-	: radius(_radius), center(_center)
-{
-}
+float Sphere::radius = 0.0f;
 
-
-Sphere::~Sphere(void)
+std::vector<glm::vec3>* Sphere::generate(int depth, float r, const glm::vec3 &center)
 {
-}
-
-const std::vector<glm::vec3> Sphere::generate(int depth) const
-{
+	radius = r;
 	const float X(0.525731112119133606f * radius);
 	const float Z(0.850650808352039932f * radius);
 
@@ -29,15 +22,15 @@ const std::vector<glm::vec3> Sphere::generate(int depth) const
 		{6,1,10}, {9,0,11}, {9,11,2}, {9,2,5}, {7,2,11}
 	};
 
-	std::vector<glm::vec3> out;
+	std::vector<glm::vec3> *out = new std::vector<glm::vec3>();
 	for (int i = 0; i < 20; i++)
-		subdivide(vdata[tindices[i][0]], vdata[tindices[i][1]], vdata[tindices[i][2]], depth, out);
+		subdivide(vdata[tindices[i][0]], vdata[tindices[i][1]], vdata[tindices[i][2]], depth, *out);
 
 	return out;
 }
 
 void Sphere::subdivide(const glm::vec3 &a, const glm::vec3 &b, const glm::vec3 &c, 
-					   int depth, std::vector<glm::vec3> &out) const
+					   int depth, std::vector<glm::vec3> &out)
 {
 	if (depth == 0) 
 	{

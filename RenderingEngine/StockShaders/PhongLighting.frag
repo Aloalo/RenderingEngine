@@ -36,9 +36,12 @@ void main()
 	vec3 viewDirection = normalize(-vertexPosition);
 	vec3 reflectDir = reflect(-lightDir, surfaceNormal);
 	float phongTerm = dot(viewDirection, reflectDir);
-	phongTerm = clamp(phongTerm, 0, 1);
-	phongTerm = cosAngIncidence != 0.0 ? phongTerm : 0.0;
-	phongTerm = pow(phongTerm, shininessFactor);
+	if(phongTerm  > 0.0)
+	{
+		phongTerm = clamp(phongTerm, 0, 1);
+		phongTerm = cosAngIncidence != 0.0 ? phongTerm : 0.0;
+		phongTerm = pow(phongTerm, shininessFactor);
+	}
 	
 	outputColor += specularColor * attenIntensity * phongTerm;
 }

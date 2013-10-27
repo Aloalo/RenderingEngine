@@ -1,10 +1,12 @@
+
 #include "Mesh.h"
 
 #include <map>
 #include <algorithm>
-#include <GL/glew.h>
+#include "GL/glew.h"
 #include "glm/gtc/swizzle.hpp"
 #include "MathFunctions.h"
+#include "Vertex.h"
 
 Mesh::Mesh(const std::vector<glm::vec3> &_vertexData)
 	: vertexData(_vertexData)
@@ -36,8 +38,6 @@ void Mesh::clear()
 	vertexData.clear();
 	normalData.clear();
 	uvData.clear();
-	delete indexData;
-	indexData = NULL;
 }
 
 void Mesh::addTriangle(const glm::vec3 vert[3])
@@ -88,7 +88,7 @@ void Mesh::interpolateNormals()
 	int n = vertexData.size();
 	std::vector<std::pair<Vertex, int> > out(n);
 	for(int i = 0; i < n; i++)
-		out.push_back(std::pair<Vertex, int>(vertexData[i], i));
+		out[i] = std::pair<Vertex, int>(Vertex(vertexData[i]), i);
 	std::sort(out.begin(), out.end());
 
 	int index = 0;
@@ -110,7 +110,7 @@ void Mesh::interpolateNormals()
 	}
 }
 
-bool getSimilarVertexIndex(PackedVertex &packed, std::map<PackedVertex, unsigned int> &VertexToOutIndex, unsigned int &result)
+bool getSimilarVertexIndex(const PackedVertex &packed, std::map<PackedVertex, unsigned int> &VertexToOutIndex, unsigned int &result)
 {
 	std::map<PackedVertex, unsigned int>::iterator it = VertexToOutIndex.find(packed);
 	if (it == VertexToOutIndex.end())
@@ -156,7 +156,7 @@ void Mesh::applyIndexing()
 		}
 	}
 
-	indexData = new IndexContainer(outIndexData);
+	indexData.setData(outIndexData);
 	vertexData = outVertexData;
 	uvData = outUvData;
 	normalData = outNormalData;
@@ -171,8 +171,8 @@ void Mesh::flipOrientation()
 void Mesh::setOrientation(unsigned int _orientation)
 {
 	orientation = _orientation;
-	if(!((orientation == GL_CCW && MathFunctions::ccw(vertexData[0], vertexData[1], vertexData[2]) > 0)
-		|| (orientation == GL_CW && MathFunctions::ccw(vertexData[0], vertexData[1], vertexData[2]) < 0)))
+	if(!((orientation == GL_CCW && mfl::ccw<float>(vertexData[0], vertexData[1], vertexData[2]) > 0)
+		|| (orientation == GL_CW && mfl::ccw<float>(vertexData[0], vertexData[1], vertexData[2]) < 0)))
 		flip();
 }
 
@@ -193,12 +193,12 @@ const glm::vec2* Mesh::getUVData() const
 
 const void* Mesh::getIndexData() const
 {
-	return indexData->getData();
+	return indexData.getData();
 }
 
 unsigned int Mesh::getIndexDataType() const
 {
-	int n = indexData->size();
+	int n = indexData.size();
 	return n <= UCHAR_MAX ? GL_UNSIGNED_BYTE : (n <= USHRT_MAX ? GL_UNSIGNED_SHORT : GL_UNSIGNED_INT);
 }
 
@@ -219,7 +219,7 @@ int Mesh::numOfUVs() const
 
 int Mesh::numOfIndices() const
 {
-	return indexData->size();
+	return indexData.size();
 }
 
 int Mesh::getVertexDataSize() const
@@ -229,7 +229,7 @@ int Mesh::getVertexDataSize() const
 
 int Mesh::getIndexDataSize() const
 {
-	return indexData->getSizeInBytes();
+	return indexData.getSizeInBytes();
 }
 
 int Mesh::getUVDataSize() const

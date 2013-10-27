@@ -7,6 +7,10 @@ Texture::Texture(GLenum _target)
 	generate();
 }
 
+Texture::Texture()
+{
+}
+
 Texture::~Texture(void)
 {
 }
@@ -26,27 +30,32 @@ void Texture::bind() const
 	glBindTexture(target, ID);
 }
 
-void Texture::texParam(GLenum paramName, GLuint param) const
+void Texture::texParami(GLenum paramName, GLuint param) const
 {
+	bind();
 	glTexParameteri(target, paramName, param);
 }
 
-void Texture::texParam(GLenum paramName, GLfloat param) const
+void Texture::texParamf(GLenum paramName, GLfloat param) const
 {
+	bind();
 	glTexParameterf(target, paramName, param);
 }
 
-void Texture::texParam(GLenum paramName, const GLuint *param) const
+void Texture::texParamIuiv(GLenum paramName, const GLuint *param) const
 {
+	bind();
 	glTexParameterIuiv(target, paramName, param);
 }
 
-void Texture::texParam(GLenum paramName, const GLint *param) const
+void Texture::texParamIiv(GLenum paramName, const GLint *param) const
 {
+	bind();
 	glTexParameterIiv(target, paramName, param);
 }
 
-void Texture::texParam(GLenum paramName, const GLfloat *param) const
+void Texture::texParamfv(GLenum paramName, const GLfloat *param) const
 {
+	bind();
 	glTexParameterfv(target, paramName, param);
 }

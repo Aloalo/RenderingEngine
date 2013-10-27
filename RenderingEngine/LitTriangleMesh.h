@@ -8,14 +8,14 @@ class LitTriangleMesh
 	: public LitObject
 {
 public:
-	LitTriangleMesh(Mesh *mesh, const Material *mat, const glm::mat4 &modelMatrix);
+	LitTriangleMesh(Mesh *mesh, const Material &mat, const glm::mat4 &modelMatrix);
 	~LitTriangleMesh(void);
 
 
 	void initDrawing();
 	void draw(const glm::mat4 &View, const glm::mat4 &Projection);
 
-	const Material* getMaterial() const;
+	const Material& getMaterial() const;
 	const glm::mat4& modelMatrix() const;
 
 private:
@@ -27,7 +27,7 @@ private:
 	BufferObject normals;
 	BufferObject indices;
 
-	const Material *mat;
+	const Material mat;
 	glm::mat4 Model;
 };
 

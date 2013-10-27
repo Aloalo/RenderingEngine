@@ -12,5 +12,6 @@ TO implement:
 
 
 TO fix
-- vertex klase
-- Sphere
+- vertex klase!!
+- mesh!!
+- rendering loop?

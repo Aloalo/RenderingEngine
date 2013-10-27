@@ -9,6 +9,9 @@ Camera::Camera(const glm::vec3 _position, float _aspectRatio, float _FoV)
 	dir = glm::vec3(0., 0., 0.);
 }
 
+Camera::Camera()
+{
+}
 
 Camera::~Camera(void)
 {
@@ -22,14 +25,14 @@ void Camera::update(float distance)
 	position += (direction * dir.z + up * dir.y + right * dir.x) * distance;
 }
 
-void Camera::rotate(float pitch, float yaw)
+void Camera::rotate(float yaw, float pitch)
 {
-	phix += pitch;
-	phiy += yaw;
-	if(phiy > MathFunctions::pi / 2.)
-		phiy = MathFunctions::pi / 2.;
-	if(phiy < -MathFunctions::pi / 2.)
-		phiy = -MathFunctions::pi / 2.;
+	phix += yaw;
+	phiy += pitch;
+	if(phiy > mfl::pi / 2.)
+		phiy = mfl::pi / 2.;
+	if(phiy < -mfl::pi / 2.)
+		phiy = -mfl::pi / 2.;
 }
 
 void Camera::translate(const glm::vec3 &_dir)
@@ -49,12 +52,12 @@ void Camera::setFieldOfView(float _FoV)
 
 void Camera::setPitch(float pitch)
 {
-	phix = pitch;
+	phiy = pitch;
 }
 
 void Camera::setYaw(float yaw)
 {
-	phiy = yaw;
+	phix = yaw;
 }
 
 glm::mat4 Camera::getProjectionMatrix() const
@@ -82,9 +85,9 @@ glm::vec3 Camera::getDirection() const
 glm::vec3 Camera::getRight() const
 {
 	return glm::vec3(
-		sin(phix - MathFunctions::pi/2.0f), 
+		sin(phix - mfl::pi/2.0f), 
 		0,
-		cos(phix - MathFunctions::pi/2.0f)
+		cos(phix - mfl::pi/2.0f)
 		);
 }
 

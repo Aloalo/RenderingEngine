@@ -1,5 +1,6 @@
 #include "Mirror.h"
-#include <Engine.h>
+#include "Engine.h"
+
 
 bool Mirror::enable = 1;
 
@@ -17,8 +18,8 @@ Mirror::~Mirror(void)
 void Mirror::initDrawing()
 {
 	renderTarget.texImage(0, GL_RGB, glm::vec3(1024, 768, 0), GL_RGB, GL_UNSIGNED_BYTE, 0);
-	renderTarget.texParam(GL_TEXTURE_MAG_FILTER, (GLuint)GL_NEAREST);
-	renderTarget.texParam(GL_TEXTURE_MIN_FILTER, (GLuint)GL_NEAREST);
+	renderTarget.texParami(GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	renderTarget.texParami(GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 
 	rbo.allocateStorage(GL_DEPTH_COMPONENT, 1024, 768);
 	fbo.attachRenderBuffer(GL_DEPTH_ATTACHMENT, rbo);
@@ -37,8 +38,8 @@ void Mirror::draw(const glm::mat4 &View, const glm::mat4 &Projection)
 	glm::vec3 pos = Engine::getCamera()->getPosition();
 
 	pos -= 2.f * glm::dot(pos - sq.c, sq.n) / glm::dot(sq.n, sq.n) * sq.n;
-	glm::vec3 dir = glm::reflect(Engine::getCamera()->cam->getDirection(), sq.n);
-	glm::vec3 up = glm::reflect(Engine::getCamera()->cam->getUp(), sq.n);
+	glm::vec3 dir = glm::reflect(Engine::getCamera()->cam.getDirection(), sq.n);
+	glm::vec3 up = glm::reflect(Engine::getCamera()->cam.getUp(), sq.n);
 	
 //	TODO::ZAVRSI;
 	

@@ -94,6 +94,18 @@
     <None Include="StockShaders\ADS.frag">
       <Filter>Header Files\Stock\Shaders</Filter>
     </None>
+    <None Include="StockShaders\AmbientLight.frag">
+      <Filter>Header Files\Stock\Shaders</Filter>
+    </None>
+    <None Include="StockShaders\DiffuseLight.frag">
+      <Filter>Header Files\Stock\Shaders</Filter>
+    </None>
+    <None Include="StockShaders\Lighting.vert">
+      <Filter>Header Files\Stock\Shaders</Filter>
+    </None>
+    <None Include="StockShaders\PhongLighting.frag">
+      <Filter>Header Files\Stock\Shaders</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="VertexAttribArray.cpp">
@@ -123,9 +135,6 @@
     <ClCompile Include="MatrixStack.cpp">
       <Filter>Source Files\Utilities</Filter>
     </ClCompile>
-    <ClCompile Include="MathFunctions.cpp">
-      <Filter>Source Files\Utilities</Filter>
-    </ClCompile>
     <ClCompile Include="VertexShader.cpp">
       <Filter>Source Files\GLobjectWrappers\Program</Filter>
     </ClCompile>
@@ -144,26 +153,8 @@
     <ClCompile Include="StockCameraHandler.cpp">
       <Filter>Source Files\Stock</Filter>
     </ClCompile>
-    <ClCompile Include="Vertex.cpp">
-      <Filter>Source Files\Geometry</Filter>
-    </ClCompile>
-    <ClCompile Include="Mesh.cpp">
-      <Filter>Source Files\Geometry</Filter>
-    </ClCompile>
-    <ClCompile Include="VertexN.cpp">
-      <Filter>Source Files\Geometry</Filter>
-    </ClCompile>
-    <ClCompile Include="VertexUV.cpp">
-      <Filter>Source Files\Geometry</Filter>
-    </ClCompile>
-    <ClCompile Include="PackedVertex.cpp">
-      <Filter>Source Files\Geometry</Filter>
-    </ClCompile>
     <ClCompile Include="IndexContainer.cpp">
       <Filter>Source Files\Utilities</Filter>
-    </ClCompile>
-    <ClCompile Include="Sphere.cpp">
-      <Filter>Source Files\Stock</Filter>
     </ClCompile>
     <ClCompile Include="NormalDrawer.cpp">
       <Filter>Source Files\Stock</Filter>
@@ -234,6 +225,12 @@
     <ClCompile Include="UnLitObject.cpp">
       <Filter>Source Files\Engine</Filter>
     </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>Source Files\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="Sphere.cpp">
+      <Filter>Source Files\Geometry</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Updateable.h">
@@ -285,15 +282,6 @@
       <Filter>Header Files\Geometry</Filter>
     </ClInclude>
     <ClInclude Include="Mesh.h">
-      <Filter>Header Files\Geometry</Filter>
-    </ClInclude>
-    <ClInclude Include="VertexN.h">
-      <Filter>Header Files\Geometry</Filter>
-    </ClInclude>
-    <ClInclude Include="VertexUV.h">
-      <Filter>Header Files\Geometry</Filter>
-    </ClInclude>
-    <ClInclude Include="PackedVertex.h">
       <Filter>Header Files\Geometry</Filter>
     </ClInclude>
     <ClInclude Include="IndexContainer.h">

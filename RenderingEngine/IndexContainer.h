@@ -10,6 +10,7 @@ public:
 	IndexContainer(const std::vector<unsigned int> &indexData);
 	~IndexContainer(void);
 
+	void setData(const std::vector<unsigned int> &indexData);
 	int size() const;
 	int getSizeInBytes() const;
 	const void* getData() const;

@@ -28,8 +28,8 @@ void SpecularPointLight::collectData(std::shared_ptr<LitObject> &obj, const glm:
 	glm::mat4 MV = View * obj->modelMatrix();
 	p->setUniform("mvMatrix", MV);
 	p->setUniform("normalMatrix", glm::transpose(glm::inverse(glm::mat3(MV))));
-	p->setUniform("specularColor", obj->getMaterial()->specularColor);
-	p->setUniform("shininessFactor", obj->getMaterial()->shininessFactor);
+	p->setUniform("specularColor", obj->getMaterial().specularColor);
+	p->setUniform("shininessFactor", obj->getMaterial().shininessFactor);
 }
 
 glm::mat4& SpecularPointLight::modelMatrix()

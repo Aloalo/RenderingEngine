@@ -2,17 +2,13 @@
 
 IndexContainer::IndexContainer(const std::vector<unsigned int> &indexData)
 {
-	indexCount = indexData.size();
-	if(indexCount <= UCHAR_MAX)
-		cast<unsigned char>(indexData);
-	else if(indexCount <= USHRT_MAX)
-		cast<unsigned short>(indexData);
-	else
-		cast<unsigned int>(indexData);
+	setData(indexData);
 }
 
 IndexContainer::IndexContainer(void)
+	: indexCount(0), sizeInBytes(0)
 {
+	data = NULL;
 }
 
 
@@ -45,5 +41,19 @@ void IndexContainer::cast(const std::vector<unsigned int> &indexData)
 		*((T*)data+i) = (T)indexData[i];
 
 	sizeInBytes = indexCount * sizeof(T);
+}
+
+void IndexContainer::setData(const std::vector<unsigned int> &indexData)
+{
+	if(data != NULL)
+		delete data;
+	indexCount = indexData.size();
+	if(indexCount <= UCHAR_MAX)
+		cast<unsigned char>(indexData);
+	else if(indexCount <= USHRT_MAX)
+		cast<unsigned short>(indexData);
+	else
+		cast<unsigned int>(indexData);
+
 }
 

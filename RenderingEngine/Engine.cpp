@@ -11,10 +11,12 @@ Renderer Engine::renderer;
 std::list<std::shared_ptr<Updateable> > Engine::updateList;
 GLbitfield Engine::mask = GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT;
 glm::vec4 Engine::backgroundColor = glm::vec4(0.4);
+char Engine::winTitle[150];
 
 
 Engine::Engine(float _updateInterval, int _windowWidth, int _windowHeight)
 {
+	cam = NULL;
 	updateInterval = _updateInterval;
 	windowWidth = _windowWidth;
 	windowHeight = _windowHeight;
@@ -35,12 +37,12 @@ void Engine::stop()
 
 void Engine::useStockCamera(const glm::vec3 &position, const glm::vec3 &direction, float FoV, float cameraSpeed)
 {
-	Camera *c = new Camera(position, (float) windowWidth / (float) windowHeight, FoV);
+	Camera c(position, (float) windowWidth / (float) windowHeight, FoV);
 	glm::vec3 d = glm::normalize(direction);
 
 	float phiy = asin(d.y);
 	float phix = atan2(d.x, d.z);
-	c->rotate(phix, phiy);
+	c.rotate(phix, phiy);
 
 	cam = std::shared_ptr<CameraHandler>(new StockCameraHandler(c, cameraSpeed, 0.005f));
 	Input::addInputObserver(std::shared_ptr<InputObserver>(cam));
@@ -57,7 +59,7 @@ void Engine::addToDisplayList(std::shared_ptr<Drawable> &d)
 	renderer.addObject(d);
 }
 
-void Engine::addToDisplayList(Mesh *mesh, const Material *mat, const glm::mat4 &modelMatrix)
+void Engine::addToDisplayList(Mesh *mesh, const Material &mat, const glm::mat4 &modelMatrix)
 {
 	addToDisplayList(std::shared_ptr<Drawable>(new LitTriangleMesh(mesh, mat, modelMatrix)));
 }
@@ -93,12 +95,14 @@ void Engine::initialize()
 		exit(-1);
 	}
 
-	glewExperimental = true;
+	glewExperimental = GL_TRUE;
 	if (glewInit() != GLEW_OK)
 	{
 		fprintf(stderr, "Failed to initialize GLEW\n");
 		exit(-1);
 	}
+
+	memset(winTitle, 0, sizeof(winTitle));
 }
 
 void Engine::enableMode(GLenum mode)
@@ -122,8 +126,27 @@ void Engine::renderingLoop()
 		nextFrame();
 }
 
+inline void Engine::displayFPS()
+{
+	static double lastTime = glfwGetTime();
+	static int frameCount = 0;
+
+	frameCount++;
+	double currentTime = glfwGetTime();
+	float deltaTime = float(currentTime - lastTime);
+	if(deltaTime > 1.0f)
+	{
+		char title[100];
+		sprintf(title, "%s, FPS: %f", Engine::winTitle, (float)frameCount / deltaTime);
+		glfwSetWindowTitle(title);
+		lastTime = currentTime;
+		frameCount = 0;
+	}
+}
+
 inline void Engine::nextFrame()
 {
+	displayFPS();
 	static double lastTime = glfwGetTime();
 	double currentTime = glfwGetTime();
 	float deltaTime = float(currentTime - lastTime);
@@ -139,8 +162,8 @@ inline void Engine::nextFrame()
 		(*i)->update(deltaTime);
 	}
 
-	glm::mat4 ViewMatrix = cam->getViewMatrix();
-	glm::mat4 ProjectionMatrix = cam->getProjectionMatrix();
+	glm::mat4 ViewMatrix = cam ? cam->getViewMatrix() : glm::mat4(1.0f);
+	glm::mat4 ProjectionMatrix = cam ? cam->getProjectionMatrix() : glm::mat4(1.0f);
 
 	renderer.draw(ViewMatrix, ProjectionMatrix);
 
@@ -175,4 +198,9 @@ std::shared_ptr<CameraHandler>& Engine::getCamera()
 Renderer& Engine::getRenderer()
 {
 	return renderer;
+}
+
+void Engine::setWindowTitle(const char *name)
+{
+	strcpy(winTitle, name);
 }

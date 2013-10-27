@@ -20,9 +20,10 @@ public:
 	static void setCamera(std::shared_ptr<CameraHandler> _cam);
 	static std::shared_ptr<CameraHandler>& getCamera();
 	static Renderer& getRenderer();
+	static void setWindowTitle(const char *name);
 
 	static void addToDisplayList(std::shared_ptr<Drawable> &d);
-	static void addToDisplayList(Mesh *mesh, const Material *mat, const glm::mat4 &modelMatrix);
+	static void addToDisplayList(Mesh *mesh, const Material &mat, const glm::mat4 &modelMatrix);
 	static void addToUpdateList(std::shared_ptr<Updateable> &u);
 	static void addLight(std::shared_ptr<Light> &light);
 
@@ -39,9 +40,9 @@ public:
 
 private:
 	static void initialize();
-
 	static void renderingLoop();
 	static inline void nextFrame();
+	static void displayFPS();
 
 	static Renderer renderer;
 	static std::list<std::shared_ptr<Updateable> > updateList;
@@ -51,4 +52,5 @@ private:
 	static float updateInterval;
 	static GLbitfield mask;
 	static glm::vec4 backgroundColor;
+	static char winTitle[150];
 };

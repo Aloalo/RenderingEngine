@@ -42,6 +42,7 @@ void GLFWCALL Input::mouseClick(int button, int state)
 
 void GLFWCALL Input::handleResize(int width, int height)
 {
+	glViewport(0, 0, width, height);
 	for(std::list<std::shared_ptr<InputObserver> >::iterator i = observerList.begin(); i != observerList.end(); i++)
 		(*i)->windowResize(width, height);
 }

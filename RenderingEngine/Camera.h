@@ -5,11 +5,12 @@
 class Camera
 {
 public:
+	Camera();
 	Camera(const glm::vec3 _position, float _aspectRatio, float _FoV);
 	~Camera(void);
 
 	void update(float distance);
-	void rotate(float pitch, float yaw);
+	void rotate(float yaw, float pitch);
 	void translate(const glm::vec3 &dir);
 
 	void setPitch(float pitch);
