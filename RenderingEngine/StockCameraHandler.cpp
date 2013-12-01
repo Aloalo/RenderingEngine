@@ -1,6 +1,6 @@
 #include "StockCameraHandler.h"
-
-#include <GL\glfw.h>
+#include "Engine.h"
+#include <GLFW/glfw3.h>
 
 
 StockCameraHandler::StockCameraHandler(const Camera &cam, float cameraSpeed, float mouseSpeed)
@@ -8,7 +8,7 @@ StockCameraHandler::StockCameraHandler(const Camera &cam, float cameraSpeed, flo
 {
 	springiness = 55.0f;
 	int windowWidth, windowHeight;
-	glfwGetWindowSize(&windowWidth, &windowHeight);
+	Engine::getWindowSize(windowWidth, windowHeight);
 	usex = windowWidth;
 	usey = windowHeight;
 }
@@ -17,8 +17,10 @@ StockCameraHandler::~StockCameraHandler(void)
 {
 }
 
-void StockCameraHandler::keyPress(int key, int action)
+void StockCameraHandler::keyPress(int key, int scancode, int action, int mods)
 {
+	if(action == GLFW_REPEAT)
+		return;
 	float mod = action == GLFW_PRESS? 1 : -1;
 	switch(key)
 	{
@@ -45,7 +47,7 @@ void StockCameraHandler::keyPress(int key, int action)
 	}
 }
 
-void StockCameraHandler::mouseMove(int x, int y)
+void StockCameraHandler::mouseMove(double x, double y)
 {
 	static float lastTime = glfwGetTime();
 	float currentTime = glfwGetTime();
@@ -53,28 +55,19 @@ void StockCameraHandler::mouseMove(int x, int y)
 	lastTime = currentTime;
 
 	int windowWidth, windowHeight;
-	glfwGetWindowSize(&windowWidth, &windowHeight);
+	Engine::getWindowSize(windowWidth, windowHeight);
 
 	float d = 1 - exp(log(0.5) * springiness * dt);
 	usex += (x - usex) * d;
 	usey += (y - usey) * d;
 
 	cam.rotate(float(windowWidth / 2 - usex) * mouseSpeed, float(windowHeight / 2 - usey) * mouseSpeed);
-	glfwSetMousePos(windowWidth / 2, windowHeight / 2);
-}
-
-void StockCameraHandler::mouseClick(int button, int state)
-{
+	glfwSetCursorPos(Engine::getWindow(), windowWidth / 2, windowHeight / 2);
 }
 
 void StockCameraHandler::windowResize(int width, int height)
 {
 	cam.setAspectRatio((float) width / (float) height);
-}
-
-void StockCameraHandler::mouseWheelMove(int pos)
-{
-	
 }
 
 void StockCameraHandler::initState()

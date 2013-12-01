@@ -1,10 +1,8 @@
-
-#include "Mesh.h"
-
+#include <GL/glew.h>
 #include <map>
 #include <algorithm>
-#include "GL/glew.h"
-#include "glm/gtc/swizzle.hpp"
+#include <glm/gtc/swizzle.hpp>
+#include "Mesh.h"
 #include "MathFunctions.h"
 #include "Vertex.h"
 

@@ -1,5 +1,4 @@
 #include "Engine.h"
-#include <GL/glfw.h>
 #include "Input.h"
 #include "LitTriangleMesh.h"
 
@@ -12,6 +11,7 @@ std::list<std::shared_ptr<Updateable> > Engine::updateList;
 GLbitfield Engine::mask = GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT;
 glm::vec4 Engine::backgroundColor = glm::vec4(0.4);
 char Engine::winTitle[150];
+GLFWwindow *Engine::window = NULL;
 
 
 Engine::Engine(float _updateInterval, int _windowWidth, int _windowHeight)
@@ -31,8 +31,8 @@ Engine::~Engine()
 
 void Engine::stop()
 {
-	updateList.clear();
-	renderer.clear();
+	glfwDestroyWindow(window);
+	glfwTerminate();
 }
 
 void Engine::useStockCamera(const glm::vec3 &position, const glm::vec3 &direction, float FoV, float cameraSpeed)
@@ -44,7 +44,7 @@ void Engine::useStockCamera(const glm::vec3 &position, const glm::vec3 &directio
 	float phix = atan2(d.x, d.z);
 	c.rotate(phix, phiy);
 
-	cam = std::shared_ptr<CameraHandler>(new StockCameraHandler(c, cameraSpeed, 0.005f));
+	cam = std::shared_ptr<CameraHandler>(new StockCameraHandler(c, cameraSpeed, 0.0025f));
 	Input::addInputObserver(std::shared_ptr<InputObserver>(cam));
 	addToUpdateList(std::shared_ptr<Updateable>(cam));
 }
@@ -83,12 +83,11 @@ void Engine::initialize()
 		exit(-1);
 	}
 
-	glfwOpenWindowHint(GLFW_FSAA_SAMPLES, 4);
-	glfwOpenWindowHint(GLFW_OPENGL_VERSION_MAJOR, 3);
-	glfwOpenWindowHint(GLFW_OPENGL_VERSION_MINOR, 3);
-	glfwOpenWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+	glfwWindowHint(GLFW_SAMPLES, 4);
+	window = glfwCreateWindow(windowWidth, windowHeight, "", NULL, NULL);
+	glfwMakeContextCurrent(window);
 
-	if(!glfwOpenWindow(windowWidth, windowHeight, 0, 0, 0, 0, 32, 8, GLFW_WINDOW))
+	if(!window)
 	{
 		fprintf(stderr, "Failed to initialize GLFW\n");
 		glfwTerminate();
@@ -122,7 +121,7 @@ void Engine::setBufferClearMask(GLbitfield _mask)
 
 void Engine::renderingLoop()
 {
-	while(true)
+	while(!glfwWindowShouldClose(window))
 		nextFrame();
 }
 
@@ -138,7 +137,7 @@ inline void Engine::displayFPS()
 	{
 		char title[100];
 		sprintf(title, "%s, FPS: %f", Engine::winTitle, (float)frameCount / deltaTime);
-		glfwSetWindowTitle(title);
+		glfwSetWindowTitle(window, title);
 		lastTime = currentTime;
 		frameCount = 0;
 	}
@@ -167,7 +166,8 @@ inline void Engine::nextFrame()
 
 	renderer.draw(ViewMatrix, ProjectionMatrix);
 
-	glfwSwapBuffers();
+	glfwSwapBuffers(window);
+	glfwPollEvents();
 }
 
 void Engine::setBackgroundColor(glm::vec4 color)
@@ -203,4 +203,21 @@ Renderer& Engine::getRenderer()
 void Engine::setWindowTitle(const char *name)
 {
 	strcpy(winTitle, name);
+}
+
+void Engine::getWindowSize(int &width, int &height)
+{
+	width = windowWidth;
+	height = windowHeight;
+}
+
+GLFWwindow* Engine::getWindow()
+{
+	return window;
+}
+
+void Engine::setWindowSize(int width, int height)
+{
+	windowWidth = width;
+	windowHeight = height;
 }

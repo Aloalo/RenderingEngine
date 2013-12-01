@@ -1,5 +1,5 @@
 #include "Texture.h"
-#include "GL\glfw.h"
+#include <GLFW/glfw3.h>
 
 Texture::Texture(GLenum _target)
 	: target(_target)

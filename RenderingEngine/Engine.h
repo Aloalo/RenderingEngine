@@ -1,5 +1,6 @@
 #pragma once
 
+#include <GL/glew.h>
 #include "Drawable.h"
 #include "Updateable.h"
 #include "StockCameraHandler.h"
@@ -9,6 +10,7 @@
 #include <memory>
 #include "Renderer.h"
 #include "Mesh.h"
+#include <GLFW/glfw3.h>
 
 class Engine
 {
@@ -37,6 +39,9 @@ public:
 
 	static glm::mat4 getProjectionMatrix();
 	static glm::mat4 getViewMatrix();
+	static void getWindowSize(int &width, int &height);
+	static void setWindowSize(int width, int height);
+	static GLFWwindow* getWindow();
 
 private:
 	static void initialize();
@@ -47,6 +52,7 @@ private:
 	static Renderer renderer;
 	static std::list<std::shared_ptr<Updateable> > updateList;
 	static std::shared_ptr<CameraHandler> cam;
+	static GLFWwindow *window;
 
 	static int windowWidth, windowHeight;
 	static float updateInterval;

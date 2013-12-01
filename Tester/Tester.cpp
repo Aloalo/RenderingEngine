@@ -56,14 +56,13 @@ void addSphere()
 
 int _tmain(int argc, char* argv[])
 {
-	Engine *e = new Engine(1. / 60., 1024, 768);
-	Input *input = new Input();
+	Engine e(1. / 80., 1280, 720);
+	Input input;
 	Engine::enableMode(GL_DEPTH_TEST);
 	Engine::enableMode(GL_CULL_FACE); 
 
-	input->setMouseMoveCallback();
-	e->useStockCamera(glm::vec3(0.0f, 0.0f, -30.0f), glm::vec3(0.0f, 0.0f, 1.0f), 45.0f, 4.0f);
-
+	input.setMouseMoveCallback();
+	e.useStockCamera(glm::vec3(0.0f, 0.0f, -30.0f), glm::vec3(0.0f, 0.0f, 1.0f), 45.0f, 4.0f);
 
 	addSphere();
 	addSineCosine();
@@ -75,11 +74,11 @@ int _tmain(int argc, char* argv[])
 	std::shared_ptr<Light> pointLight(new SpecularPointLight(glm::vec3(0.0f, -5.0f, 5.0f), glm::vec4(10.0f, 10.0f, 10.0f, 1.0f), 3.0f));
 	Engine::addLight(pointLight);
 	MovingLight *ptr = new MovingLight(pointLight);
-	e->addToUpdateList(std::shared_ptr<Updateable>(ptr));
+	e.addToUpdateList(std::shared_ptr<Updateable>(ptr));
 	pointLight = NULL;
 	ptr = NULL;
 
 	Engine::setWindowTitle("Tester");
-	e->start();
+	e.start();
 	return 0;
 }

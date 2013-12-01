@@ -1,56 +1,55 @@
-#include "Input.h"
 #include "Engine.h"
-#include <GL\glfw.h>
+#include "Input.h"
 
 std::list<std::shared_ptr<InputObserver> > Input::observerList;
 
 Input::Input(void)
 {
-	glfwSetKeyCallback(keyPress);
-	glfwSetWindowSizeCallback(handleResize);
+	glfwSetKeyCallback(Engine::getWindow(), keyPress);
+	glfwSetWindowSizeCallback(Engine::getWindow(), handleResize);
 }
 
 
 Input::~Input(void)
 {
-	observerList.clear();
 }
 
-void GLFWCALL Input::keyPress(int key, int action)
+void Input::keyPress(GLFWwindow *window, int key, int scancode, int action, int mods)
 {
-	if(glfwGetKey(GLFW_KEY_ESC) == GLFW_PRESS)
+	if(key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 	{
-		Engine::stop();
-		exit(0);
+		glfwSetWindowShouldClose(window, GL_TRUE);
+		return;
 	}
 
 	for(std::list<std::shared_ptr<InputObserver> >::iterator i = observerList.begin(); i != observerList.end(); i++)
-		(*i)->keyPress(key, action);
+		(*i)->keyPress(key, scancode, action, mods);
 }
 
-void GLFWCALL Input::mouseMove(int x, int y)
+void Input::mouseMove(GLFWwindow *window, double x, double y)
 {
 	for(std::list<std::shared_ptr<InputObserver> >::iterator i = observerList.begin(); i != observerList.end(); i++)
 		(*i)->mouseMove(x, y);
 }
 
-void GLFWCALL Input::mouseClick(int button, int state)
+void Input::mouseClick(GLFWwindow *window, int button, int state, int mods)
 {
 	for(std::list<std::shared_ptr<InputObserver> >::iterator i = observerList.begin(); i != observerList.end(); i++)
-		(*i)->mouseClick(button, state);
+		(*i)->mouseClick(button, state, mods);
 }
 
-void GLFWCALL Input::handleResize(int width, int height)
+void Input::handleResize(GLFWwindow *window, int width, int height)
 {
 	glViewport(0, 0, width, height);
+	Engine::setWindowSize(width, height);
 	for(std::list<std::shared_ptr<InputObserver> >::iterator i = observerList.begin(); i != observerList.end(); i++)
 		(*i)->windowResize(width, height);
 }
 
-void GLFWCALL Input::mouseWheelMove(int pos)
+void Input::mouseWheelMove(GLFWwindow *window, double posx, double posy)
 {
 	for(std::list<std::shared_ptr<InputObserver> >::iterator i = observerList.begin(); i != observerList.end(); i++)
-		(*i)->mouseWheelMove(pos);
+		(*i)->mouseWheelMove(0);
 }
 
 void Input::addInputObserver(std::shared_ptr<InputObserver> IO)
@@ -61,19 +60,23 @@ void Input::addInputObserver(std::shared_ptr<InputObserver> IO)
 void Input::setMouseMoveCallback()
 {
 	int windowWidth, windowHeight;
-	glfwGetWindowSize(&windowWidth, &windowHeight);
-	glfwDisable(GLFW_MOUSE_CURSOR);
+	Engine::getWindowSize(windowWidth, windowHeight);
 
-	glfwSetMousePos(windowWidth / 2, windowHeight / 2);
-	glfwSetMousePosCallback(mouseMove); 
+	glfwSetCursorPos(Engine::getWindow(), windowWidth / 2, windowHeight / 2);
+	glfwSetCursorPosCallback(Engine::getWindow(), mouseMove); 
 }
 
 void Input::setMouseClickCallback()
 {
-	glfwSetMouseButtonCallback(mouseClick);
+	glfwSetMouseButtonCallback(Engine::getWindow(), mouseClick);
 }
 
 void Input::setMouseWheelCallback()
 {
-	glfwSetMouseWheelCallback(mouseWheelMove);
+	glfwSetScrollCallback(Engine::getWindow(), mouseWheelMove);
+}
+
+void Input::setMousePosition(double x, double y)
+{
+	glfwSetCursorPos(Engine::getWindow(), x, y);
 }

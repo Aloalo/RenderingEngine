@@ -8,7 +8,6 @@ Renderer::Renderer(void)
 
 Renderer::~Renderer(void)
 {
-	clear();
 }
 
 void Renderer::draw(const glm::mat4 &View, const glm::mat4 &Projection)
