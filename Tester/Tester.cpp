@@ -1,5 +1,3 @@
-#include "StdAfx.h"
-
 #include <cstdio>
 
 #include "Engine.h"
@@ -54,7 +52,7 @@ void addSphere()
 	sphereMesh = NULL;
 }
 
-int _tmain(int argc, char* argv[])
+int main(int argc, char* argv[])
 {
 	Engine e(1. / 80., 1280, 720);
 	Input input;
