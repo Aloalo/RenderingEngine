@@ -6,16 +6,12 @@
 class Sphere
 {
 public:
-	Sphere(float _radius, const glm::vec3 &_center);
-	~Sphere(void);
-
-	const std::vector<glm::vec3> generate(int depth) const;
+	static std::vector<glm::vec3>* generate(int depth, float r, const glm::vec3 &center);
 
 private:
-	void subdivide(const glm::vec3 &a, const glm::vec3 &b, const glm::vec3 &c, 
-		           int depth, std::vector<glm::vec3> &out) const;
+	static void subdivide(const glm::vec3 &a, const glm::vec3 &b, const glm::vec3 &c, 
+		           int depth, std::vector<glm::vec3> &out);
 
-	float radius;
-	glm::vec3 center;
+	static float radius;
 };
 

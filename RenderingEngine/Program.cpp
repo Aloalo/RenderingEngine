@@ -85,6 +85,11 @@ void Program::setUniformBlockBinding(const char *name, int bindingPoint)
 	glUniformBlockBinding(id, getUniformBlockLocation(name), bindingPoint);
 }
 
+void Program::setUniform(const char *name, int x)
+{
+	glProgramUniform1f(id, getUniformLocation(name), x);
+}
+
 void Program::setUniform(const char *name, const float &x)
 {
 	glProgramUniform1f(id, getUniformLocation(name), x);

@@ -6,14 +6,12 @@ class StockCameraHandler :
 	public CameraHandler
 {
 public:
-	StockCameraHandler(Camera *_cam, float _cameraSpeed, float _mouseSpeed);
+	StockCameraHandler(const Camera &cam, float cameraSpeed, float mouseSpeed);
 	~StockCameraHandler(void);
 
-	void keyPress(int key, int action);
-	void mouseMove(int x, int y);
-	void mouseClick(int button, int state);
+	void keyPress(int key, int scancode, int action, int mods);
+	void mouseMove(double x, double y);
 	void windowResize(int width, int height);
-	void mouseWheelMove(int pos);
 
 	void initState();
 	void update(float deltaTime);
@@ -26,6 +24,6 @@ private:
 	float mouseSpeed;
 
 	float springiness;
-	int usex, usey;
+	double usex, usey;
 };
 

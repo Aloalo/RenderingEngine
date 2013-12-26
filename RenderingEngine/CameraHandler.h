@@ -8,13 +8,13 @@ class CameraHandler :
 	public InputObserver, public Updateable
 {
 public:
-	CameraHandler(Camera *_cam);
+	CameraHandler(const Camera &cam);
 	virtual ~CameraHandler(void);
 
 	virtual glm::mat4 getProjectionMatrix() const = 0;
 	virtual glm::mat4 getViewMatrix() const = 0;
+	const glm::vec3& getPosition() const;
 
-protected:
-	Camera *cam;
+	Camera cam;
 };
 

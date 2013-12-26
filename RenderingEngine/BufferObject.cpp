@@ -6,14 +6,14 @@ BufferObject *BufferObject::boundBuffer = 0;
 BufferObject::BufferObject(GLenum _target, GLenum _usage)
 	: target(_target), usage(_usage)
 {
-	glGenBuffers(1, &ID);
+	generate();
 }
 
 
 BufferObject::BufferObject(GLenum _target, GLenum _usage, const GLvoid *data, GLsizei size)
 	: target(_target), usage(_usage)
 {
-	glGenBuffers(1, &ID);
+	generate();
 	setData(data, size);
 }
 
@@ -51,7 +51,7 @@ void BufferObject::reSetData(const GLvoid *data, GLuint offset, GLuint size)
 	glBufferSubData(target, offset, size, data);
 }
 
-GLuint BufferObject::get() const
+void BufferObject::generate()
 {
-	return ID;
+	glGenBuffers(1, &ID);
 }

@@ -1,20 +1,27 @@
 #pragma once
-
-#include <GL\glew.h>
+#include "OGLobject.h"
+#include "glm/glm.hpp"
 
 class Texture
+	: public OGLobject
 {
 public:
-	Texture(GLenum _target);
-	~Texture(void);
+	Texture();
+	Texture(GLuint _target);
+	virtual ~Texture(void);
 
-	void bind();
-	void load(const char *imagepath);
-	void texParam(GLenum paramName, GLuint param);
-	void texParam(GLenum paramName, GLfloat param);
+	void bind() const;
+	void destroy();
 
-private:
-	GLuint ID;
+	void texParami(GLenum paramName, GLuint param) const;
+	void texParamf(GLenum paramName, GLfloat param) const;
+	void texParamIuiv(GLenum paramName, const GLuint *param) const;
+	void texParamIiv(GLenum paramName, const GLint *param) const;
+	void texParamfv(GLenum paramName, const GLfloat *param) const;
+
+	virtual void texImage(GLint level, GLint internalFormat, const glm::vec3 &dimensions, GLenum format, GLenum type, const GLvoid *data) const = 0;
+protected:
+	void generate();
 	GLenum target;
 };
 

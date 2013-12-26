@@ -2,9 +2,10 @@
 
 #include <glm/gtc/matrix_transform.hpp>
 
-MovingLight::MovingLight(std::shared_ptr<Light> &_light)
+MovingLight::MovingLight(Light *light)
+	: light(dynamic_cast<SpecularPointLight*>(light))
 {
-	light = std::dynamic_pointer_cast<PointLight>(_light);
+	//light = dynamic_cast<SpecularPointLight*>(light);
 }
 
 

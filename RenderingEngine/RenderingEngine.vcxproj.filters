@@ -64,6 +64,12 @@
     <Filter Include="Source Files\Engine\Light">
       <UniqueIdentifier>{3d39a683-4b1e-40dc-9179-2f6233de3eb0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\GLobjectWrappers\Texture">
+      <UniqueIdentifier>{25524eac-32c1-472e-bdd7-43499bfb6d75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GLobjectWrappers\Texture">
+      <UniqueIdentifier>{dcdffc8d-43c1-46cd-a51b-7379ba69ff13}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
@@ -86,6 +92,18 @@
       <Filter>Header Files\Stock\Shaders</Filter>
     </None>
     <None Include="StockShaders\ADS.frag">
+      <Filter>Header Files\Stock\Shaders</Filter>
+    </None>
+    <None Include="StockShaders\AmbientLight.frag">
+      <Filter>Header Files\Stock\Shaders</Filter>
+    </None>
+    <None Include="StockShaders\DiffuseLight.frag">
+      <Filter>Header Files\Stock\Shaders</Filter>
+    </None>
+    <None Include="StockShaders\Lighting.vert">
+      <Filter>Header Files\Stock\Shaders</Filter>
+    </None>
+    <None Include="StockShaders\PhongLighting.frag">
       <Filter>Header Files\Stock\Shaders</Filter>
     </None>
   </ItemGroup>
@@ -117,9 +135,6 @@
     <ClCompile Include="MatrixStack.cpp">
       <Filter>Source Files\Utilities</Filter>
     </ClCompile>
-    <ClCompile Include="MathFunctions.cpp">
-      <Filter>Source Files\Utilities</Filter>
-    </ClCompile>
     <ClCompile Include="VertexShader.cpp">
       <Filter>Source Files\GLobjectWrappers\Program</Filter>
     </ClCompile>
@@ -138,29 +153,8 @@
     <ClCompile Include="StockCameraHandler.cpp">
       <Filter>Source Files\Stock</Filter>
     </ClCompile>
-    <ClCompile Include="Texture.cpp">
-      <Filter>Source Files\GLobjectWrappers</Filter>
-    </ClCompile>
-    <ClCompile Include="Vertex.cpp">
-      <Filter>Source Files\Geometry</Filter>
-    </ClCompile>
-    <ClCompile Include="Mesh.cpp">
-      <Filter>Source Files\Geometry</Filter>
-    </ClCompile>
-    <ClCompile Include="VertexN.cpp">
-      <Filter>Source Files\Geometry</Filter>
-    </ClCompile>
-    <ClCompile Include="VertexUV.cpp">
-      <Filter>Source Files\Geometry</Filter>
-    </ClCompile>
-    <ClCompile Include="PackedVertex.cpp">
-      <Filter>Source Files\Geometry</Filter>
-    </ClCompile>
     <ClCompile Include="IndexContainer.cpp">
       <Filter>Source Files\Utilities</Filter>
-    </ClCompile>
-    <ClCompile Include="Sphere.cpp">
-      <Filter>Source Files\Stock</Filter>
     </ClCompile>
     <ClCompile Include="NormalDrawer.cpp">
       <Filter>Source Files\Stock</Filter>
@@ -189,12 +183,6 @@
     <ClCompile Include="LitObject.cpp">
       <Filter>Source Files\Engine</Filter>
     </ClCompile>
-    <ClCompile Include="UnLitObject.cpp">
-      <Filter>Source Files\Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="PointLight.cpp">
-      <Filter>Source Files\Engine\Light</Filter>
-    </ClCompile>
     <ClCompile Include="Light.cpp">
       <Filter>Source Files\Engine\Light</Filter>
     </ClCompile>
@@ -204,11 +192,47 @@
     <ClCompile Include="AmbientLight.cpp">
       <Filter>Source Files\Engine\Light</Filter>
     </ClCompile>
+    <ClCompile Include="SpecularPointLight.cpp">
+      <Filter>Source Files\Engine\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="OGLobject.cpp">
+      <Filter>Source Files\GLobjectWrappers</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture2D.cpp">
+      <Filter>Source Files\GLobjectWrappers\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Source Files\GLobjectWrappers\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderBufferObject.cpp">
+      <Filter>Source Files\GLobjectWrappers</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameBufferObject.cpp">
+      <Filter>Source Files\GLobjectWrappers</Filter>
+    </ClCompile>
+    <ClCompile Include="Square.cpp">
+      <Filter>Source Files\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="LitTriangleMesh.cpp">
+      <Filter>Source Files\Stock</Filter>
+    </ClCompile>
+    <ClCompile Include="Triangle.cpp">
+      <Filter>Source Files\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="Material.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="UnLitObject.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>Source Files\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="Sphere.cpp">
+      <Filter>Source Files\Geometry</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Engine.h">
-      <Filter>Header Files\Engine</Filter>
-    </ClInclude>
     <ClInclude Include="Updateable.h">
       <Filter>Header Files\Engine</Filter>
     </ClInclude>
@@ -254,29 +278,14 @@
     <ClInclude Include="StockCameraHandler.h">
       <Filter>Header Files\Stock</Filter>
     </ClInclude>
-    <ClInclude Include="Texture.h">
-      <Filter>Header Files\GLobjectWrappers</Filter>
-    </ClInclude>
     <ClInclude Include="Vertex.h">
       <Filter>Header Files\Geometry</Filter>
     </ClInclude>
     <ClInclude Include="Mesh.h">
       <Filter>Header Files\Geometry</Filter>
     </ClInclude>
-    <ClInclude Include="VertexN.h">
-      <Filter>Header Files\Geometry</Filter>
-    </ClInclude>
-    <ClInclude Include="VertexUV.h">
-      <Filter>Header Files\Geometry</Filter>
-    </ClInclude>
-    <ClInclude Include="PackedVertex.h">
-      <Filter>Header Files\Geometry</Filter>
-    </ClInclude>
     <ClInclude Include="IndexContainer.h">
       <Filter>Header Files\Utilities</Filter>
-    </ClInclude>
-    <ClInclude Include="Sphere.h">
-      <Filter>Header Files\Stock</Filter>
     </ClInclude>
     <ClInclude Include="NormalDrawer.h">
       <Filter>Header Files\Stock</Filter>
@@ -305,12 +314,6 @@
     <ClInclude Include="LitObject.h">
       <Filter>Header Files\Engine</Filter>
     </ClInclude>
-    <ClInclude Include="UnLitObject.h">
-      <Filter>Header Files\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="PointLight.h">
-      <Filter>Header Files\Engine\Light</Filter>
-    </ClInclude>
     <ClInclude Include="Light.h">
       <Filter>Header Files\Engine\Light</Filter>
     </ClInclude>
@@ -319,6 +322,54 @@
     </ClInclude>
     <ClInclude Include="AmbientLight.h">
       <Filter>Header Files\Engine\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="SpecularPointLight.h">
+      <Filter>Header Files\Engine\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="OGLobject.h">
+      <Filter>Header Files\GLobjectWrappers</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderBufferObject.h">
+      <Filter>Header Files\GLobjectWrappers</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Header Files\GLobjectWrappers\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture2D.h">
+      <Filter>Header Files\GLobjectWrappers\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameBufferObject.h">
+      <Filter>Header Files\GLobjectWrappers</Filter>
+    </ClInclude>
+    <ClInclude Include="OGLobjects.h">
+      <Filter>Header Files\GLobjectWrappers</Filter>
+    </ClInclude>
+    <ClInclude Include="Square.h">
+      <Filter>Header Files\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Triangle.h">
+      <Filter>Header Files\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="LitTriangleMesh.h">
+      <Filter>Header Files\Stock</Filter>
+    </ClInclude>
+    <ClInclude Include="Lights.h">
+      <Filter>Header Files\Engine\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry.h">
+      <Filter>Header Files\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Material.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Sphere.h">
+      <Filter>Header Files\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="UnLitObject.h">
+      <Filter>Header Files\Engine</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

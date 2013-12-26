@@ -1,8 +1,9 @@
 #pragma once
 
-#include <GL/glew.h>
+#include "OGLobject.h"
 
 class VertexArrayObject
+	: public OGLobject
 {
 public:
 	/*Also generates the VAO*/
@@ -11,11 +12,10 @@ public:
 
 	static void unBind();
 
-	void destroy();
 	void bind() const;
-	GLuint get() const;
+	void destroy();
 
-private:
-	GLuint ID;
+protected:
+	void generate();
 };
 

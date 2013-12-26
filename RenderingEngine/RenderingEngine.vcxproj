@@ -20,12 +20,14 @@
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -38,14 +40,14 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSdkDir)include;$(FrameworkSDKDir)\include;..\OGLtools\glfw\include;..\OGLtools\glew\include;..\OGLtools</IncludePath>
+    <IncludePath>C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\Include;$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSdkDir)include;$(FrameworkSDKDir)\include;$(GLEW_HOME)\include;$(GLM_HOME);$(GLFW_HOME)\include</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LibraryPath>$(VCInstallDir)lib;$(VCInstallDir)atlmfc\lib;$(WindowsSdkDir)lib;$(FrameworkSDKDir)\lib;..\OGLtools\glfw\lib;..\OGLtools\glew\lib;</LibraryPath>
+    <LibraryPath>C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\Lib;$(VCInstallDir)lib;$(VCInstallDir)atlmfc\lib;$(WindowsSdkDir)lib;$(FrameworkSDKDir)\lib;$(GLEW_HOME)\lib;$(GLFW_HOME)\lib;$(GLEW_HOME)\lib</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSdkDir)include;$(FrameworkSDKDir)\include;..\OGLtools\glfw\include;..\OGLtools\glew\include;..\OGLtools</IncludePath>
-    <LibraryPath>$(VCInstallDir)lib;$(VCInstallDir)atlmfc\lib;$(WindowsSdkDir)lib;$(FrameworkSDKDir)\lib;..\OGLtools\glfw\lib;..\OGLtools\glew\lib;</LibraryPath>
+    <IncludePath>C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\Include;$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSdkDir)include;$(FrameworkSDKDir)\include;$(GLEW_HOME)\include;$(GLM_HOME);$(GLFW_HOME)\include</IncludePath>
+    <LibraryPath>C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\Lib;$(VCInstallDir)lib;$(VCInstallDir)atlmfc\lib;$(WindowsSdkDir)lib;$(FrameworkSDKDir)\lib;$(GLEW_HOME)\lib;$(GLFW_HOME)\lib;$(GLEW_HOME)\lib</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -60,7 +62,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>GLFW.lib;glew32.lib;opengl32.lib;</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;glew32.lib;</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -68,10 +70,13 @@
       <WarningLevel>Level3</WarningLevel>
       <PrecompiledHeader>
       </PrecompiledHeader>
-      <Optimization>MaxSpeed</Optimization>
+      <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <OmitFramePointers>true</OmitFramePointers>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -80,16 +85,20 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <Lib>
-      <AdditionalDependencies>GLFW.lib;glew32.lib;opengl32.lib;</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;glew32.lib;</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
     <None Include="StockShaders\ADS.frag" />
     <None Include="StockShaders\ADS.vert" />
+    <None Include="StockShaders\AmbientLight.frag" />
+    <None Include="StockShaders\DiffuseLight.frag" />
+    <None Include="StockShaders\Lighting.vert" />
     <None Include="StockShaders\NormalShader.frag" />
     <None Include="StockShaders\NormalShader.geom" />
     <None Include="StockShaders\NormalShader.vert" />
+    <None Include="StockShaders\PhongLighting.frag" />
     <None Include="StockShaders\Simple.frag" />
     <None Include="StockShaders\Simple.vert" />
   </ItemGroup>
@@ -102,6 +111,7 @@
     <ClCompile Include="Drawable.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="FragmentShader.cpp" />
+    <ClCompile Include="FrameBufferObject.cpp" />
     <ClCompile Include="FunctionGraph.cpp" />
     <ClCompile Include="GeometryShader.cpp" />
     <ClCompile Include="IndexContainer.cpp" />
@@ -110,28 +120,30 @@
     <ClCompile Include="Function.cpp" />
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="LitObject.cpp" />
-    <ClCompile Include="MathFunctions.cpp" />
+    <ClCompile Include="LitTriangleMesh.cpp" />
+    <ClCompile Include="Material.cpp" />
     <ClCompile Include="MatrixStack.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="NormalDrawer.cpp" />
-    <ClCompile Include="PackedVertex.cpp" />
-    <ClCompile Include="PointLight.cpp" />
+    <ClCompile Include="OGLobject.cpp" />
+    <ClCompile Include="RenderBufferObject.cpp" />
+    <ClCompile Include="SpecularPointLight.cpp" />
     <ClCompile Include="Program.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="SineCosine.cpp" />
     <ClCompile Include="Sphere.cpp" />
+    <ClCompile Include="Square.cpp" />
     <ClCompile Include="StockCameraHandler.cpp" />
     <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="Texture2D.cpp" />
+    <ClCompile Include="Triangle.cpp" />
     <ClCompile Include="UniformBuffer.cpp" />
     <ClCompile Include="UnLitObject.cpp" />
     <ClCompile Include="Updateable.cpp" />
-    <ClCompile Include="Vertex.cpp" />
     <ClCompile Include="VertexArrayObject.cpp" />
     <ClCompile Include="VertexAttribArray.cpp" />
-    <ClCompile Include="VertexN.cpp" />
     <ClCompile Include="VertexShader.cpp" />
-    <ClCompile Include="VertexUV.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AmbientLight.h" />
@@ -142,36 +154,44 @@
     <ClInclude Include="Drawable.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="FragmentShader.h" />
+    <ClInclude Include="FrameBufferObject.h" />
     <ClInclude Include="FunctionGraph.h" />
+    <ClInclude Include="Geometry.h" />
     <ClInclude Include="GeometryShader.h" />
     <ClInclude Include="IndexContainer.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="InputObserver.h" />
     <ClInclude Include="Function.h" />
     <ClInclude Include="Light.h" />
+    <ClInclude Include="Lights.h" />
     <ClInclude Include="LitObject.h" />
+    <ClInclude Include="LitTriangleMesh.h" />
+    <ClInclude Include="Material.h" />
     <ClInclude Include="MathFunctions.h" />
     <ClInclude Include="MatrixStack.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="NormalDrawer.h" />
-    <ClInclude Include="PackedVertex.h" />
-    <ClInclude Include="PointLight.h" />
+    <ClInclude Include="OGLobject.h" />
+    <ClInclude Include="OGLobjects.h" />
+    <ClInclude Include="RenderBufferObject.h" />
+    <ClInclude Include="SpecularPointLight.h" />
     <ClInclude Include="Program.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="SineCosine.h" />
     <ClInclude Include="Sphere.h" />
+    <ClInclude Include="Square.h" />
     <ClInclude Include="StockCameraHandler.h" />
     <ClInclude Include="Texture.h" />
+    <ClInclude Include="Texture2D.h" />
+    <ClInclude Include="Triangle.h" />
     <ClInclude Include="UniformBuffer.h" />
     <ClInclude Include="UnLitObject.h" />
     <ClInclude Include="Updateable.h" />
     <ClInclude Include="Vertex.h" />
     <ClInclude Include="VertexArrayObject.h" />
     <ClInclude Include="VertexAttribArray.h" />
-    <ClInclude Include="VertexN.h" />
     <ClInclude Include="VertexShader.h" />
-    <ClInclude Include="VertexUV.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,14 +1,14 @@
 #pragma once
 
 #include "Updateable.h"
+#include "SpecularPointLight.h"
 #include <memory>
-#include <PointLight.h>
 
 class MovingLight :
 	public Updateable
 {
 public:
-	MovingLight(std::shared_ptr<Light> &_light);
+	MovingLight(Light *light);
 	~MovingLight(void);
 
 	void initState();
@@ -17,6 +17,6 @@ public:
 private:
 	float angle;
 	float angularVel;
-	std::shared_ptr<PointLight> light;
+	SpecularPointLight *light;
 };
 

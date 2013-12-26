@@ -1,7 +1,8 @@
 #pragma once
 
-#include "PackedVertex.h"
 #include "IndexContainer.h"
+#include "glm/glm.hpp"
+#include <vector>
 
 class Mesh
 {
@@ -18,6 +19,7 @@ public:
 	void clear();
 	void addTriangle(const glm::vec3 vert[3]);
 	void addTriangle(const glm::vec3 vert[3], const glm::vec3 nor[3]);
+	void addTriangle(const glm::vec3 vert[3], const glm::vec2 uv[3]);
 
 	void calculateNormals();
 	void interpolateNormals();
@@ -49,7 +51,7 @@ private:
 	std::vector<glm::vec3> normalData;
 	std::vector<glm::vec2> uvData;
 
-	IndexContainer *indexData;
+	IndexContainer indexData;
 
 	unsigned int orientation;
 };

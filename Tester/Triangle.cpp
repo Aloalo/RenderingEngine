@@ -1,4 +1,3 @@
-#include "StdAfx.h"
 #include "Triangle.h"
 
 #include <glm/gtc/matrix_transform.hpp>

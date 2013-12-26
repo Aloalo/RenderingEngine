@@ -5,6 +5,7 @@
 class VertexAttribArray
 {
 public:
+	VertexAttribArray();
 	VertexAttribArray(GLuint _index, GLint _size, GLenum _type, GLboolean _norm);
 	VertexAttribArray(GLuint _index, GLint _size, GLenum _type);
 	~VertexAttribArray(void);

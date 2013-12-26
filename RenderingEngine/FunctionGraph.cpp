@@ -10,7 +10,6 @@ FunctionGraph::FunctionGraph(Function *func)
 FunctionGraph::~FunctionGraph(void)
 {
 	delete f;
-	f = NULL;
 }
 
 void FunctionGraph::generateGraph(const glm::vec2 x[3], int depth, float cutoff, Mesh *output)

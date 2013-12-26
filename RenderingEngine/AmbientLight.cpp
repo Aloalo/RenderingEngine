@@ -21,9 +21,9 @@ void AmbientLight::renderingSetup(const glm::mat4 &View, const glm::mat4 &Projec
 	p->setUniform("projectionMatrix", Projection);
 }
 
-void AmbientLight::collectData(std::shared_ptr<LitObject> &obj, const glm::mat4 &View, const glm::mat4 &Projection)
+void AmbientLight::collectData(LitObject *obj, const glm::mat4 &View, const glm::mat4 &Projection)
 {
 	glm::mat4 MV = View * obj->modelMatrix();
 	p->setUniform("mvMatrix", MV);
-	p->setUniform("materialAmbientColor", obj->ambientColor());
+	p->setUniform("materialAmbientColor", obj->getMaterial().ambientColor);
 }
