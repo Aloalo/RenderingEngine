@@ -2,12 +2,16 @@
 #include "Input.h"
 #include "LitTriangleMesh.h"
 
+#ifdef _WIN32
+#include "windows.h"
+#endif
+
 int Engine::windowWidth = 1024;
 int Engine::windowHeight = 768;
 float Engine::updateInterval = 1. / 60.;
-std::shared_ptr<CameraHandler> Engine::cam;
+CameraHandler *Engine::cam;
 Renderer Engine::renderer;
-std::list<std::shared_ptr<Updateable> > Engine::updateList;
+std::list<Updateable*> Engine::updateList;
 GLbitfield Engine::mask = GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT;
 glm::vec4 Engine::backgroundColor = glm::vec4(0.4);
 char Engine::winTitle[150];
@@ -44,27 +48,27 @@ void Engine::useStockCamera(const glm::vec3 &position, const glm::vec3 &directio
 	float phix = atan2(d.x, d.z);
 	c.rotate(phix, phiy);
 
-	cam = std::shared_ptr<CameraHandler>(new StockCameraHandler(c, cameraSpeed, 0.0025f));
-	Input::addInputObserver(std::shared_ptr<InputObserver>(cam));
-	addToUpdateList(std::shared_ptr<Updateable>(cam));
+	cam = new StockCameraHandler(c, cameraSpeed, 0.0025f);
+	Input::addInputObserver(cam);
+	addToUpdateList(cam);
 }
 
-void Engine::setCamera(std::shared_ptr<CameraHandler> _cam)
+void Engine::setCamera(CameraHandler* _cam)
 {
 	cam = _cam;
 }
 
-void Engine::addToDisplayList(std::shared_ptr<Drawable> &d)
+void Engine::addToDisplayList(Drawable *d)
 {
 	renderer.addObject(d);
 }
 
 void Engine::addToDisplayList(Mesh *mesh, const Material &mat, const glm::mat4 &modelMatrix)
 {
-	addToDisplayList(std::shared_ptr<Drawable>(new LitTriangleMesh(mesh, mat, modelMatrix)));
+	addToDisplayList(new LitTriangleMesh(mesh, mat, modelMatrix));
 }
 
-void Engine::addToUpdateList(std::shared_ptr<Updateable> &u)
+void Engine::addToUpdateList(Updateable *u)
 {
 	u->initState();
 	updateList.push_back(u);
@@ -101,6 +105,17 @@ void Engine::initialize()
 		exit(-1);
 	}
 
+#ifdef _WIN32
+	// Turn on vertical screen sync under Windows.
+	// (I.e. it uses the WGL_EXT_swap_control extension)
+	typedef BOOL (WINAPI *PFNWGLSWAPINTERVALEXTPROC)(int interval);
+	PFNWGLSWAPINTERVALEXTPROC wglSwapIntervalEXT = NULL;
+	wglSwapIntervalEXT = (PFNWGLSWAPINTERVALEXTPROC)wglGetProcAddress("wglSwapIntervalEXT");
+	if(wglSwapIntervalEXT)
+		wglSwapIntervalEXT(0);
+#endif
+
+	glfwSwapInterval(0);
 	memset(winTitle, 0, sizeof(winTitle));
 }
 
@@ -154,7 +169,7 @@ inline void Engine::nextFrame()
 	glClearColor(backgroundColor.x, backgroundColor.y, backgroundColor.z, backgroundColor.w);
 	glClear(mask);
 	
-	for(std::list<std::shared_ptr<Updateable> >::iterator i = updateList.begin(); i != updateList.end(); i++)
+	for(std::list<Updateable*>::iterator i = updateList.begin(); i != updateList.end(); i++)
 	{
 		if(*i == NULL)
 			updateList.erase(i);
@@ -166,6 +181,7 @@ inline void Engine::nextFrame()
 
 	renderer.draw(ViewMatrix, ProjectionMatrix);
 
+	
 	glfwSwapBuffers(window);
 	glfwPollEvents();
 }
@@ -185,12 +201,12 @@ glm::mat4 Engine::getViewMatrix()
 	return cam->getViewMatrix();
 }
 
-void Engine::addLight(std::shared_ptr<Light> &light)
+void Engine::addLight(Light *light)
 {
 	renderer.addLight(light);
 }
 
-std::shared_ptr<CameraHandler>& Engine::getCamera()
+CameraHandler* Engine::getCamera()
 {
 	return cam;
 }

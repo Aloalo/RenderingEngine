@@ -10,7 +10,7 @@ public:
 	~SpecularPointLight(void);
 
 	void renderingSetup(const glm::mat4 &View, const glm::mat4 &Projection);
-	void collectData(std::shared_ptr<LitObject> &obj, const glm::mat4 &View, const glm::mat4 &Projection);
+	void collectData(LitObject *obj, const glm::mat4 &View, const glm::mat4 &Projection);
 	glm::mat4& modelMatrix();
 
 

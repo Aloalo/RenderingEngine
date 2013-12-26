@@ -21,7 +21,7 @@ void DiffuseLight::renderingSetup(const glm::mat4 &View, const glm::mat4 &Projec
 	p->setUniform("lightDir", direction);
 }
 
-void DiffuseLight::collectData(std::shared_ptr<LitObject> &obj, const glm::mat4 &View, const glm::mat4 &Projection)
+void DiffuseLight::collectData(LitObject *obj, const glm::mat4 &View, const glm::mat4 &Projection)
 {
 	glm::mat4 MV = View * obj->modelMatrix();
 	p->setUniform("mvMatrix", MV);

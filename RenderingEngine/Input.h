@@ -3,6 +3,7 @@
 #include "InputObserver.h"
 #include <GLFW/glfw3.h>
 #include <list>
+#include <memory>
 
 class Input
 {
@@ -16,7 +17,7 @@ public:
 	static void keyPress(GLFWwindow *window, int key, int scancode, int action, int mods);
 	static void handleResize(GLFWwindow *window, int width, int height);
 
-	static void addInputObserver(std::shared_ptr<InputObserver> IO);
+	static void addInputObserver(InputObserver *IO);
 
 	static void setMouseMoveCallback();
 	static void setMouseClickCallback();
@@ -24,6 +25,6 @@ public:
 	static void setMousePosition(double x, double y);
 
 private:
-	static std::list<std::shared_ptr<InputObserver> > observerList;
+	static std::list<InputObserver*> observerList;
 };
 

@@ -13,10 +13,10 @@ Renderer::~Renderer(void)
 void Renderer::draw(const glm::mat4 &View, const glm::mat4 &Projection)
 {
 	bool set = false;
-	for(std::list<std::shared_ptr<Light> >::iterator k = lightList.begin(); k != lightList.end(); k++)
+	for(std::list<Light*>::iterator k = lightList.begin(); k != lightList.end(); k++)
 	{
 		(*k)->renderingSetup(View, Projection);
-		for(std::list<std::shared_ptr<LitObject> >::iterator i = litList.begin(); i != litList.end(); i++)
+		for(std::list<LitObject*>::iterator i = litList.begin(); i != litList.end(); i++)
 		{
 			(*k)->collectData(*i, View, Projection);
 			(*i)->draw(View, Projection);
@@ -33,21 +33,21 @@ void Renderer::draw(const glm::mat4 &View, const glm::mat4 &Projection)
 
 	glDepthFunc(GL_LESS);
 	glDisable(GL_BLEND);
-	for(std::list<std::shared_ptr<UnLitObject> >::iterator i = unLitList.begin(); i != unLitList.end(); i++)
+	for(std::list<UnLitObject*>::iterator i = unLitList.begin(); i != unLitList.end(); i++)
 		(*i)->draw(View, Projection);
 
 }
 
-void Renderer::addObject(std::shared_ptr<Drawable> &obj)
+void Renderer::addObject(Drawable *obj)
 {
 	obj->initDrawing();
-	if(std::shared_ptr<LitObject> ptr = std::dynamic_pointer_cast<LitObject>(obj))
+	if(LitObject *ptr = dynamic_cast<LitObject*>(obj))
 		litList.push_back(ptr);
-	else if(std::shared_ptr<UnLitObject> ptr = std::dynamic_pointer_cast<UnLitObject>(obj))
+	else if(UnLitObject *ptr = dynamic_cast<UnLitObject*>(obj))
 		unLitList.push_back(ptr);
 }
 
-void Renderer::addLight(std::shared_ptr<Light> &light)
+void Renderer::addLight(Light *light)
 {
 	lightList.push_back(light);
 }

@@ -8,7 +8,7 @@ class MovingLight :
 	public Updateable
 {
 public:
-	MovingLight(std::shared_ptr<Light> &_light);
+	MovingLight(Light *light);
 	~MovingLight(void);
 
 	void initState();
@@ -17,6 +17,6 @@ public:
 private:
 	float angle;
 	float angularVel;
-	std::shared_ptr<SpecularPointLight> light;
+	SpecularPointLight *light;
 };
 

@@ -8,6 +8,10 @@
 #include "SineCosine.h"
 #include <NormalDrawer.h>
 
+
+Mesh *mesh;
+Mesh *sphereMesh;
+
 void addSineCosine()
 {
 	glm::mat4 Model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, -10.0f, 0.0f));
@@ -17,7 +21,7 @@ void addSineCosine()
 		glm::vec2(-20.0f, -20.0f), glm::vec2(-20.0f, 20.0f), glm::vec2(20.0f, 20.0f),
 		glm::vec2(-20.0f, -20.0f), glm::vec2(20.0f, 20.0f), glm::vec2(20.0f, -20.0f)
 	};
-	Mesh *mesh = new Mesh();
+	mesh = new Mesh();
 	FunctionGraph graph(new SineCosine());
 	graph.generateGraph(x, 7, -1000.0f, mesh);
 	graph.generateGraph(x+3, 7, -1000.0f, mesh);
@@ -29,14 +33,13 @@ void addSineCosine()
 
 	Engine::addToDisplayList(mesh, mat, Model);
 
-	mesh = NULL;
 	//Engine::addToDisplayList(std::shared_ptr<Drawable>(new NormalDrawer(mesh, Model)));
 }
 
 void addSphere()
 {
 	std::vector<glm::vec3> *vec = Sphere::generate(4, 1.0f, glm::vec3(0.0f));
-	Mesh *sphereMesh = new Mesh(*vec);
+	sphereMesh = new Mesh(*vec);
 	delete vec;
 
 	sphereMesh->setOrientation(GL_CCW);
@@ -48,8 +51,7 @@ void addSphere()
 	Engine::addToDisplayList(sphereMesh, mat, glm::mat4(1.0f));
 
 
-	Engine::addToDisplayList(std::shared_ptr<Drawable>(new NormalDrawer(*sphereMesh)));
-	sphereMesh = NULL;
+	Engine::addToDisplayList(new NormalDrawer(*sphereMesh));
 }
 
 int main(int argc, char* argv[])
@@ -65,18 +67,30 @@ int main(int argc, char* argv[])
 	addSphere();
 	addSineCosine();
 
-	Engine::addLight(std::shared_ptr<Light>(new AmbientLight(glm::vec4(0.3f, 0.3f, 0.3f, 1.0f))));
-	Engine::addLight(std::shared_ptr<Light>(new DiffuseLight(glm::vec3(-1.0f, 1.0f, -1.0f))));
-	Engine::addLight(std::shared_ptr<Light>(new SpecularPointLight(glm::vec3(5.0f, 0.0f, 0.0f), glm::vec4(10.5f, 10.5f, 10.5f, 10.0f), 2.0f)));
+	Light *lights[4] = 
+	{
+		new AmbientLight(glm::vec4(0.3f, 0.3f, 0.3f, 1.0f)),
+		new DiffuseLight(glm::vec3(-1.0f, 1.0f, -1.0f)),
+		new SpecularPointLight(glm::vec3(5.0f, 0.0f, 0.0f), glm::vec4(10.5f, 10.5f, 10.5f, 10.0f), 2.0f),
+		new SpecularPointLight(glm::vec3(0.0f, -5.0f, 5.0f), glm::vec4(10.0f, 10.0f, 10.0f, 1.0f), 3.0f)
+	};
 
-	std::shared_ptr<Light> pointLight(new SpecularPointLight(glm::vec3(0.0f, -5.0f, 5.0f), glm::vec4(10.0f, 10.0f, 10.0f, 1.0f), 3.0f));
-	Engine::addLight(pointLight);
-	MovingLight *ptr = new MovingLight(pointLight);
-	e.addToUpdateList(std::shared_ptr<Updateable>(ptr));
-	pointLight = NULL;
-	ptr = NULL;
+	Engine::addLight(lights[0]);
+	Engine::addLight(lights[1]);
+	Engine::addLight(lights[2]);
+	Engine::addLight(lights[3]);
+
+	MovingLight *ptr = new MovingLight(lights[3]);
+	e.addToUpdateList(ptr);
 
 	Engine::setWindowTitle("Tester");
 	e.start();
+
+	delete mesh;
+	delete sphereMesh;
+	delete ptr;
+	for(int i = 0; i < 4; ++i)
+		delete lights[i];
+
 	return 0;
 }

@@ -1,5 +1,4 @@
 #include "Camera.h"
-
 #include "MathFunctions.h"
 
 Camera::Camera(const glm::vec3 _position, float _aspectRatio, float _FoV)
@@ -40,26 +39,6 @@ void Camera::translate(const glm::vec3 &_dir)
 	dir += _dir;
 }
 
-void Camera::setAspectRatio(float _aspectRatio)
-{
-	aspectRatio = _aspectRatio;
-}
-
-void Camera::setFieldOfView(float _FoV)
-{
-	FoV = _FoV;
-}
-
-void Camera::setPitch(float pitch)
-{
-	phiy = pitch;
-}
-
-void Camera::setYaw(float yaw)
-{
-	phix = yaw;
-}
-
 glm::mat4 Camera::getProjectionMatrix() const
 {
 	return glm::perspective(FoV, aspectRatio, 0.1f, 100.0f);
@@ -94,9 +73,4 @@ glm::vec3 Camera::getRight() const
 glm::vec3 Camera::getUp() const
 {
 	return glm::cross(getRight(), getDirection());
-}
-
-const glm::vec3& Camera::getPosition() const
-{
-	return position;
 }

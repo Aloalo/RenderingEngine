@@ -67,7 +67,7 @@ void StockCameraHandler::mouseMove(double x, double y)
 
 void StockCameraHandler::windowResize(int width, int height)
 {
-	cam.setAspectRatio((float) width / (float) height);
+	cam.aspectRatio = (float) width / (float) height;
 }
 
 void StockCameraHandler::initState()

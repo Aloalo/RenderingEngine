@@ -1,7 +1,7 @@
 #include "Engine.h"
 #include "Input.h"
 
-std::list<std::shared_ptr<InputObserver> > Input::observerList;
+std::list<InputObserver*> Input::observerList;
 
 Input::Input(void)
 {
@@ -22,19 +22,19 @@ void Input::keyPress(GLFWwindow *window, int key, int scancode, int action, int 
 		return;
 	}
 
-	for(std::list<std::shared_ptr<InputObserver> >::iterator i = observerList.begin(); i != observerList.end(); i++)
+	for(std::list<InputObserver*>::iterator i = observerList.begin(); i != observerList.end(); i++)
 		(*i)->keyPress(key, scancode, action, mods);
 }
 
 void Input::mouseMove(GLFWwindow *window, double x, double y)
 {
-	for(std::list<std::shared_ptr<InputObserver> >::iterator i = observerList.begin(); i != observerList.end(); i++)
+	for(std::list<InputObserver*>::iterator i = observerList.begin(); i != observerList.end(); i++)
 		(*i)->mouseMove(x, y);
 }
 
 void Input::mouseClick(GLFWwindow *window, int button, int state, int mods)
 {
-	for(std::list<std::shared_ptr<InputObserver> >::iterator i = observerList.begin(); i != observerList.end(); i++)
+	for(std::list<InputObserver*>::iterator i = observerList.begin(); i != observerList.end(); i++)
 		(*i)->mouseClick(button, state, mods);
 }
 
@@ -42,17 +42,17 @@ void Input::handleResize(GLFWwindow *window, int width, int height)
 {
 	glViewport(0, 0, width, height);
 	Engine::setWindowSize(width, height);
-	for(std::list<std::shared_ptr<InputObserver> >::iterator i = observerList.begin(); i != observerList.end(); i++)
+	for(std::list<InputObserver*>::iterator i = observerList.begin(); i != observerList.end(); i++)
 		(*i)->windowResize(width, height);
 }
 
 void Input::mouseWheelMove(GLFWwindow *window, double posx, double posy)
 {
-	for(std::list<std::shared_ptr<InputObserver> >::iterator i = observerList.begin(); i != observerList.end(); i++)
+	for(std::list<InputObserver*>::iterator i = observerList.begin(); i != observerList.end(); i++)
 		(*i)->mouseWheelMove(0);
 }
 
-void Input::addInputObserver(std::shared_ptr<InputObserver> IO)
+void Input::addInputObserver(InputObserver *IO)
 {
 	observerList.push_back(IO);
 }

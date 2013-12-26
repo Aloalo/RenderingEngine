@@ -13,11 +13,6 @@ public:
 	void rotate(float yaw, float pitch);
 	void translate(const glm::vec3 &dir);
 
-	void setPitch(float pitch);
-	void setYaw(float yaw);
-	void setAspectRatio(float _aspectRatio);
-	void setFieldOfView(float _FoV);
-
 	glm::mat4 getProjectionMatrix() const;
 	glm::mat4 getViewMatrix() const;
 
@@ -26,13 +21,11 @@ public:
 	glm::vec3 getDirection() const;
 	glm::vec3 getRight() const;
 	glm::vec3 getUp() const;
-	const glm::vec3& getPosition() const;
 
-private:
-	glm::vec3 dir;
 	glm::vec3 position;
 	float phix, phiy;
 	float FoV;
 	float aspectRatio;
+	glm::vec3 dir;
 };
 
