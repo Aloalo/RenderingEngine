@@ -40,14 +40,14 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\Include;$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSdkDir)include;$(FrameworkSDKDir)\include;$(GLEW_HOME)\include;$(GLM_HOME);$(GLFW_HOME)\include</IncludePath>
+    <IncludePath>$(GLEW_HOME)\include;$(GLM_HOME);$(GLFW_HOME)\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LibraryPath>C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\Lib;$(VCInstallDir)lib;$(VCInstallDir)atlmfc\lib;$(WindowsSdkDir)lib;$(FrameworkSDKDir)\lib;$(GLEW_HOME)\lib;$(GLFW_HOME)\lib;$(GLEW_HOME)\lib</LibraryPath>
+    <LibraryPath>$(GLEW_HOME)\lib;$(GLFW_HOME)\lib-msvc110;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\Include;$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSdkDir)include;$(FrameworkSDKDir)\include;$(GLEW_HOME)\include;$(GLM_HOME);$(GLFW_HOME)\include</IncludePath>
-    <LibraryPath>C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\Lib;$(VCInstallDir)lib;$(VCInstallDir)atlmfc\lib;$(WindowsSdkDir)lib;$(FrameworkSDKDir)\lib;$(GLEW_HOME)\lib;$(GLFW_HOME)\lib;$(GLEW_HOME)\lib</LibraryPath>
+    <IncludePath>$(GLEW_HOME)\include;$(GLM_HOME);$(GLFW_HOME)\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(GLEW_HOME)\lib;$(GLFW_HOME)\lib-msvc110;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
