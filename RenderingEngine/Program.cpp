@@ -87,10 +87,10 @@ void Program::setUniformBlockBinding(const char *name, int bindingPoint)
 
 void Program::setUniform(const char *name, int x)
 {
-	glProgramUniform1f(id, getUniformLocation(name), x);
+	glProgramUniform1f(id, getUniformLocation(name), (float)x);
 }
 
-void Program::setUniform(const char *name, const float &x)
+void Program::setUniform(const char *name, float x)
 {
 	glProgramUniform1f(id, getUniformLocation(name), x);
 }

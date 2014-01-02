@@ -4,7 +4,7 @@
 
 namespace mfl
 {
-	const double pi = 3.14159265359;
+	const float pi = 3.14159165359f;
 	const float EPS = 0.0001f;
 
 	template<class T>

@@ -18,26 +18,26 @@ void StockCameraHandler::keyPress(int key, int scancode, int action, int mods)
 	if(action == GLFW_REPEAT)
 		return;
 
-	float mod = action == GLFW_PRESS? 1 : -1;
+	int mod = action == GLFW_PRESS ? 1 : -1;
 	switch(key)
 	{
 	case 'W':
-		dir += vec3(0, 0, 1.) * mod;
-		break;
-	case 'A':
-		dir += vec3(-1., 0, 0) * mod;
+		dir += vec3(0, 0, -mod);
 		break;
 	case 'S':
-		dir += vec3(0, 0, -1.) * mod;
+		dir += vec3(0, 0, mod);
+		break;
+	case 'A':
+		dir += vec3(-mod, 0, 0);
 		break;
 	case 'D':
-		dir += vec3(1., 0, 0) * mod;
+		dir += vec3(mod, 0, 0);
 		break;
 	case 'Q':
-		dir += vec3(0, -1., 0) * mod;
+		dir += vec3(0, -mod, 0);
 		break;
 	case 'E':
-		dir += vec3(0, 1., 0) * mod;
+		dir += vec3(0, mod, 0);
 		break;
 	default:
 		break;
@@ -46,11 +46,11 @@ void StockCameraHandler::keyPress(int key, int scancode, int action, int mods)
 
 void StockCameraHandler::mouseMove(double x, double y)
 {
-	int windowWidth, windowHeight;
-	Engine::getWindowSize(windowWidth, windowHeight);
+	int w, h;
+	Engine::getWindowSize(w, h);
 
-	rotate(float(windowWidth / 2 - x) * rotationSpeed, float(windowHeight / 2 - y) * rotationSpeed);
-	glfwSetCursorPos(Engine::getWindow(), windowWidth / 2, windowHeight / 2);
+	rotate(float(w / 2 - x) * rotationSpeed, float(h / 2 - y) * rotationSpeed);
+	glfwSetCursorPos(Engine::getWindow(), w / 2, h / 2);
 }
 
 void StockCameraHandler::rotate(float yaw, float pitch)
@@ -73,11 +73,30 @@ void StockCameraHandler::update(float deltaTime)
 	dx -= dxr;
 	dy -= dyr;
 
-	glm::vec3 direction = cam.getDirection();
-	glm::vec3 right = cam.getRight();
-	glm::vec3 up = glm::cross(right, direction);
-	cam.position += (direction * dir.z + up * dir.y + right * dir.x) * deltaTime * speed;
+	//glm::vec3 direction = cam.getDirection();
+	//glm::vec3 right = cam.getRight();
+	//glm::vec3 up = glm::cross(right, direction);
+	//if(dir.x || dir.y || dir.z)
+	//	cam.position += deltaTime * speed * normalize(direction * dir.z + vec3(0, dir.y, 0) + right * dir.x);
+	
+	if(!(dir.x || dir.y || dir.z))
+		return;
+
+	vec3 v
+	(
+		dir.x,
+		dir.z * sin(cam.phiy),
+		dir.z * cos(cam.phiy)
+	);
+	v = vec3
+	(
+		v.x * cos(cam.phix) + v.z * sin(cam.phix),
+		v.y,
+		-v.x * sin(cam.phix) + v.z * cos(cam.phix)
+	);
+	cam.position += deltaTime * speed * normalize(-v + vec3(0, dir.y, 0));
 }
+
 
 glm::mat4 StockCameraHandler::getProjectionMatrix() const
 {

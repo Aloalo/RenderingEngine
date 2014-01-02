@@ -17,4 +17,3 @@ public:
 
 	Camera cam;
 };
-

@@ -6,7 +6,7 @@ class Camera
 {
 public:
 	Camera();
-	Camera(const glm::vec3 _position, float _aspectRatio, float _FoV);
+	Camera(const glm::vec3 position, float aspectRatio, float FoV);
 	~Camera(void);
 
 	void rotate(float yaw, float pitch);
@@ -26,4 +26,3 @@ public:
 	float FoV;
 	float aspectRatio;
 };
-

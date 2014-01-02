@@ -56,7 +56,7 @@ void addSphere()
 
 int main(int argc, char* argv[])
 {
-	Engine e(1. / 80., 1280, 720);
+	Engine e(1.f / 80.f, 1280, 720);
 	Input input;
 	Engine::enableMode(GL_DEPTH_TEST);
 	Engine::enableMode(GL_CULL_FACE); 
