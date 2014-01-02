@@ -42,6 +42,8 @@ public:
 	static void setWindowSize(int width, int height);
 	static GLFWwindow* getWindow();
 
+	static void hideMouse(bool hide);
+
 private:
 	static void initialize();
 	static void renderingLoop();

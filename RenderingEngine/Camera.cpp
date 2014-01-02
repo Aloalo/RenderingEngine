@@ -2,10 +2,8 @@
 #include "MathFunctions.h"
 
 Camera::Camera(const glm::vec3 _position, float _aspectRatio, float _FoV)
-	: position(_position), aspectRatio(_aspectRatio), FoV(_FoV)
+	: position(_position), aspectRatio(_aspectRatio), FoV(_FoV), phix(0), phiy(0)
 {
-	phix = phiy = 0.0;
-	dir = glm::vec3(0., 0., 0.);
 }
 
 Camera::Camera()
@@ -16,14 +14,6 @@ Camera::~Camera(void)
 {
 }
 
-void Camera::update(float distance)
-{
-	glm::vec3 direction = getDirection();
-	glm::vec3 right = getRight();
-	glm::vec3 up = glm::cross(right, direction);
-	position += (direction * dir.z + up * dir.y + right * dir.x) * distance;
-}
-
 void Camera::rotate(float yaw, float pitch)
 {
 	phix += yaw;
@@ -32,11 +22,6 @@ void Camera::rotate(float yaw, float pitch)
 		phiy = mfl::pi / 2.;
 	if(phiy < -mfl::pi / 2.)
 		phiy = -mfl::pi / 2.;
-}
-
-void Camera::translate(const glm::vec3 &_dir)
-{
-	dir += _dir;
 }
 
 glm::mat4 Camera::getProjectionMatrix() const
