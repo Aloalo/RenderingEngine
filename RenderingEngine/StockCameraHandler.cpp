@@ -2,15 +2,11 @@
 #include "Engine.h"
 #include <GLFW/glfw3.h>
 
+using namespace glm;
 
-StockCameraHandler::StockCameraHandler(const Camera &cam, float cameraSpeed, float mouseSpeed)
-	: CameraHandler(cam), cameraSpeed(cameraSpeed), mouseSpeed(mouseSpeed)
+StockCameraHandler::StockCameraHandler(const Camera &cam, float speed, float rotationSpeed) :
+	CameraHandler(cam), speed(speed), rotationSpeed(rotationSpeed), springiness(100), dx(0), dy(0)
 {
-	springiness = 55.0f;
-	int windowWidth, windowHeight;
-	Engine::getWindowSize(windowWidth, windowHeight);
-	usex = windowWidth;
-	usey = windowHeight;
 }
 
 StockCameraHandler::~StockCameraHandler(void)
@@ -21,26 +17,27 @@ void StockCameraHandler::keyPress(int key, int scancode, int action, int mods)
 {
 	if(action == GLFW_REPEAT)
 		return;
+
 	float mod = action == GLFW_PRESS? 1 : -1;
 	switch(key)
 	{
 	case 'W':
-		cam.translate(glm::vec3(0, 0, 1.) * mod);
+		dir += vec3(0, 0, 1.) * mod;
 		break;
 	case 'A':
-		cam.translate(glm::vec3(-1., 0, 0) * mod);
+		dir += vec3(-1., 0, 0) * mod;
 		break;
 	case 'S':
-		cam.translate(glm::vec3(0, 0, -1.) * mod);
+		dir += vec3(0, 0, -1.) * mod;
 		break;
 	case 'D':
-		cam.translate(glm::vec3(1., 0, 0) * mod);
+		dir += vec3(1., 0, 0) * mod;
 		break;
 	case 'Q':
-		cam.translate(glm::vec3(0, -1., 0) * mod);
+		dir += vec3(0, -1., 0) * mod;
 		break;
 	case 'E':
-		cam.translate(glm::vec3(0, 1., 0) * mod);
+		dir += vec3(0, 1., 0) * mod;
 		break;
 	default:
 		break;
@@ -49,34 +46,37 @@ void StockCameraHandler::keyPress(int key, int scancode, int action, int mods)
 
 void StockCameraHandler::mouseMove(double x, double y)
 {
-	static float lastTime = glfwGetTime();
-	float currentTime = glfwGetTime();
-	float dt = currentTime - lastTime;
-	lastTime = currentTime;
-
 	int windowWidth, windowHeight;
 	Engine::getWindowSize(windowWidth, windowHeight);
 
-	float d = 1 - exp(log(0.5) * springiness * dt);
-	usex += (x - usex) * d;
-	usey += (y - usey) * d;
-
-	cam.rotate(float(windowWidth / 2 - usex) * mouseSpeed, float(windowHeight / 2 - usey) * mouseSpeed);
+	rotate(float(windowWidth / 2 - x) * rotationSpeed, float(windowHeight / 2 - y) * rotationSpeed);
 	glfwSetCursorPos(Engine::getWindow(), windowWidth / 2, windowHeight / 2);
+}
+
+void StockCameraHandler::rotate(float yaw, float pitch)
+{
+	dx += yaw;
+	dy += pitch;
 }
 
 void StockCameraHandler::windowResize(int width, int height)
 {
-	cam.aspectRatio = (float) width / (float) height;
-}
-
-void StockCameraHandler::initState()
-{
+	cam.aspectRatio = (float)width / height;
 }
 
 void StockCameraHandler::update(float deltaTime)
 {
-	cam.update(deltaTime * cameraSpeed);
+	float cf = 1 - exp(-springiness * deltaTime);
+	float dxr = cf * dx;
+	float dyr = cf * dy;
+	cam.rotate(dxr, dyr);
+	dx -= dxr;
+	dy -= dyr;
+
+	glm::vec3 direction = cam.getDirection();
+	glm::vec3 right = cam.getRight();
+	glm::vec3 up = glm::cross(right, direction);
+	cam.position += (direction * dir.z + up * dir.y + right * dir.x) * deltaTime * speed;
 }
 
 glm::mat4 StockCameraHandler::getProjectionMatrix() const

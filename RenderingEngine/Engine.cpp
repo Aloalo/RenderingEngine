@@ -29,6 +29,7 @@ Engine::Engine(float _updateInterval, int _windowWidth, int _windowHeight)
 
 Engine::~Engine()
 {
+	delete cam;
 	stop();
 }
 
@@ -53,7 +54,7 @@ void Engine::useStockCamera(const glm::vec3 &position, const glm::vec3 &directio
 	addToUpdateList(cam);
 }
 
-void Engine::setCamera(CameraHandler* _cam)
+void Engine::setCamera(CameraHandler *_cam)
 {
 	cam = _cam;
 }
@@ -236,4 +237,10 @@ void Engine::setWindowSize(int width, int height)
 {
 	windowWidth = width;
 	windowHeight = height;
+}
+
+
+void Engine::hideMouse(bool hide)
+{
+	glfwSetInputMode(getWindow(), GLFW_CURSOR, hide ? GLFW_CURSOR_HIDDEN : GLFW_CURSOR_NORMAL);
 }

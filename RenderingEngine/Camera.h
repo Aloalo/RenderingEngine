@@ -9,7 +9,6 @@ public:
 	Camera(const glm::vec3 _position, float _aspectRatio, float _FoV);
 	~Camera(void);
 
-	void update(float distance);
 	void rotate(float yaw, float pitch);
 	void translate(const glm::vec3 &dir);
 
@@ -26,6 +25,5 @@ public:
 	float phix, phiy;
 	float FoV;
 	float aspectRatio;
-	glm::vec3 dir;
 };
 

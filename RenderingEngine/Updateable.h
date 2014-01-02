@@ -6,7 +6,7 @@ public:
 	Updateable(void);
 	virtual ~Updateable(void);
 
-	virtual void initState() = 0;
+	virtual void initState();
 	virtual void update(float deltaTime) = 0;
 };
 
