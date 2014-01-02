@@ -132,7 +132,7 @@ void Mesh::applyIndexing()
 	bool hasNormal = normalData.size() > 0;
 	const glm::vec3 zero(0.0f);
 
-	int n = vertexData.size();
+	unsigned int n = vertexData.size();
 	for (unsigned int i = 0; i < n; i++)
 	{
 		PackedVertex packed(vertexData[i], hasNormal ? normalData[i] : zero, hasUV ? uvData[i] : glm::vec2(0.0f));

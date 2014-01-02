@@ -8,7 +8,7 @@
 
 int Engine::windowWidth = 1024;
 int Engine::windowHeight = 768;
-float Engine::updateInterval = 1. / 60.;
+float Engine::updateInterval = 1.f / 60.f;
 CameraHandler *Engine::cam;
 Renderer Engine::renderer;
 std::list<Updateable*> Engine::updateList;

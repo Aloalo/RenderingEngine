@@ -27,6 +27,6 @@ private:
 	float rotationSpeed;
 	float springiness;
 
-	double dx, dy;
+	float dx, dy;
 };
 
