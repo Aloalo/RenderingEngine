@@ -2,9 +2,8 @@
 
 #include "glm/glm.hpp"
 
-class Material
+struct Material
 {
-public:
 	Material(const glm::vec4 &ambientColor, const glm::vec4 &diffuseColor, const glm::vec4 &specularColor, float shininessFactor);
 	~Material(void);
 
