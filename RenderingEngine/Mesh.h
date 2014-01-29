@@ -3,16 +3,21 @@
 #include "IndexContainer.h"
 #include "glm/glm.hpp"
 #include <vector>
+#include "tiny_obj_loader.h"
+
 
 class Mesh
 {
 public:
-	Mesh();
+	Mesh(void);
+	Mesh(const tinyobj::shape_t &shape);
 	Mesh(const std::vector<glm::vec3> &_vertexData,
 		const std::vector<glm::vec3> &_normalData = std::vector<glm::vec3>(),
 		const std::vector<glm::vec2> &_uvData = std::vector<glm::vec2>());
 	~Mesh(void);
 
+	void constructFromShape(const tinyobj::shape_t &shape);
+	void makeUpUVData();
 	void clear();
 	void addTriangle(const glm::vec3 vert[3]);
 	void addTriangle(const glm::vec3 vert[3], const glm::vec3 nor[3]);

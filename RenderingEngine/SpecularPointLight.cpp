@@ -1,8 +1,10 @@
 #include "SpecularPointLight.h"
 
+using namespace glm;
+
 Program *SpecularPointLight::p = NULL;
 
-SpecularPointLight::SpecularPointLight(const glm::vec3 &_position, const glm::vec4 &_intensity, float _attenuation)
+SpecularPointLight::SpecularPointLight(const vec3 &_position, const vec4 &_intensity, float _attenuation)
 	: position(_position), attenuation(_attenuation), Model(1.0f),
 	Light(_intensity)
 {
@@ -14,7 +16,7 @@ SpecularPointLight::~SpecularPointLight(void)
 {
 }
 
-void SpecularPointLight::renderingSetup(const glm::mat4 &View, const glm::mat4 &Projection)
+void SpecularPointLight::renderingSetup(const mat4 &View, const mat4 &Projection)
 {
 	p->use();
 	p->setUniform("projectionMatrix", Projection);
@@ -23,13 +25,16 @@ void SpecularPointLight::renderingSetup(const glm::mat4 &View, const glm::mat4 &
 	p->setUniform("lightIntensity", intensity);
 }
 
-void SpecularPointLight::collectData(LitObject *obj, const glm::mat4 &View, const glm::mat4 &Projection)
+void SpecularPointLight::collectData(LitObject *obj, const mat4 &View, const mat4 &Projection)
 {
 	glm::mat4 MV = View * obj->modelMatrix();
 	p->setUniform("mvMatrix", MV);
 	p->setUniform("normalMatrix", glm::transpose(glm::inverse(glm::mat3(MV))));
 	p->setUniform("specularColor", obj->getMaterial().specularColor);
-	p->setUniform("shininessFactor", obj->getMaterial().shininessFactor);
+	p->setUniform("diffuseColor", obj->getMaterial().diffuseColor);
+	p->setUniform("shininessFactor", obj->getMaterial().shininess);
+	if(obj->getTexture() != NULL)
+		p->setUniform("textureSampler", (int)obj->getTexture()->getID());
 }
 
 glm::mat4& SpecularPointLight::modelMatrix()

@@ -27,4 +27,6 @@ void DiffuseLight::collectData(LitObject *obj, const glm::mat4 &View, const glm:
 	p->setUniform("mvMatrix", MV);
 	p->setUniform("normalMatrix", glm::transpose(glm::inverse(glm::mat3(MV))));
 	p->setUniform("diffuseColor", obj->getMaterial().diffuseColor);
+	if(obj->getTexture() != NULL)
+		p->setUniform("textureSampler", (int)obj->getTexture()->getID());
 }

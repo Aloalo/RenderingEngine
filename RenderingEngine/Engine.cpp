@@ -1,6 +1,6 @@
 #include "Engine.h"
 #include "Input.h"
-#include "LitTriangleMesh.h"
+#include "Object3D.h"
 
 #ifdef _WIN32
 #include "windows.h"
@@ -66,11 +66,6 @@ void Engine::setCamera(CameraHandler *_cam)
 void Engine::addToDisplayList(Drawable *d)
 {
 	renderer.addObject(d);
-}
-
-void Engine::addToDisplayList(Mesh *mesh, const Material &mat, const mat4 &modelMatrix)
-{
-	addToDisplayList(new LitTriangleMesh(mesh, mat, modelMatrix));
 }
 
 void Engine::addToUpdateList(Updateable *u)

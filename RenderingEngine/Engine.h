@@ -24,7 +24,6 @@ public:
 	static void setWindowTitle(const char *name);
 
 	static void addToDisplayList(Drawable *d);
-	static void addToDisplayList(Mesh *mesh, const Material &mat, const glm::mat4 &modelMatrix);
 	static void addToUpdateList(Updateable *u);
 	static void addLight(Light *light);
 

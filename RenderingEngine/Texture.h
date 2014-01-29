@@ -20,6 +20,9 @@ public:
 	void texParamfv(GLenum paramName, const GLfloat *param) const;
 
 	virtual void texImage(GLint level, GLint internalFormat, const glm::vec3 &dimensions, GLenum format, GLenum type, const GLvoid *data) const = 0;
+
+	static Texture* defaultWhite();
+
 protected:
 	void generate();
 	GLenum target;

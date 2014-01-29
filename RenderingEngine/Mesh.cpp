@@ -9,20 +9,58 @@
 using namespace std;
 using namespace glm;
 using namespace mfl;
+using namespace tinyobj;
+
+
+Mesh::Mesh(void)
+{
+}
+
+Mesh::Mesh(const shape_t &shape)
+{
+	constructFromShape(shape);
+}
 
 Mesh::Mesh(const vector<vec3> &_vertexData, const vector<vec3> &_normalData, const vector<vec2> &_uvData)
 	: vertexData(_vertexData), normalData(_normalData), uvData(_uvData)
 {
 }
 
-Mesh::Mesh()
-{
-}
 
 Mesh::~Mesh(void)
 {
 }
 
+
+void Mesh::constructFromShape(const shape_t &shape)
+{
+	if(shape.mesh.normals.size() == 0 && shape.mesh.indices.size() > 0)
+	{
+		printf("Not a LitObject!\n");
+		return;
+	}
+	int n = shape.mesh.positions.size() / 3;
+	for(int i = 0; i < n; ++i)
+	{
+		vertexData.push_back(vec3(shape.mesh.positions[3*i+0], shape.mesh.positions[3*i+1], shape.mesh.positions[3*i+2]));
+		if(shape.mesh.normals.size() > 0)
+			normalData.push_back(vec3(shape.mesh.normals[3*i+0], shape.mesh.normals[3*i+1], shape.mesh.normals[3*i+2]));
+		if(shape.mesh.texcoords.size() > 0)
+			uvData.push_back(vec2(shape.mesh.texcoords[3*i+0], shape.mesh.texcoords[3*i+1]));
+	}
+	
+	if(shape.mesh.texcoords.size() == 0)
+		makeUpUVData();
+	if(shape.mesh.normals.size() == 0)
+		calculateNormals();
+	if(shape.mesh.indices.size() != 0)
+		indexData.setData(shape.mesh.indices);
+}
+
+void Mesh::makeUpUVData()
+{
+	uvData = vector<vec2>(vertexData.size(), vec2(0.0f, 0.0f));
+}
 
 void Mesh::clear()
 {

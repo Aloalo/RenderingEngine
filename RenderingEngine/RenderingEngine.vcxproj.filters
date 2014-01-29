@@ -213,9 +213,6 @@
     <ClCompile Include="Square.cpp">
       <Filter>Source Files\Geometry</Filter>
     </ClCompile>
-    <ClCompile Include="LitTriangleMesh.cpp">
-      <Filter>Source Files\Stock</Filter>
-    </ClCompile>
     <ClCompile Include="Triangle.cpp">
       <Filter>Source Files\Geometry</Filter>
     </ClCompile>
@@ -236,6 +233,12 @@
     </ClCompile>
     <ClCompile Include="MathFunctions.cpp">
       <Filter>Source Files\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="tiny_obj_loader.cc">
+      <Filter>Source Files\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="Object3D.cpp">
+      <Filter>Source Files\Geometry</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -356,9 +359,6 @@
     <ClInclude Include="Triangle.h">
       <Filter>Header Files\Geometry</Filter>
     </ClInclude>
-    <ClInclude Include="LitTriangleMesh.h">
-      <Filter>Header Files\Stock</Filter>
-    </ClInclude>
     <ClInclude Include="Lights.h">
       <Filter>Header Files\Engine\Light</Filter>
     </ClInclude>
@@ -376,6 +376,12 @@
     </ClInclude>
     <ClInclude Include="UnLitObject.h">
       <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="tiny_obj_loader.h">
+      <Filter>Header Files\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Object3D.h">
+      <Filter>Header Files\Geometry</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

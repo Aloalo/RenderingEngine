@@ -2,17 +2,19 @@
 
 in vec3 vertexNormal;
 in vec3 vertexPosition;
+in vec2 UV;
 
 out vec4 outputColor;
 
 uniform vec3 cameraSpaceLightPos;
 
+uniform vec4 diffuseColor;
 uniform vec4 specularColor;
 uniform float shininessFactor;
 
 uniform float lightAttenuation;
 uniform vec4 lightIntensity;
-
+uniform sampler2D textureSampler;
 
 float CalcAttenuation(in vec3 vertexPosition, out vec3 lightDirection)
 {
@@ -43,5 +45,5 @@ void main()
 		phongTerm = pow(phongTerm, shininessFactor);
 	}
 	
-	outputColor += specularColor * attenIntensity * phongTerm;
+	outputColor += attenIntensity * (specularColor * phongTerm + diffuseColor * cosAngIncidence) * texture(textureSampler, UV).rgba;
 }

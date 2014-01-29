@@ -1,5 +1,7 @@
-#include "Texture.h"
+#include "Texture2D.h"
 #include <GLFW/glfw3.h>
+
+using namespace glm;
 
 Texture::Texture(GLenum _target)
 	: target(_target)
@@ -58,4 +60,14 @@ void Texture::texParamfv(GLenum paramName, const GLfloat *param) const
 {
 	bind();
 	glTexParameterfv(target, paramName, param);
+}
+
+Texture* Texture::defaultWhite()
+{
+	Texture *tex = new Texture2D(GL_TEXTURE_2D);
+	float data[] = {1.0f, 1.0f, 1.0f, 1.0f};
+
+	tex->bind();
+	tex->texImage(0, GL_RGBA, vec3(1, 1, 0), GL_RGBA, GL_FLOAT, data);
+	return tex;
 }

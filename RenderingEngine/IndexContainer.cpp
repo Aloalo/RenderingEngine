@@ -1,14 +1,14 @@
 #include "IndexContainer.h"
 
 IndexContainer::IndexContainer(const std::vector<unsigned int> &indexData)
+	: data(NULL)
 {
 	setData(indexData);
 }
 
 IndexContainer::IndexContainer(void)
-	: indexCount(0), sizeInBytes(0)
+	: indexCount(0), sizeInBytes(0), data(NULL)
 {
-	data = NULL;
 }
 
 
