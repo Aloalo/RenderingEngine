@@ -6,17 +6,11 @@
 #include "MathFunctions.h"
 #include "Vertex.h"
 
-Mesh::Mesh(const std::vector<glm::vec3> &_vertexData)
-	: vertexData(_vertexData)
-{
-}
+using namespace std;
+using namespace glm;
+using namespace mfl;
 
-Mesh::Mesh(const std::vector<glm::vec3> &_vertexData, const std::vector<glm::vec3> &_normalData)
-	: vertexData(_vertexData), normalData(_normalData)
-{
-}
-
-Mesh::Mesh(const std::vector<glm::vec3> &_vertexData, const std::vector<glm::vec3> &_normalData, const std::vector<glm::vec2> &_uvData)
+Mesh::Mesh(const vector<vec3> &_vertexData, const vector<vec3> &_normalData, const vector<vec2> &_uvData)
 	: vertexData(_vertexData), normalData(_normalData), uvData(_uvData)
 {
 }
@@ -27,7 +21,6 @@ Mesh::Mesh()
 
 Mesh::~Mesh(void)
 {
-	clear();
 }
 
 
@@ -38,14 +31,14 @@ void Mesh::clear()
 	uvData.clear();
 }
 
-void Mesh::addTriangle(const glm::vec3 vert[3])
+void Mesh::addTriangle(const vec3 vert[3])
 {
 	vertexData.push_back(vert[0]);
 	vertexData.push_back(vert[1]);
 	vertexData.push_back(vert[2]);
 }
 
-void Mesh::addTriangle(const glm::vec3 vert[3], const glm::vec3 nor[3])
+void Mesh::addTriangle(const vec3 vert[3], const vec3 nor[3])
 {
 	vertexData.push_back(vert[0]);
 	vertexData.push_back(vert[1]);
@@ -55,7 +48,7 @@ void Mesh::addTriangle(const glm::vec3 vert[3], const glm::vec3 nor[3])
 	normalData.push_back(nor[2]);
 }
 
-void Mesh::addTriangle(const glm::vec3 vert[3], const glm::vec2 uv[3])
+void Mesh::addTriangle(const vec3 vert[3], const vec2 uv[3])
 {
 	vertexData.push_back(vert[0]);
 	vertexData.push_back(vert[1]);
@@ -72,8 +65,8 @@ void Mesh::calculateNormals()
 	float flip = orientation == GL_CCW ? -1.0f : 1.0f;
 	for(int i = 0; i < n; i += 3)
 	{
-		glm::vec3 normal = -glm::cross(vertexData[i + 1] - vertexData[i], vertexData[i + 2] - vertexData[i]);
-		normal = glm::normalize(normal);
+		vec3 normal = -cross(vertexData[i + 1] - vertexData[i], vertexData[i + 2] - vertexData[i]);
+		normal = normalize(normal);
 
 		normalData.push_back(flip * normal);
 		normalData.push_back(flip * normal);
@@ -84,13 +77,13 @@ void Mesh::calculateNormals()
 void Mesh::interpolateNormals()
 {
 	int n = vertexData.size();
-	std::vector<std::pair<Vertex, int> > out(n);
+	vector<pair<Vertex, int> > out(n);
 	for(int i = 0; i < n; i++)
-		out[i] = std::pair<Vertex, int>(Vertex(vertexData[i]), i);
-	std::sort(out.begin(), out.end());
+		out[i] = pair<Vertex, int>(Vertex(vertexData[i]), i);
+	sort(out.begin(), out.end());
 
 	int index = 0;
-	glm::vec3 interpNor = normalData[out[0].second];
+	vec3 interpNor = normalData[out[0].second];
 	for(int i = 1; i < n; i++)
 	{
 		while(i < n && out[index].first == out[i].first)
@@ -103,14 +96,14 @@ void Mesh::interpolateNormals()
 		for(int j = index; j < i; j++)
 			normalData[out[j].second] = interpNor;
 
-		interpNor = glm::vec3(0.0f);
+		interpNor = vec3(0.0f);
 		index = i;
 	}
 }
 
-bool getSimilarVertexIndex(const PackedVertex &packed, std::map<PackedVertex, unsigned int> &VertexToOutIndex, unsigned int &result)
+bool getSimilarVertexIndex(const Vertex &packed, map<Vertex, unsigned int> &VertexToOutIndex, unsigned int &result)
 {
-	std::map<PackedVertex, unsigned int>::iterator it = VertexToOutIndex.find(packed);
+	map<Vertex, unsigned int>::iterator it = VertexToOutIndex.find(packed);
 	if (it == VertexToOutIndex.end())
 		return false;
 	else
@@ -122,20 +115,20 @@ bool getSimilarVertexIndex(const PackedVertex &packed, std::map<PackedVertex, un
 
 void Mesh::applyIndexing()
 {
-	std::vector<glm::vec3> outVertexData;
-	std::vector<glm::vec3> outNormalData;
-	std::vector<glm::vec2> outUvData;
-	std::vector<unsigned int> outIndexData;
+	vector<vec3> outVertexData;
+	vector<vec3> outNormalData;
+	vector<vec2> outUvData;
+	vector<unsigned int> outIndexData;
 
-	std::map<PackedVertex, unsigned int> VertexToOutIndex;
+	map<Vertex, unsigned int> VertexToOutIndex;
 	bool hasUV = uvData.size() > 0;
 	bool hasNormal = normalData.size() > 0;
-	const glm::vec3 zero(0.0f);
+	const vec3 zero(0.0f);
 
 	unsigned int n = vertexData.size();
 	for (unsigned int i = 0; i < n; i++)
 	{
-		PackedVertex packed(vertexData[i], hasNormal ? normalData[i] : zero, hasUV ? uvData[i] : glm::vec2(0.0f));
+		Vertex packed(vertexData[i], hasNormal ? normalData[i] : zero, hasUV ? uvData[i] : vec2(0.0f));
 
 		unsigned int index;
 		bool found = getSimilarVertexIndex(packed, VertexToOutIndex, index);
@@ -169,22 +162,22 @@ void Mesh::flipOrientation()
 void Mesh::setOrientation(unsigned int _orientation)
 {
 	orientation = _orientation;
-	if(!((orientation == GL_CCW && mfl::ccw<float>(vertexData[0], vertexData[1], vertexData[2]) > 0)
-		|| (orientation == GL_CW && mfl::ccw<float>(vertexData[0], vertexData[1], vertexData[2]) < 0)))
+	if(!((orientation == GL_CCW && ccw(vertexData[0], vertexData[1], vertexData[2]) > 0)
+		|| (orientation == GL_CW && ccw(vertexData[0], vertexData[1], vertexData[2]) < 0)))
 		flip();
 }
 
-const glm::vec3* Mesh::getVertexData() const
+const vec3* Mesh::getVertexData() const
 {
 	return vertexData.data();
 }
 
-const glm::vec3* Mesh::getNormalData() const
+const vec3* Mesh::getNormalData() const
 {
 	return normalData.data();
 }
 
-const glm::vec2* Mesh::getUVData() const
+const vec2* Mesh::getUVData() const
 {
 	return uvData.data();
 }
@@ -245,10 +238,10 @@ void Mesh::flip()
 	int n = vertexData.size();
 	for(int i = 0; i < n; i += 3)
 	{
-		std::swap(vertexData[i], vertexData[i + 1]);
+		swap(vertexData[i], vertexData[i + 1]);
 		if(normalData.size())
-			std::swap(normalData[i], normalData[i + 1]);
+			swap(normalData[i], normalData[i + 1]);
 		if(uvData.size())
-			std::swap(uvData[i], uvData[i + 1]);
+			swap(uvData[i], uvData[i + 1]);
 	}
 }

@@ -6,14 +6,18 @@
 #include "windows.h"
 #endif
 
+using namespace std;
+using namespace glm;
+
+
 int Engine::windowWidth = 1024;
 int Engine::windowHeight = 768;
 float Engine::updateInterval = 1.f / 60.f;
 CameraHandler *Engine::cam;
 Renderer Engine::renderer;
-std::list<Updateable*> Engine::updateList;
+list<Updateable*> Engine::updateList;
 GLbitfield Engine::mask = GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT;
-glm::vec4 Engine::backgroundColor = glm::vec4(0.4);
+vec4 Engine::backgroundColor = vec4(0.4);
 char Engine::winTitle[150];
 GLFWwindow *Engine::window = NULL;
 
@@ -40,10 +44,10 @@ void Engine::stop()
 	glfwTerminate();
 }
 
-void Engine::useStockCamera(const glm::vec3 &position, const glm::vec3 &direction, float FoV, float cameraSpeed)
+void Engine::useStockCamera(const vec3 &position, const vec3 &direction, float FoV, float cameraSpeed)
 {
 	Camera c(position, (float) windowWidth / (float) windowHeight, FoV);
-	glm::vec3 d = glm::normalize(direction);
+	vec3 d = normalize(direction);
 
 	float phiy = asin(d.y);
 	float phix = atan2(d.x, d.z);
@@ -64,7 +68,7 @@ void Engine::addToDisplayList(Drawable *d)
 	renderer.addObject(d);
 }
 
-void Engine::addToDisplayList(Mesh *mesh, const Material &mat, const glm::mat4 &modelMatrix)
+void Engine::addToDisplayList(Mesh *mesh, const Material &mat, const mat4 &modelMatrix)
 {
 	addToDisplayList(new LitTriangleMesh(mesh, mat, modelMatrix));
 }
@@ -106,18 +110,35 @@ void Engine::initialize()
 		exit(-1);
 	}
 
-#ifdef _WIN32
-	// Turn on vertical screen sync under Windows.
-	// (I.e. it uses the WGL_EXT_swap_control extension)
-	typedef BOOL (WINAPI *PFNWGLSWAPINTERVALEXTPROC)(int interval);
-	PFNWGLSWAPINTERVALEXTPROC wglSwapIntervalEXT = NULL;
-	wglSwapIntervalEXT = (PFNWGLSWAPINTERVALEXTPROC)wglGetProcAddress("wglSwapIntervalEXT");
-	if(wglSwapIntervalEXT)
-		wglSwapIntervalEXT(0);
-#endif
-
+	enableVsync(false);
 	glfwSwapInterval(0);
 	memset(winTitle, 0, sizeof(winTitle));
+}
+
+void Engine::enableVsync(bool on)
+{
+#ifdef _WIN32
+	if(!on)
+	{
+		// Turn on vertical screen sync under Windows.
+		// (I.e. it uses the WGL_EXT_swap_control extension)
+		typedef BOOL (WINAPI *PFNWGLSWAPINTERVALEXTPROC)(int interval);
+		PFNWGLSWAPINTERVALEXTPROC wglSwapIntervalEXT = NULL;
+		wglSwapIntervalEXT = (PFNWGLSWAPINTERVALEXTPROC)wglGetProcAddress("wglSwapIntervalEXT");
+		if(wglSwapIntervalEXT)
+			wglSwapIntervalEXT(0);
+	}
+	else
+	{
+		// Turn on vertical screen sync under Windows.
+		// (I.e. it uses the WGL_EXT_swap_control extension)
+		typedef BOOL (WINAPI *PFNWGLSWAPINTERVALEXTPROC)(int interval);
+		PFNWGLSWAPINTERVALEXTPROC wglSwapIntervalEXT = NULL;
+		wglSwapIntervalEXT = (PFNWGLSWAPINTERVALEXTPROC)wglGetProcAddress("wglSwapIntervalEXT");
+		if(wglSwapIntervalEXT)
+			wglSwapIntervalEXT(1);
+	}
+#endif
 }
 
 void Engine::enableMode(GLenum mode)
@@ -170,15 +191,15 @@ inline void Engine::nextFrame()
 	glClearColor(backgroundColor.x, backgroundColor.y, backgroundColor.z, backgroundColor.w);
 	glClear(mask);
 	
-	for(std::list<Updateable*>::iterator i = updateList.begin(); i != updateList.end(); i++)
+	for(list<Updateable*>::iterator i = updateList.begin(); i != updateList.end(); i++)
 	{
 		if(*i == NULL)
 			updateList.erase(i);
 		(*i)->update(deltaTime);
 	}
 
-	glm::mat4 ViewMatrix = cam ? cam->getViewMatrix() : glm::mat4(1.0f);
-	glm::mat4 ProjectionMatrix = cam ? cam->getProjectionMatrix() : glm::mat4(1.0f);
+	mat4 ViewMatrix = cam ? cam->getViewMatrix() : mat4(1.0f);
+	mat4 ProjectionMatrix = cam ? cam->getProjectionMatrix() : mat4(1.0f);
 
 	renderer.draw(ViewMatrix, ProjectionMatrix);
 
@@ -187,17 +208,17 @@ inline void Engine::nextFrame()
 	glfwPollEvents();
 }
 
-void Engine::setBackgroundColor(glm::vec4 color)
+void Engine::setBackgroundColor(vec4 color)
 {
 	backgroundColor = color;
 }
 
-glm::mat4 Engine::getProjectionMatrix()
+mat4 Engine::getProjectionMatrix()
 {
 	return cam->getProjectionMatrix();
 }
 
-glm::mat4 Engine::getViewMatrix()
+mat4 Engine::getViewMatrix()
 {
 	return cam->getViewMatrix();
 }

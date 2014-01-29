@@ -8,12 +8,9 @@ class Mesh
 {
 public:
 	Mesh();
-	Mesh(const std::vector<glm::vec3> &_vertexData);
 	Mesh(const std::vector<glm::vec3> &_vertexData,
-		const std::vector<glm::vec3> &_normalData);
-	Mesh(const std::vector<glm::vec3> &_vertexData,
-		const std::vector<glm::vec3> &_normalData,
-		const std::vector<glm::vec2> &_uvData);
+		const std::vector<glm::vec3> &_normalData = std::vector<glm::vec3>(),
+		const std::vector<glm::vec2> &_uvData = std::vector<glm::vec2>());
 	~Mesh(void);
 
 	void clear();

@@ -32,7 +32,6 @@ const void* IndexContainer::getData() const
 	return data;
 }
 
-
 template <class T>
 void IndexContainer::cast(const std::vector<unsigned int> &indexData)
 {

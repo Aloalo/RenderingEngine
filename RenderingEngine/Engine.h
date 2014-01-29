@@ -31,6 +31,7 @@ public:
 	static void start();
 	static void stop();
 
+	static void enableVsync(bool on);
 	static void enableMode(GLenum mode);
 	static void disableMode(GLenum mode);
 	static void setBufferClearMask(GLbitfield _mask);

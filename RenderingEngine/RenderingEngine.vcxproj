@@ -122,6 +122,7 @@
     <ClCompile Include="LitObject.cpp" />
     <ClCompile Include="LitTriangleMesh.cpp" />
     <ClCompile Include="Material.cpp" />
+    <ClCompile Include="MathFunctions.cpp" />
     <ClCompile Include="MatrixStack.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="NormalDrawer.cpp" />
@@ -141,6 +142,7 @@
     <ClCompile Include="UniformBuffer.cpp" />
     <ClCompile Include="UnLitObject.cpp" />
     <ClCompile Include="Updateable.cpp" />
+    <ClCompile Include="Vertex.cpp" />
     <ClCompile Include="VertexArrayObject.cpp" />
     <ClCompile Include="VertexAttribArray.cpp" />
     <ClCompile Include="VertexShader.cpp" />
