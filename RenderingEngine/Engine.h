@@ -24,6 +24,7 @@ public:
 	static void setWindowTitle(const char *name);
 
 	static void addToDisplayList(Drawable *d);
+	static Drawable* addModelToDisplayList(const tinyobj::shape_t &shape);
 	static void addToUpdateList(Updateable *u);
 	static void addLight(Light *light);
 

@@ -1,6 +1,8 @@
 #include "Engine.h"
 #include "Input.h"
 #include "Object3D.h"
+#include "UnlitObject3D.h"
+
 
 #ifdef _WIN32
 #include "windows.h"
@@ -66,6 +68,20 @@ void Engine::setCamera(CameraHandler *_cam)
 void Engine::addToDisplayList(Drawable *d)
 {
 	renderer.addObject(d);
+}
+
+Drawable* Engine::addModelToDisplayList(const tinyobj::shape_t &shape)
+{
+	Drawable *obj;
+	Mesh *mesh = new Mesh(shape.mesh);
+	Material mat = shape.material.name.empty() ? Material::defaultWhite() : Material(shape.material);
+	if(shape.mesh.normals.size() == 0)
+		obj = new UnlitObject3D(mesh, mat);
+	else
+		obj = new Object3D(mesh, mat);
+
+	addToDisplayList(obj);
+	return obj;
 }
 
 void Engine::addToUpdateList(Updateable *u)

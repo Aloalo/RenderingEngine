@@ -3,7 +3,7 @@
 using namespace std;
 using namespace glm;
 
-Object3D::Object3D(const Material &mat, Mesh *mesh, Texture *tex, const mat4 &ModelMatrix)
+Object3D::Object3D(Mesh *mesh, const Material &mat, Texture *tex, const mat4 &ModelMatrix)
 	: mat(mat), mesh(mesh), tex(tex), vertices(GL_ARRAY_BUFFER, GL_STATIC_DRAW),
 	normals(GL_ARRAY_BUFFER, GL_STATIC_DRAW), uv(GL_ARRAY_BUFFER, GL_STATIC_DRAW), 
 	vertAttrib(0, 3, GL_FLOAT, GL_FALSE), normAttrib(1, 3, GL_FLOAT, GL_FALSE), 

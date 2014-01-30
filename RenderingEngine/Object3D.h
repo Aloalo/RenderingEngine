@@ -12,7 +12,7 @@ class Object3D :
 	public LitObject
 {
 public:
-	Object3D(const Material &mat, Mesh *mesh, Texture *tex = Texture::defaultWhite(), const glm::mat4 &ModelMatrix = glm::mat4(1.0f));
+	Object3D(Mesh *mesh, const Material &mat = Material::defaultWhite(), Texture *tex = Texture::defaultWhite(), const glm::mat4 &ModelMatrix = glm::mat4(1.0f));
 	~Object3D(void);
 	
 

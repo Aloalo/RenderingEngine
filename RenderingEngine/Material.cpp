@@ -18,3 +18,8 @@ Material::Material(const material_t &mat)
 Material::~Material(void)
 {
 }
+
+Material Material::defaultWhite()
+{
+	return Material(vec4(1.0f), vec4(1.0f), vec4(1.0f), 1.0f);
+}

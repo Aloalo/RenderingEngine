@@ -88,12 +88,6 @@
     <None Include="StockShaders\NormalShader.frag">
       <Filter>Header Files\Stock\Shaders</Filter>
     </None>
-    <None Include="StockShaders\ADS.vert">
-      <Filter>Header Files\Stock\Shaders</Filter>
-    </None>
-    <None Include="StockShaders\ADS.frag">
-      <Filter>Header Files\Stock\Shaders</Filter>
-    </None>
     <None Include="StockShaders\AmbientLight.frag">
       <Filter>Header Files\Stock\Shaders</Filter>
     </None>
@@ -104,6 +98,12 @@
       <Filter>Header Files\Stock\Shaders</Filter>
     </None>
     <None Include="StockShaders\PhongLighting.frag">
+      <Filter>Header Files\Stock\Shaders</Filter>
+    </None>
+    <None Include="StockShaders\UnLitSimple.frag">
+      <Filter>Header Files\Stock\Shaders</Filter>
+    </None>
+    <None Include="StockShaders\UnLitSimple.vert">
       <Filter>Header Files\Stock\Shaders</Filter>
     </None>
   </ItemGroup>
@@ -238,6 +238,9 @@
       <Filter>Source Files\Utilities</Filter>
     </ClCompile>
     <ClCompile Include="Object3D.cpp">
+      <Filter>Source Files\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="UnlitObject3D.cpp">
       <Filter>Source Files\Geometry</Filter>
     </ClCompile>
   </ItemGroup>
@@ -381,6 +384,9 @@
       <Filter>Header Files\Utilities</Filter>
     </ClInclude>
     <ClInclude Include="Object3D.h">
+      <Filter>Header Files\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="UnlitObject3D.h">
       <Filter>Header Files\Geometry</Filter>
     </ClInclude>
   </ItemGroup>

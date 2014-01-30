@@ -9,6 +9,9 @@ struct Material
 	Material(const tinyobj::material_t &mat);
 	~Material(void);
 
+
+	static Material defaultWhite();
+
 	glm::vec4 diffuseColor;
 	glm::vec4 specularColor;
 	glm::vec4 ambientColor;

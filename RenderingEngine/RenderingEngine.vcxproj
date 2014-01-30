@@ -90,8 +90,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
-    <None Include="StockShaders\ADS.frag" />
-    <None Include="StockShaders\ADS.vert" />
     <None Include="StockShaders\AmbientLight.frag" />
     <None Include="StockShaders\DiffuseLight.frag" />
     <None Include="StockShaders\Lighting.vert" />
@@ -101,6 +99,8 @@
     <None Include="StockShaders\PhongLighting.frag" />
     <None Include="StockShaders\Simple.frag" />
     <None Include="StockShaders\Simple.vert" />
+    <None Include="StockShaders\UnLitSimple.frag" />
+    <None Include="StockShaders\UnLitSimple.vert" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AmbientLight.cpp" />
@@ -142,6 +142,7 @@
     <ClCompile Include="Triangle.cpp" />
     <ClCompile Include="UniformBuffer.cpp" />
     <ClCompile Include="UnLitObject.cpp" />
+    <ClCompile Include="UnlitObject3D.cpp" />
     <ClCompile Include="Updateable.cpp" />
     <ClCompile Include="Vertex.cpp" />
     <ClCompile Include="VertexArrayObject.cpp" />
@@ -191,6 +192,7 @@
     <ClInclude Include="Triangle.h" />
     <ClInclude Include="UniformBuffer.h" />
     <ClInclude Include="UnLitObject.h" />
+    <ClInclude Include="UnlitObject3D.h" />
     <ClInclude Include="Updateable.h" />
     <ClInclude Include="Vertex.h" />
     <ClInclude Include="VertexArrayObject.h" />

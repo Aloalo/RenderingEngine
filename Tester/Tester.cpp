@@ -14,10 +14,13 @@ using namespace std;
 using namespace glm;
 using namespace tinyobj;
 
-vector<Object3D*> objects;
+vector<Drawable*> junk;
 
 void cleanUp()
 {
+	for(int i = 0; i < junk.size(); ++i)
+		delete junk[i];
+	junk.clear();
 }
 
 void addSineCosine()
@@ -40,10 +43,10 @@ void addSineCosine()
 
 	const Material mat(vec4(1.0f, 0.2f, 0.2f, 1.0f), vec4(0.1f, 0.1f, 0.1f, 1.0f), vec4(0.7f, 0.7f, 0.7f, 1.0f), 128.0f);
 
-	Object3D *obj = new Object3D(mat, mesh);
+	Object3D *obj = new Object3D(mesh, mat);
 	obj->setModelMatrix(Model);
-	objects.push_back(obj);
-	Engine::addToDisplayList(objects.back());
+	junk.push_back(obj);
+	Engine::addToDisplayList(junk.back());
 
 	//Engine::addToDisplayList(new NormalDrawer(*mesh, Model));
 	mesh = NULL;
@@ -63,15 +66,15 @@ void addSphere()
 	sphereMesh->makeUpUVData();
 
 	const Material mat(vec4(0.2f, 0.1f, 1.0f, 1.0f), vec4(0.2f, 0.1f, 1.0f, 1.0f), vec4(1.0f, 1.0f, 1.0f, 1.0f), 32.0f);
-	objects.push_back(new Object3D(mat, sphereMesh));
+	junk.push_back(new Object3D(sphereMesh, mat));
 
-	Engine::addToDisplayList(objects.back());
+	Engine::addToDisplayList(junk.back());
 
 	//Engine::addToDisplayList(new NormalDrawer(*sphereMesh));
 	sphereMesh = NULL;
 }
 
-void addMesh(const string &path, const string &mtl_basepath = string())
+void addObjFile(const string &path, const string &mtl_basepath = string())
 {
 	vector<shape_t> shapes;
 	string err;
@@ -87,17 +90,9 @@ void addMesh(const string &path, const string &mtl_basepath = string())
 		exit(0);
 	}
 
-	const Material mat(vec4(0.7f, 0.7f, 7.0f, 1.0f), vec4(0.8f, 0.8f, 0.7f, 1.0f), vec4(1.0f, 1.0f, 1.0f, 1.0f), 32.0f);
+	//const Material mat(vec4(0.7f, 0.7f, 7.0f, 1.0f), vec4(0.8f, 0.8f, 0.7f, 1.0f), vec4(1.0f, 1.0f, 1.0f, 1.0f), 32.0f);
 	for(int i = 0; i < shapes.size(); ++i)
-	{
-		if(shapes[i].material.name.empty())
-			objects.push_back(new Object3D(mat, new Mesh(shapes[i])));
-		else
-			objects.push_back(new Object3D(shapes[i].material, new Mesh(shapes[i])));
-		Engine::addToDisplayList(objects.back());
-	}
-
-	//Engine::addToDisplayList(new NormalDrawer(*sphereMesh));
+		junk.push_back(Engine::addModelToDisplayList(shapes[i]));
 }
 
 int main(int argc, char* argv[])
@@ -110,9 +105,13 @@ int main(int argc, char* argv[])
 	input.setMouseMoveCallback();
 	e.useStockCamera(vec3(0.0f, 0.0f, -30.0f), vec3(0.0f, 0.0f, 1.0f), 45.0f, 4.0f);
 	
-	//addSineCosine();
+	addSineCosine();
 	//addSphere();
-	addMesh("../Resources/buddha.obj", "../Resources/");
+	//addObjFile("../Resources/powerplant/powerplant.obj", "../Resources/powerplant/");
+	addObjFile("../Resources/buddha/buddha.obj", "../Resources/buddha/");
+	//addObjFile("../Resources/cube/cube.obj", "../Resources/cube/");
+	//addObjFile("../Resources/cornell_box/cornell_box.obj", "../Resources/cornell_box/");
+	//addObjFile("../Resources/sibenik/sponza.obj", "../Resources/sibenik/");
 
 	Light *lights[3] = 
 	{
@@ -124,9 +123,6 @@ int main(int argc, char* argv[])
 	Engine::addLight(lights[0]);
 	Engine::addLight(lights[1]);
 	Engine::addLight(lights[2]);
-
-	//MovingLight *ptr = new MovingLight(lights[2]);
-	//e.addToUpdateList(ptr);
 
 	Engine::setWindowTitle("Tester");
 	e.start();

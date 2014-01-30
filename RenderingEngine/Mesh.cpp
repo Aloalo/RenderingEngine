@@ -1,7 +1,7 @@
 #include <GL/glew.h>
 #include <map>
 #include <algorithm>
-#include <glm/gtc/swizzle.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 #include "Mesh.h"
 #include "MathFunctions.h"
 #include "Vertex.h"
@@ -16,9 +16,9 @@ Mesh::Mesh(void)
 {
 }
 
-Mesh::Mesh(const shape_t &shape)
+Mesh::Mesh(const mesh_t &mesh)
 {
-	constructFromShape(shape);
+	constructFromShape(mesh);
 }
 
 Mesh::Mesh(const vector<vec3> &_vertexData, const vector<vec3> &_normalData, const vector<vec2> &_uvData)
@@ -32,29 +32,22 @@ Mesh::~Mesh(void)
 }
 
 
-void Mesh::constructFromShape(const shape_t &shape)
+void Mesh::constructFromShape(const mesh_t &mesh)
 {
-	if(shape.mesh.normals.size() == 0 && shape.mesh.indices.size() > 0)
-	{
-		printf("Not a LitObject!\n");
-		return;
-	}
-	int n = shape.mesh.positions.size() / 3;
+	int n = mesh.positions.size() / 3;
 	for(int i = 0; i < n; ++i)
 	{
-		vertexData.push_back(vec3(shape.mesh.positions[3*i+0], shape.mesh.positions[3*i+1], shape.mesh.positions[3*i+2]));
-		if(shape.mesh.normals.size() > 0)
-			normalData.push_back(vec3(shape.mesh.normals[3*i+0], shape.mesh.normals[3*i+1], shape.mesh.normals[3*i+2]));
-		if(shape.mesh.texcoords.size() > 0)
-			uvData.push_back(vec2(shape.mesh.texcoords[3*i+0], shape.mesh.texcoords[3*i+1]));
+		vertexData.push_back(vec3(mesh.positions[3*i+0], mesh.positions[3*i+1], mesh.positions[3*i+2]));
+		if(mesh.normals.size() > 0)
+			normalData.push_back(normalize(vec3(mesh.normals[3*i+0], mesh.normals[3*i+1], mesh.normals[3*i+2])));
+		if(mesh.texcoords.size() > 0)
+			uvData.push_back(vec2(mesh.texcoords[3*i+0], mesh.texcoords[3*i+1]));
 	}
 	
-	if(shape.mesh.texcoords.size() == 0)
+	if(mesh.texcoords.size() == 0)
 		makeUpUVData();
-	if(shape.mesh.normals.size() == 0)
-		calculateNormals();
-	if(shape.mesh.indices.size() != 0)
-		indexData.setData(shape.mesh.indices);
+	if(mesh.indices.size() != 0)
+		indexData.setData(mesh.indices);
 }
 
 void Mesh::makeUpUVData()
