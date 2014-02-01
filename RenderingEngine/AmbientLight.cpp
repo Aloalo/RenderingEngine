@@ -1,12 +1,23 @@
 #include "AmbientLight.h"
 
 Program *AmbientLight::p = NULL;
-
+TextureSampler AmbientLight::imageSampler;
 AmbientLight::AmbientLight(const glm::vec4 &_intensity)
 	: Light(_intensity)
 {
 	if(p == NULL)
+	{
 		p = new Program(VertexShader("../RenderingEngine/StockShaders/Lighting"), FragmentShader("../RenderingEngine/StockShaders/AmbientLight"));
+		imageSampler.generate();
+		imageSampler.samplerParameteri(GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		imageSampler.samplerParameteri(GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		imageSampler.samplerParameteri(GL_TEXTURE_WRAP_T, GL_REPEAT);
+		imageSampler.samplerParameteri(GL_TEXTURE_WRAP_S, GL_REPEAT);
+
+		p->use();
+		p->setUniform("textureSampler", 0);
+		p->bindSamplerObjectToSampler("textureSampler", imageSampler);
+	}
 }
 
 
@@ -25,5 +36,9 @@ void AmbientLight::collectData(LitObject *obj, const glm::mat4 &View, const glm:
 {
 	glm::mat4 MV = View * obj->modelMatrix();
 	p->setUniform("mvMatrix", MV);
-	p->setUniform("materialAmbientColor", obj->getMaterial().ambientColor);
+	//p->setUniform("materialAmbientColor", obj->getMaterial().ambientColor);
+	p->setUniform("diffuseColor", obj->getMaterial().diffuseColor);
+
+	glActiveTexture(GL_TEXTURE0 + p->getUniformi("textureSampler"));
+	obj->getMaterial().diffuse_tex.bind();
 }

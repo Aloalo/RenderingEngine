@@ -4,8 +4,8 @@
 
 namespace mfl
 {
-	const float pi = 3.14159165359f;
-	const float EPS = 0.0001f;
+	static float pi = 3.14159165359f;
+	static float EPS = 0.0001f;
 
 	template<class T>
 	float clamp(T x, T a, T b);
@@ -22,6 +22,7 @@ namespace mfl
 	float ccw(const glm::vec3 &a, const glm::vec3 &b, const glm::vec3 &c);
 	bool equals(const glm::vec3 &a, const glm::vec3 &b);
 	bool equals(const glm::vec2 &a, const glm::vec2 &b);
+	bool isZero(const glm::vec3 &a);
 }
 
 

@@ -1,9 +1,8 @@
 #pragma once
 
-#include "glm\glm.hpp"
+#include <glm/glm.hpp>
 #include "Program.h"
 #include "LitObject.h"
-#include <memory>
 
 class Light
 {

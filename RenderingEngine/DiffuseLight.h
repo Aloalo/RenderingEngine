@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Light.h"
+#include "TextureSampler.h"
 
 class DiffuseLight :
 	public Light
@@ -15,5 +16,6 @@ public:
 private:
 	glm::vec3 direction;
 	static Program *p;
+	static TextureSampler imageSampler;
 };
 

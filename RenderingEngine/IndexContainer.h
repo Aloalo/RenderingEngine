@@ -10,6 +10,8 @@ public:
 	IndexContainer(const std::vector<unsigned int> &indexData);
 	~IndexContainer(void);
 
+	unsigned int get(int idx);
+
 	void setData(const std::vector<unsigned int> &indexData);
 	int size() const;
 	int getSizeInBytes() const;
@@ -18,6 +20,9 @@ public:
 private:
 	template <class T>
 	void cast(const std::vector<unsigned int> &indexData);
+	template <class T>
+	T& get(int idx);
+
 	void *data;
 	int indexCount;
 	int sizeInBytes;

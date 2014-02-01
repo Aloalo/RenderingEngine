@@ -24,18 +24,12 @@
     <ClInclude Include="MovingLight.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Mirror.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Triangle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MovingLight.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Mirror.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Tester.cpp" />

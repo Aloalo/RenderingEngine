@@ -12,7 +12,7 @@ class Object3D :
 	public LitObject
 {
 public:
-	Object3D(Mesh *mesh, const Material &mat = Material::defaultWhite(), Texture *tex = Texture::defaultWhite(), const glm::mat4 &ModelMatrix = glm::mat4(1.0f));
+	Object3D(Mesh *mesh, const Material &mat = Material::defaultWhite(), const glm::mat4 &ModelMatrix = glm::mat4(1.0f));
 	~Object3D(void);
 	
 
@@ -20,13 +20,12 @@ public:
 	void initDrawing();
 	void draw(const glm::mat4 &View, const glm::mat4 &Projection);
 	const Material& getMaterial() const;
-	const glm::mat4& modelMatrix() const;
-	const Texture* getTexture() const;
+	glm::mat4& modelMatrix();
 	
+	
+	Mesh *mesh;
 private:
 	Material mat;
-	Mesh *mesh;
-	Texture *tex;
 	glm::mat4 Model;
 	
 	VertexArrayObject triangleVAO;

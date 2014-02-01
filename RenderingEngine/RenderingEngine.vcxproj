@@ -62,7 +62,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;glew32.lib;DevIL.lib;</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;glew32.lib;DevIL.lib;ILUT.lib;ILU.lib;</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -85,7 +85,7 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <Lib>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;glew32.lib;DevIL.lib;</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;glew32.lib;DevIL.lib;ILUT.lib;ILU.lib;</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -137,7 +137,8 @@
     <ClCompile Include="Square.cpp" />
     <ClCompile Include="StockCameraHandler.cpp" />
     <ClCompile Include="Texture.cpp" />
-    <ClCompile Include="Texture2D.cpp" />
+    <ClCompile Include="TextureHandler.cpp" />
+    <ClCompile Include="TextureSampler.cpp" />
     <ClCompile Include="tiny_obj_loader.cc" />
     <ClCompile Include="Triangle.cpp" />
     <ClCompile Include="UniformBuffer.cpp" />
@@ -187,7 +188,8 @@
     <ClInclude Include="Square.h" />
     <ClInclude Include="StockCameraHandler.h" />
     <ClInclude Include="Texture.h" />
-    <ClInclude Include="Texture2D.h" />
+    <ClInclude Include="TextureHandler.h" />
+    <ClInclude Include="TextureSampler.h" />
     <ClInclude Include="tiny_obj_loader.h" />
     <ClInclude Include="Triangle.h" />
     <ClInclude Include="UniformBuffer.h" />

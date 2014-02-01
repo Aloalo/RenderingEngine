@@ -3,8 +3,8 @@
 using namespace std;
 using namespace glm;
 
-Object3D::Object3D(Mesh *mesh, const Material &mat, Texture *tex, const mat4 &ModelMatrix)
-	: mat(mat), mesh(mesh), tex(tex), vertices(GL_ARRAY_BUFFER, GL_STATIC_DRAW),
+Object3D::Object3D(Mesh *mesh, const Material &mat, const mat4 &ModelMatrix)
+	: mat(mat), mesh(mesh), vertices(GL_ARRAY_BUFFER, GL_STATIC_DRAW),
 	normals(GL_ARRAY_BUFFER, GL_STATIC_DRAW), uv(GL_ARRAY_BUFFER, GL_STATIC_DRAW), 
 	vertAttrib(0, 3, GL_FLOAT, GL_FALSE), normAttrib(1, 3, GL_FLOAT, GL_FALSE), 
 	uvAttrib(2, 2, GL_FLOAT, GL_FLOAT), Model(ModelMatrix)
@@ -22,7 +22,6 @@ Object3D::~Object3D(void)
 	indices.destroy();
 	uv.destroy();
 	delete mesh;
-	delete tex;
 }
 
 void Object3D::setModelMatrix(const glm::mat4 &ModelMatrix)
@@ -59,12 +58,7 @@ const Material& Object3D::getMaterial() const
 	return mat;
 }
 
-const mat4& Object3D::modelMatrix() const
+mat4& Object3D::modelMatrix()
 {
 	return Model;
-}
-
-const Texture* Object3D::getTexture() const
-{
-	return tex;
 }

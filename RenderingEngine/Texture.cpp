@@ -1,15 +1,15 @@
-#include "Texture2D.h"
+#include "Texture.h"
 #include <GLFW/glfw3.h>
 
 using namespace glm;
+using namespace std;
 
-Texture::Texture(GLenum _target)
-	: target(_target)
+Texture::Texture(void)
 {
-	generate();
 }
 
-Texture::Texture()
+Texture::Texture(const string &name, GLenum target)
+	: name(name), target(target)
 {
 }
 
@@ -30,6 +30,22 @@ void Texture::destroy()
 void Texture::bind() const
 {
 	glBindTexture(target, ID);
+}
+
+void Texture::unBind() const
+{
+	glBindTexture(target, 0);
+}
+
+void Texture::texImage(GLint level, GLint internalFormat, const glm::vec3 &dimensions, GLenum format, GLenum type, const GLvoid *data) const
+{
+	bind();
+	glTexImage2D(target, level, internalFormat, dimensions.x, dimensions.y, 0, format, type, data);
+}
+
+const std::string& Texture::getName()
+{
+	return name;
 }
 
 void Texture::texParami(GLenum paramName, GLuint param) const
@@ -60,14 +76,4 @@ void Texture::texParamfv(GLenum paramName, const GLfloat *param) const
 {
 	bind();
 	glTexParameterfv(target, paramName, param);
-}
-
-Texture* Texture::defaultWhite()
-{
-	Texture *tex = new Texture2D(GL_TEXTURE_2D);
-	float data[] = {1.0f, 1.0f, 1.0f, 1.0f};
-
-	tex->bind();
-	tex->texImage(0, GL_RGBA, vec3(1, 1, 0), GL_RGBA, GL_FLOAT, data);
-	return tex;
 }

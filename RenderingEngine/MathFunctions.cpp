@@ -44,4 +44,9 @@ namespace mfl
 	{
 		return abs(a.x - b.x) < EPS && abs(a.y - b.y) < EPS;
 	}
+
+	bool isZero(const glm::vec3 &a)
+	{
+		return abs(a.x) < EPS && abs(a.y) < EPS && abs(a.z) < EPS;
+	}
 }

@@ -80,6 +80,13 @@ int Program::getUniformBlockLocation(const char *name)
 	return glGetUniformBlockIndex(id, name);
 }
 
+int Program::getUniformi(const char *name)
+{
+	int ret;
+	glGetUniformiv(id, glGetUniformLocation(id, name), &ret);
+	return ret;
+}
+
 void Program::setUniformBlockBinding(const char *name, int bindingPoint)
 {
 	glUniformBlockBinding(id, getUniformBlockLocation(name), bindingPoint);
@@ -138,6 +145,13 @@ void Program::setUniform(const char *name, int cnt, const vec3 *x)
 void Program::setUniform(const char *name, int cnt, const vec4 *x)
 {
 	glProgramUniform4fv(id, getUniformLocation(name), cnt, (float*)x);
+}
+
+void Program::bindSamplerObjectToSampler(const char *name, const TextureSampler &tex)
+{
+	int texUnit = getUniformi(name);
+	glActiveTexture(GL_TEXTURE0 + texUnit);
+	glBindSampler(texUnit, tex.getID());
 }
 
 void Program::attach(const Shader &sh)

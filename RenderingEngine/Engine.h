@@ -9,6 +9,7 @@
 #include <cmath>
 #include "Renderer.h"
 #include "Mesh.h"
+#include "TextureHandler.h"
 #include <GLFW/glfw3.h>
 
 class Engine
@@ -24,7 +25,9 @@ public:
 	static void setWindowTitle(const char *name);
 
 	static void addToDisplayList(Drawable *d);
-	static Drawable* addModelToDisplayList(const tinyobj::shape_t &shape);
+	static Drawable* addToDisplayList(const tinyobj::shape_t &shape, const std::string &matlPath, const glm::mat4 &Model = glm::mat4(1.0f));
+	static Drawable* addLitObject(const tinyobj::shape_t &shape, const std::string &matlPath, const glm::mat4 &Model = glm::mat4(1.0f));
+
 	static void addToUpdateList(Updateable *u);
 	static void addLight(Light *light);
 
@@ -61,4 +64,6 @@ private:
 	static GLbitfield mask;
 	static glm::vec4 backgroundColor;
 	static char winTitle[150];
+
+	TextureHandler texHandler;
 };

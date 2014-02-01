@@ -1,5 +1,7 @@
 #include "NormalDrawer.h"
 
+using namespace glm;
+
 NormalDrawer::NormalDrawer(const Mesh &mesh)
 	: Model(1.0f), p("../RenderingEngine/StockShaders/NormalShader"),
 	vertices(GL_ARRAY_BUFFER, GL_STATIC_DRAW, mesh.getVertexData(), mesh.getVertexDataSize()),
@@ -10,7 +12,7 @@ NormalDrawer::NormalDrawer(const Mesh &mesh)
 	vertexNum = mesh.numOfVertices();
 }
 
-NormalDrawer::NormalDrawer(const Mesh &mesh, glm::mat4 model)
+NormalDrawer::NormalDrawer(const Mesh &mesh, const mat4 &model)
 	: Model(model), p("../RenderingEngine/StockShaders/NormalShader"),
 	vertices(GL_ARRAY_BUFFER, GL_STATIC_DRAW, mesh.getVertexData(), mesh.getVertexDataSize()),
 	vertAttrib(0, 3, GL_FLOAT, GL_FALSE),
@@ -34,9 +36,9 @@ void NormalDrawer::initDrawing()
 	norAttrib.attribPointer();
 }
 
-void NormalDrawer::draw(const glm::mat4 &View, const glm::mat4 &Projection)
+void NormalDrawer::draw(const mat4 &View, const mat4 &Projection)
 {
-	glm::mat4 MVP = Projection * View * Model;
+	mat4 MVP = Projection * View * Model;
 
 	p.use();
 	p.setUniform("MVP", MVP);

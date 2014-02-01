@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Light.h"
+#include "TextureSampler.h"
 
 class AmbientLight :
 	public Light
@@ -13,4 +14,5 @@ public:
 	void collectData(LitObject *obj, const glm::mat4 &View, const glm::mat4 &Projection);
 private:
 	static Program *p;
+	static TextureSampler imageSampler;
 };

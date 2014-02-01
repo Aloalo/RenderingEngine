@@ -17,6 +17,17 @@ IndexContainer::~IndexContainer(void)
 	delete [] data;
 }
 
+
+unsigned int IndexContainer::get(int idx)
+{
+	if(indexCount <= UCHAR_MAX)
+		return get<unsigned char>(idx);
+	else if(indexCount <= USHRT_MAX)
+		return get<unsigned short>(idx);
+	else
+		return get<unsigned int>(idx);
+}
+
 int IndexContainer::size() const
 {
 	return indexCount;
@@ -40,6 +51,13 @@ void IndexContainer::cast(const std::vector<unsigned int> &indexData)
 		*((T*)data+i) = (T)indexData[i];
 
 	sizeInBytes = indexCount * sizeof(T);
+}
+
+
+template <class T>
+T& IndexContainer::get(int idx)
+{
+	return *((T*)data+idx);
 }
 
 void IndexContainer::setData(const std::vector<unsigned int> &indexData)

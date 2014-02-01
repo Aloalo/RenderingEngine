@@ -45,5 +45,5 @@ void main()
 		phongTerm = pow(phongTerm, shininessFactor);
 	}
 	
-	outputColor += attenIntensity * (specularColor * phongTerm + diffuseColor * cosAngIncidence) * texture(textureSampler, UV).rgba;
+	outputColor += attenIntensity * (specularColor * phongTerm + diffuseColor * cosAngIncidence * texture(textureSampler, UV).rgba);
 }

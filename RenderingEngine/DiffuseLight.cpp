@@ -1,12 +1,24 @@
 #include "DiffuseLight.h"
 
 Program *DiffuseLight::p = NULL;
+TextureSampler DiffuseLight::imageSampler;
 
 DiffuseLight::DiffuseLight(const glm::vec3 &_direction)
 	: direction(_direction), Light(glm::vec4())
 {
 	if(p == NULL)
+	{
 		p = new Program(VertexShader("../RenderingEngine/StockShaders/Lighting"), FragmentShader("../RenderingEngine/StockShaders/DiffuseLight"));
+		imageSampler.generate();
+		imageSampler.samplerParameteri(GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		imageSampler.samplerParameteri(GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		imageSampler.samplerParameteri(GL_TEXTURE_WRAP_T, GL_REPEAT);
+		imageSampler.samplerParameteri(GL_TEXTURE_WRAP_S, GL_REPEAT);
+
+		p->use();
+		p->setUniform("textureSampler", 0);
+		p->bindSamplerObjectToSampler("textureSampler", imageSampler);
+	}
 }
 
 
@@ -27,6 +39,7 @@ void DiffuseLight::collectData(LitObject *obj, const glm::mat4 &View, const glm:
 	p->setUniform("mvMatrix", MV);
 	p->setUniform("normalMatrix", glm::transpose(glm::inverse(glm::mat3(MV))));
 	p->setUniform("diffuseColor", obj->getMaterial().diffuseColor);
-	if(obj->getTexture() != NULL)
-		p->setUniform("textureSampler", (int)obj->getTexture()->getID());
+
+	glActiveTexture(GL_TEXTURE0 + p->getUniformi("textureSampler"));
+	obj->getMaterial().diffuse_tex.bind();
 }

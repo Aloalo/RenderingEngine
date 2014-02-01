@@ -19,5 +19,6 @@ private:
 	float attenuation;
 	glm::mat4 Model;
 	static Program *p;
+	static TextureSampler sampler;
 };
 

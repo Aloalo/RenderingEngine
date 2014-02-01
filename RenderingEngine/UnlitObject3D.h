@@ -9,7 +9,7 @@ class UnlitObject3D :
 	public UnLitObject
 {
 public:
-	UnlitObject3D(Mesh *mesh, const Material &mat = Material::defaultWhite(), Texture *tex = Texture::defaultWhite(), const glm::mat4 &ModelMatrix = glm::mat4(1.0f));
+	UnlitObject3D(Mesh *mesh, const Material &mat = Material::defaultWhite(), const glm::mat4 &ModelMatrix = glm::mat4(1.0f));
 	~UnlitObject3D(void);
 	
 	void initDrawing();
@@ -18,7 +18,6 @@ public:
 private:
 	Material mat;
 	Mesh *mesh;
-	Texture *tex;
 	glm::mat4 Model;
 	
 	VertexArrayObject triangleVAO;
@@ -28,5 +27,7 @@ private:
 	BufferObject uv;
 	BufferObject indices;
 	Program p;
+
+	TextureSampler sampler;
 };
 

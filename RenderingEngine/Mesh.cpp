@@ -1,6 +1,7 @@
 #include <GL/glew.h>
 #include <map>
 #include <algorithm>
+#include <exception>
 #include <glm/gtc/matrix_transform.hpp>
 #include "Mesh.h"
 #include "MathFunctions.h"
@@ -13,16 +14,18 @@ using namespace tinyobj;
 
 
 Mesh::Mesh(void)
+	: orientation(GL_CCW)
 {
 }
 
 Mesh::Mesh(const mesh_t &mesh)
+	: orientation(GL_CCW)
 {
 	constructFromShape(mesh);
 }
 
 Mesh::Mesh(const vector<vec3> &_vertexData, const vector<vec3> &_normalData, const vector<vec2> &_uvData)
-	: vertexData(_vertexData), normalData(_normalData), uvData(_uvData)
+	: vertexData(_vertexData), normalData(_normalData), uvData(_uvData), orientation(GL_CCW)
 {
 }
 
@@ -41,7 +44,7 @@ void Mesh::constructFromShape(const mesh_t &mesh)
 		if(mesh.normals.size() > 0)
 			normalData.push_back(normalize(vec3(mesh.normals[3*i+0], mesh.normals[3*i+1], mesh.normals[3*i+2])));
 		if(mesh.texcoords.size() > 0)
-			uvData.push_back(vec2(mesh.texcoords[3*i+0], mesh.texcoords[3*i+1]));
+			uvData.push_back(vec2(mesh.texcoords[2*i+0], mesh.texcoords[2*i+1]));
 	}
 	
 	if(mesh.texcoords.size() == 0)
@@ -91,17 +94,62 @@ void Mesh::addTriangle(const vec3 vert[3], const vec2 uv[3])
 
 void Mesh::calculateNormals()
 {
-	normalData.clear();
 	int n = vertexData.size();
-	float flip = orientation == GL_CCW ? -1.0f : 1.0f;
-	for(int i = 0; i < n; i += 3)
-	{
-		vec3 normal = -cross(vertexData[i + 1] - vertexData[i], vertexData[i + 2] - vertexData[i]);
-		normal = normalize(normal);
+	int k = indexData.size();
+	float flip = orientation == GL_CCW ? 1.0f : -1.0f;
 
-		normalData.push_back(flip * normal);
-		normalData.push_back(flip * normal);
-		normalData.push_back(flip * normal);
+	if(k == 0)
+	{
+		normalData.clear();
+		for(int i = 0; i < n; i += 3)
+		{
+			vec3 normal = cross(vertexData[i + 1] - vertexData[i], vertexData[i + 2] - vertexData[i]);
+			normal = normalize(normal);
+
+			normalData.push_back(flip * normal);
+			normalData.push_back(flip * normal);
+			normalData.push_back(flip * normal);
+		}
+	}
+	else
+	{
+		normalData = vector<vec3>(n, vec3(0.0f));
+
+		/*for (int i = 0; i < k; i += 3)
+		{
+			vec3 v[3] =
+			{
+				vertexData[indexData.get(i + 0)],
+				vertexData[indexData.get(i + 1)],
+				vertexData[indexData.get(i + 2)]
+			};
+			vec3 normal = cross(v[1] - v[0], v[2] - v[0]);
+
+			for (int j = 0; j < 3; ++j)
+			{
+				vec3 a = v[(j+1) % 3] - v[j];
+				vec3 b = v[(j+2) % 3] - v[j];
+				float weight = acos(dot(a, b) / (a.length() * b.length()));
+				normalData[indexData.get(i+j)] += weight * normal;
+			}
+		}*/
+
+
+		for(int i = 0; i < k; i += 3)
+		{
+			int i0 = indexData.get(i);
+			int i1 = indexData.get(i + 1);
+			int i2 = indexData.get(i + 2);
+
+			vec3 normal = cross(vertexData[i1] - vertexData[i0], vertexData[i2] - vertexData[i0]);
+			//normal = normalize(normal);
+
+			normalData[i0] += flip * normal;
+			normalData[i1] += flip * normal;
+			normalData[i2] += flip * normal;
+		}
+		for(int i = 0; i < n; ++i)
+			normalData[i] = normalize(normalData[i]);
 	}
 }
 
@@ -122,7 +170,7 @@ void Mesh::interpolateNormals()
 			interpNor += normalData[out[i].second];
 			i++;
 		}
-		interpNor /= float(i - index);
+		interpNor = normalize(interpNor);
 
 		for(int j = index; j < i; j++)
 			normalData[out[j].second] = interpNor;

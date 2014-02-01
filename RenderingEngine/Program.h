@@ -3,6 +3,7 @@
 #include "VertexShader.h"
 #include "GeometryShader.h"
 #include "FragmentShader.h"
+#include "TextureSampler.h"
 #include <glm/glm.hpp>
 
 class Program
@@ -21,6 +22,7 @@ public:
 
 	int getUniformLocation(const char *name);
 	int getUniformBlockLocation(const char *name);
+	int getUniformi(const char *name);
 
 	void setUniformBlockBinding(const char *name, int bindingPoint);
 
@@ -37,6 +39,7 @@ public:
 	void setUniform(const char *name, int cnt, const glm::vec2 *x);
  	void setUniform(const char *name, int cnt, const glm::vec3 *x);
  	void setUniform(const char *name, int cnt, const glm::vec4 *x);
+	void bindSamplerObjectToSampler(const char *samplerName, const TextureSampler& tex);
 
 private:
 	void init(const VertexShader *vs, const GeometryShader *gs, const FragmentShader *fs);

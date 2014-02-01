@@ -9,7 +9,7 @@ class NormalDrawer :
 {
 public:
 	NormalDrawer(const Mesh &mesh);
-	NormalDrawer(const Mesh &mesh, glm::mat4 model);
+	NormalDrawer(const Mesh &mesh, const glm::mat4 &model);
 	~NormalDrawer(void);
 
 	void initDrawing();

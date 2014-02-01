@@ -2,6 +2,9 @@
 
 #include <GL/glew.h>
 
+/*
+oglobjects must be destroyed by hand
+*/
 class OGLobject
 {
 public:
