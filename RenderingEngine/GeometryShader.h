@@ -2,16 +2,18 @@
 
 #include "Shader.h"
 
-class GeometryShader :
-	public Shader
+namespace reng
 {
-public:
-	GeometryShader(const char *name);
-	GeometryShader(int idr, const char *name);
-	~GeometryShader(void);
+	class GeometryShader :
+		public Shader
+	{
+	public:
+		GeometryShader(const char *name);
+		GeometryShader(int idr, const char *name);
+		~GeometryShader(void);
 
-	virtual const char* getExtension();
-	virtual const char* getTypeString();
-	virtual int getGlType();
-};
-
+		virtual const char* getExtension();
+		virtual const char* getTypeString();
+		virtual int getGlType();
+	};
+}

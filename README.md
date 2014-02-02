@@ -10,3 +10,8 @@ glm-0.9.4.6
 glfw3
 glew
 opengl 3.3 or above
+DevIL
+
+
+Resources
+https://www.dropbox.com/sh/dc6vtu47j680dwt/rxJD5hkAm_

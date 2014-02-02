@@ -2,21 +2,20 @@
 
 #include <GL/glew.h>
 
-/*
-oglobjects must be destroyed by hand
-*/
-class OGLobject
+namespace reng
 {
-public:
-	OGLobject(void);
-	virtual ~OGLobject(void);
+	class OGLobject
+	{
+	public:
+		OGLobject(void);
+		virtual ~OGLobject(void);
 
-	virtual void bind() const = 0;
-	virtual void destroy() = 0;
-	GLuint getID() const;
+		virtual void bind() const = 0;
+		virtual void destroy() = 0;
+		GLuint getID() const;
 
-protected:
-	GLuint ID;
-	virtual void generate() = 0;
-};
-
+	protected:
+		GLuint ID;
+		virtual void generate() = 0;
+	};
+}

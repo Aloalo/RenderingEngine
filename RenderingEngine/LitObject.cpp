@@ -1,11 +1,13 @@
 #include "LitObject.h"
 
-
-LitObject::LitObject(void)
+namespace reng
 {
-}
+	LitObject::LitObject(void)
+	{
+	}
 
 
-LitObject::~LitObject(void)
-{
+	LitObject::~LitObject(void)
+	{
+	}
 }

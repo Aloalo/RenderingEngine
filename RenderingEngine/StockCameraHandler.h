@@ -2,31 +2,33 @@
 
 #include "CameraHandler.h"
 
-class StockCameraHandler :
-	public CameraHandler
+namespace reng
 {
-public:
-	StockCameraHandler(const Camera &cam, float speed, float rotationSpeed);
-	~StockCameraHandler(void);
+	class StockCameraHandler :
+		public CameraHandler
+	{
+	public:
+		StockCameraHandler(const Camera &cam, float speed, float rotationSpeed);
+		~StockCameraHandler(void);
 
-	void keyPress(int key, int scancode, int action, int mods);
-	void mouseMove(double x, double y);
-	void windowResize(int width, int height);
-	
-	void rotate(float yaw, float pitch);
+		void keyPress(int key, int scancode, int action, int mods);
+		void mouseMove(double x, double y);
+		void windowResize(int width, int height);
 
-	void update(float deltaTime);
+		void rotate(float yaw, float pitch);
 
-	glm::mat4 getProjectionMatrix() const;
-	glm::mat4 getViewMatrix() const;
+		void update(float deltaTime);
 
-private:
-	glm::vec3 dir;
+		glm::mat4 getProjectionMatrix() const;
+		glm::mat4 getViewMatrix() const;
 
-	float speed;
-	float rotationSpeed;
-	float springiness;
+	private:
+		glm::vec3 dir;
 
-	float dx, dy;
-};
+		float speed;
+		float rotationSpeed;
+		float springiness;
 
+		float dx, dy;
+	};
+}

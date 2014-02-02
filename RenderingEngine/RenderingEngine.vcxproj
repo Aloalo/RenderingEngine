@@ -122,7 +122,6 @@
     <ClCompile Include="LitObject.cpp" />
     <ClCompile Include="Material.cpp" />
     <ClCompile Include="MathFunctions.cpp" />
-    <ClCompile Include="MatrixStack.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="NormalDrawer.cpp" />
     <ClCompile Include="Object3D.cpp" />
@@ -134,7 +133,6 @@
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="SineCosine.cpp" />
     <ClCompile Include="Sphere.cpp" />
-    <ClCompile Include="Square.cpp" />
     <ClCompile Include="StockCameraHandler.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TextureHandler.cpp" />
@@ -172,7 +170,6 @@
     <ClInclude Include="LitObject.h" />
     <ClInclude Include="Material.h" />
     <ClInclude Include="MathFunctions.h" />
-    <ClInclude Include="MatrixStack.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="NormalDrawer.h" />
     <ClInclude Include="Object3D.h" />
@@ -185,7 +182,6 @@
     <ClInclude Include="Shader.h" />
     <ClInclude Include="SineCosine.h" />
     <ClInclude Include="Sphere.h" />
-    <ClInclude Include="Square.h" />
     <ClInclude Include="StockCameraHandler.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TextureHandler.h" />

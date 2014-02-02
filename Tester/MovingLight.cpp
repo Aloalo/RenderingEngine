@@ -2,6 +2,8 @@
 
 #include <glm/gtc/matrix_transform.hpp>
 
+using namespace reng;
+
 MovingLight::MovingLight(Light *light)
 	: light(dynamic_cast<SpecularPointLight*>(light))
 {

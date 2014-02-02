@@ -1,14 +1,17 @@
 #pragma once
 
-#include "glm/glm.hpp"
+#include <glm/glm.hpp>
 
-class Drawable
+namespace reng
 {
-public:
-	Drawable(void);
-	virtual ~Drawable(void);
+	class Drawable
+	{
+	public:
+		Drawable(void);
+		virtual ~Drawable(void);
 
-	virtual void initDrawing() = 0;
-	virtual void draw(const glm::mat4 &View, const glm::mat4 &Projection) = 0;
-};
+		virtual void initDrawing() = 0;
+		virtual void draw(const glm::mat4 &View, const glm::mat4 &Projection) = 0;
+	};
+}
 

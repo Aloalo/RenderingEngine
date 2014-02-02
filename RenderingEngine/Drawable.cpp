@@ -1,11 +1,13 @@
 #include "Drawable.h"
 
-
-Drawable::Drawable(void)
+namespace reng
 {
-}
+	Drawable::Drawable(void)
+	{
+	}
 
 
-Drawable::~Drawable(void)
-{
+	Drawable::~Drawable(void)
+	{
+	}
 }

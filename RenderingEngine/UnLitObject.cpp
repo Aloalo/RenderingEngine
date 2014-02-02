@@ -1,11 +1,13 @@
 #include "UnLitObject.h"
 
-
-UnLitObject::UnLitObject(void)
+namespace reng
 {
-}
+	UnLitObject::UnLitObject(void)
+	{
+	}
 
 
-UnLitObject::~UnLitObject(void)
-{
+	UnLitObject::~UnLitObject(void)
+	{
+	}
 }

@@ -126,9 +126,6 @@
     <ClCompile Include="Updateable.cpp">
       <Filter>Source Files\Engine</Filter>
     </ClCompile>
-    <ClCompile Include="MatrixStack.cpp">
-      <Filter>Source Files\Utilities</Filter>
-    </ClCompile>
     <ClCompile Include="VertexShader.cpp">
       <Filter>Source Files\GLobjectWrappers\Program</Filter>
     </ClCompile>
@@ -198,9 +195,6 @@
     <ClCompile Include="FrameBufferObject.cpp">
       <Filter>Source Files\GLobjectWrappers</Filter>
     </ClCompile>
-    <ClCompile Include="Square.cpp">
-      <Filter>Source Files\Geometry</Filter>
-    </ClCompile>
     <ClCompile Include="Triangle.cpp">
       <Filter>Source Files\Geometry</Filter>
     </ClCompile>
@@ -238,7 +232,7 @@
       <Filter>Source Files\GLobjectWrappers</Filter>
     </ClCompile>
     <ClCompile Include="TextureHandler.cpp">
-      <Filter>Source Files\Engine</Filter>
+      <Filter>Source Files\GLobjectWrappers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -262,9 +256,6 @@
     </ClInclude>
     <ClInclude Include="VertexAttribArray.h">
       <Filter>Header Files\GLobjectWrappers</Filter>
-    </ClInclude>
-    <ClInclude Include="MatrixStack.h">
-      <Filter>Header Files\Utilities</Filter>
     </ClInclude>
     <ClInclude Include="MathFunctions.h">
       <Filter>Header Files\Utilities</Filter>
@@ -346,9 +337,6 @@
     </ClInclude>
     <ClInclude Include="OGLobjects.h">
       <Filter>Header Files\GLobjectWrappers</Filter>
-    </ClInclude>
-    <ClInclude Include="Square.h">
-      <Filter>Header Files\Geometry</Filter>
     </ClInclude>
     <ClInclude Include="Triangle.h">
       <Filter>Header Files\Geometry</Filter>

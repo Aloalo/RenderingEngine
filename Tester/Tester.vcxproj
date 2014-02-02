@@ -93,12 +93,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MovingLight.h" />
-    <ClInclude Include="Triangle.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MovingLight.cpp" />
     <ClCompile Include="Tester.cpp" />
-    <ClCompile Include="Triangle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\RenderingEngine\RenderingEngine.vcxproj">

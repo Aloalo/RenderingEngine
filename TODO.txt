@@ -1,0 +1,7 @@
+-Assimp
+-shader windows
+-scene graph
+
+-normal / bump / shadow mapping
+
+-physics?!

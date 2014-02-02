@@ -3,19 +3,21 @@
 #include "OGLobject.h"
 #include <string>
 
-class TextureSampler :
-	public OGLobject
+namespace reng
 {
-public:
-	TextureSampler(void);
-	~TextureSampler(void);
+	class TextureSampler :
+		public OGLobject
+	{
+	public:
+		TextureSampler(void);
+		~TextureSampler(void);
 
-	//does nothing, use Program for binding
-	void bind() const;
-	void samplerParameteri(GLenum pname, int param);
-	void samplerParameterf(GLenum pname, float param);
+		//does nothing, use Program for binding
+		void bind() const;
+		void samplerParameteri(GLenum pname, int param);
+		void samplerParameterf(GLenum pname, float param);
 
-	void generate();
-	void destroy();
-};
-
+		void generate();
+		void destroy();
+	};
+}

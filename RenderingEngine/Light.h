@@ -4,16 +4,19 @@
 #include "Program.h"
 #include "LitObject.h"
 
-class Light
+namespace reng
 {
-public:
-	Light(const glm::vec4 &intensity);
-	~Light(void);
+	class Light
+	{
+	public:
+		Light(const glm::vec4 &intensity);
+		~Light(void);
 
-	virtual void renderingSetup(const glm::mat4 &View, const glm::mat4 &Projection) = 0;
-	virtual void collectData(LitObject *obj, const glm::mat4 &View, const glm::mat4 &Projection) = 0;
+		virtual void renderingSetup(const glm::mat4 &View, const glm::mat4 &Projection) = 0;
+		virtual void collectData(LitObject *obj, const glm::mat4 &View, const glm::mat4 &Projection) = 0;
 
-protected:
-	glm::vec4 intensity;
-};
+	protected:
+		glm::vec4 intensity;
+	};
+}
 

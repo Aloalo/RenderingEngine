@@ -5,26 +5,28 @@
 #include "RenderBufferObject.h"
 #include <vector>
 
-class FrameBufferObject
-	: public OGLobject
+namespace reng
 {
-public:
-	FrameBufferObject(GLenum _target);
-	~FrameBufferObject(void);
+	class FrameBufferObject
+		: public OGLobject
+	{
+	public:
+		FrameBufferObject(GLenum _target);
+		~FrameBufferObject(void);
 
-	void bind() const;
-	void unBind() const;
+		void bind() const;
+		void unBind() const;
 
-	void destroy();
-	void attachTexture(GLenum attachment, const Texture &texture, GLint level);
-	void attachTextureLayer(GLenum attachment, const Texture &texture, GLint level, GLint layer);
-	void attachRenderBuffer(GLenum attachment, const RenderBufferObject &rbo);
-	void setDrawBuffers() const;
-	bool check() const;
+		void destroy();
+		void attachTexture(GLenum attachment, const Texture &texture, GLint level);
+		void attachTextureLayer(GLenum attachment, const Texture &texture, GLint level, GLint layer);
+		void attachRenderBuffer(GLenum attachment, const RenderBufferObject &rbo);
+		void setDrawBuffers() const;
+		bool check() const;
 
-protected:
-	void generate();
-	GLenum target;
-	std::vector<GLenum> colorAttachments;
-};
-
+	protected:
+		void generate();
+		GLenum target;
+		std::vector<GLenum> colorAttachments;
+	};
+}
