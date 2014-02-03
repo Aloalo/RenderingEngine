@@ -41,13 +41,13 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(DEVIL_HOME)\include;$(GLEW_HOME)\include;$(GLM_HOME);$(GLFW_HOME)\include;..\RenderingEngine;$(IncludePath)</IncludePath>
-    <LibraryPath>$(DEVIL_HOME)\lib;$(GLEW_HOME)\lib;$(GLFW_HOME)\lib-msvc110;..\Debug;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ASSIMP_HOME)\include;$(DEVIL_HOME)\include;$(GLEW_HOME)\include;$(GLM_HOME);$(GLFW_HOME)\include;..\RenderingEngine;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ASSIMP_HOME)\lib;$(DEVIL_HOME)\lib;$(GLEW_HOME)\lib;$(GLFW_HOME)\lib-msvc110;..\Debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(DEVIL_HOME)\include;$(GLEW_HOME)\include;$(GLM_HOME);$(GLFW_HOME)\include;..\RenderingEngine;$(IncludePath)</IncludePath>
-    <LibraryPath>$(DEVIL_HOME)\lib;$(GLEW_HOME)\lib;$(GLFW_HOME)\lib-msvc110;..\Release;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ASSIMP_HOME)\include;$(DEVIL_HOME)\include;$(GLEW_HOME)\include;$(GLM_HOME);$(GLFW_HOME)\include;..\RenderingEngine;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ASSIMP_HOME)\lib;$(DEVIL_HOME)\lib;$(GLEW_HOME)\lib;$(GLFW_HOME)\lib-msvc110;..\Release;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

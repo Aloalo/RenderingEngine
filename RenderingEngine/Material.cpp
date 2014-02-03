@@ -6,7 +6,6 @@
 using namespace glm;
 using namespace mfl;
 using namespace std;
-using namespace tinyobj;
 
 namespace reng
 {
@@ -17,28 +16,57 @@ namespace reng
 	{
 	}
 
-	Material::Material(const material_t &mat, const std::string &path)
-		: ambientColor(mat.ambient[0], mat.ambient[1], mat.ambient[2], 1.0f), diffuseColor(mat.diffuse[0], mat.diffuse[1], mat.diffuse[2], 1.0f), 
-		specularColor(mat.specular[0], mat.specular[1], mat.specular[2], 1.0f), shininess(mat.shininess), name(mat.name), ior(ior),
-		transmittance(mat.transmittance[0], mat.transmittance[1], mat.transmittance[2]), emission(mat.emission[0], mat.emission[1], mat.emission[2])
+	Material::Material(const aiMaterial *mat, const std::string &path)
 	{
-		if(!mat.ambient_texname.empty())
-			ambient_tex = TextureHandler::getTexture(path, mat.ambient_texname);
+		aiColor4D color;
+
+		mat->Get(AI_MATKEY_COLOR_AMBIENT, color);
+		ambientColor = vec4(color.r, color.g, color.b, color.a);
+
+		mat->Get(AI_MATKEY_COLOR_DIFFUSE, color);
+		diffuseColor = vec4(color.r, color.g, color.b, color.a);
+
+		mat->Get(AI_MATKEY_COLOR_SPECULAR, color);
+		specularColor = vec4(color.r, color.g, color.b, color.a);
+
+		mat->Get(AI_MATKEY_COLOR_EMISSIVE, color);
+		emission = vec3(color.r, color.g, color.b);
+
+		mat->Get<float>(AI_MATKEY_SHININESS, shininess);
+
+		if(mat->GetTextureCount(aiTextureType_AMBIENT) > 0)
+		{
+			aiString name;
+			if(mat->GetTexture(aiTextureType_AMBIENT, 0, &name, NULL, NULL, NULL, NULL, NULL) == AI_SUCCESS) 
+				ambient_tex = TextureHandler::getTexture(path, name.C_Str());
+		}
 		else
 			ambient_tex = TextureHandler::getDefaultTexture();
 
-		if(!mat.diffuse_texname.empty())
-			diffuse_tex = TextureHandler::getTexture(path, mat.diffuse_texname);
+		if(mat->GetTextureCount(aiTextureType_DIFFUSE) > 0)
+		{
+			aiString name;
+			if(mat->GetTexture(aiTextureType_DIFFUSE, 0, &name, NULL, NULL, NULL, NULL, NULL) == AI_SUCCESS) 
+				diffuse_tex = TextureHandler::getTexture(path, name.C_Str());
+		}
 		else
 			diffuse_tex = TextureHandler::getDefaultTexture();
 
-		if(!mat.specular_texname.empty())
-			specular_tex = TextureHandler::getTexture(path, mat.specular_texname);
+		if(mat->GetTextureCount(aiTextureType_SPECULAR) > 0)
+		{
+			aiString name;
+			if(mat->GetTexture(aiTextureType_SPECULAR, 0, &name, NULL, NULL, NULL, NULL, NULL) == AI_SUCCESS) 
+				specular_tex = TextureHandler::getTexture(path, name.C_Str());
+		}
 		else
 			specular_tex = TextureHandler::getDefaultTexture();
 
-		if(!mat.normal_texname.empty())
-			normal_tex = TextureHandler::getTexture(path, mat.normal_texname);
+		if(mat->GetTextureCount(aiTextureType_NORMALS) > 0)
+		{
+			aiString name;
+			if(mat->GetTexture(aiTextureType_NORMALS, 0, &name, NULL, NULL, NULL, NULL, NULL) == AI_SUCCESS) 
+				normal_tex = TextureHandler::getTexture(path, name.C_Str());
+		}
 		else
 			normal_tex = TextureHandler::getDefaultTexture();
 	}
@@ -58,7 +86,6 @@ namespace reng
 		printf("Ka: [%.2f, %.2f, %.2f]\n", ambientColor.x, ambientColor.y, ambientColor.z);
 		printf("Kd: [%.2f, %.2f, %.2f]\n", diffuseColor.x, diffuseColor.y, diffuseColor.z);
 		printf("Ks: [%.2f, %.2f, %.2f]\n", specularColor.x, specularColor.y, specularColor.z);
-		printf("Tr: [%.2f, %.2f, %.2f]\n", transmittance.x, transmittance.y, transmittance.z);
 		printf("Em: [%.2f, %.2f, %.2f]\n", emission.x, emission.y, emission.z);
 		printf("Sh: %.2f\n", shininess);
 		printf("Ior: %.2f\n\n", ior);

@@ -10,7 +10,6 @@
 using namespace std;
 using namespace glm;
 using namespace mfl;
-using namespace tinyobj;
 
 namespace reng
 {
@@ -19,10 +18,10 @@ namespace reng
 	{
 	}
 
-	Mesh::Mesh(const mesh_t &mesh)
+	Mesh::Mesh(const aiMesh *mesh)
 		: orientation(GL_CCW)
 	{
-		constructFromShape(mesh);
+		constructFromaiMesh(mesh);
 	}
 
 	Mesh::Mesh(const vector<vec3> &_vertexData, const vector<vec3> &_normalData, const vector<vec2> &_uvData)
@@ -36,22 +35,23 @@ namespace reng
 	}
 
 
-	void Mesh::constructFromShape(const mesh_t &mesh)
+	void Mesh::constructFromaiMesh(const aiMesh *mesh)
 	{
-		int n = mesh.positions.size() / 3;
-		for(int i = 0; i < n; ++i)
-		{
-			vertexData.push_back(vec3(mesh.positions[3*i+0], mesh.positions[3*i+1], mesh.positions[3*i+2]));
-			if(mesh.normals.size() > 0)
-				normalData.push_back(normalize(vec3(mesh.normals[3*i+0], mesh.normals[3*i+1], mesh.normals[3*i+2])));
-			if(mesh.texcoords.size() > 0)
-				uvData.push_back(vec2(mesh.texcoords[2*i+0], mesh.texcoords[2*i+1]));
-		}
+		vector<unsigned int> indices;
+		for(int i = 0; i < mesh->mNumFaces; ++i)
+			for(int j = 0; j < mesh->mFaces[i].mNumIndices; ++j)
+				indices.push_back(mesh->mFaces[i].mIndices[j]);
+		indexData.setData(indices);
 
-		if(mesh.texcoords.size() == 0)
+		for(int i = 0; i < mesh->mNumVertices; ++i)
+		{
+			vertexData.push_back(vec3(mesh->mVertices[i].x, mesh->mVertices[i].y, mesh->mVertices[i].z));
+			normalData.push_back(vec3(mesh->mNormals[i].x, mesh->mNormals[i].y, mesh->mNormals[i].z));
+			if(mesh->HasTextureCoords(0))
+				uvData.push_back(vec2(mesh->mTextureCoords[0][i].x, mesh->mTextureCoords[0][i].y));
+		}
+		if(uvData.empty())
 			makeUpUVData();
-		if(mesh.indices.size() != 0)
-			indexData.setData(mesh.indices);
 	}
 
 	void Mesh::makeUpUVData()
@@ -111,46 +111,6 @@ namespace reng
 				normalData.push_back(flip * normal);
 				normalData.push_back(flip * normal);
 			}
-		}
-		else
-		{
-			normalData = vector<vec3>(n, vec3(0.0f));
-
-			/*for (int i = 0; i < k; i += 3)
-			{
-			vec3 v[3] =
-			{
-			vertexData[indexData.get(i + 0)],
-			vertexData[indexData.get(i + 1)],
-			vertexData[indexData.get(i + 2)]
-			};
-			vec3 normal = cross(v[1] - v[0], v[2] - v[0]);
-
-			for (int j = 0; j < 3; ++j)
-			{
-			vec3 a = v[(j+1) % 3] - v[j];
-			vec3 b = v[(j+2) % 3] - v[j];
-			float weight = acos(dot(a, b) / (a.length() * b.length()));
-			normalData[indexData.get(i+j)] += weight * normal;
-			}
-			}*/
-
-
-			for(int i = 0; i < k; i += 3)
-			{
-				int i0 = indexData.get(i);
-				int i1 = indexData.get(i + 1);
-				int i2 = indexData.get(i + 2);
-
-				vec3 normal = cross(vertexData[i1] - vertexData[i0], vertexData[i2] - vertexData[i0]);
-				//normal = normalize(normal);
-
-				normalData[i0] += flip * normal;
-				normalData[i1] += flip * normal;
-				normalData[i2] += flip * normal;
-			}
-			for(int i = 0; i < n; ++i)
-				normalData[i] = normalize(normalData[i]);
 		}
 	}
 

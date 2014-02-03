@@ -1,6 +1,8 @@
 #include <cstdio>
 #include <iostream>
-#include <tiny_obj_loader.h>
+#include <assimp/Importer.hpp>
+#include <assimp/scene.h>
+#include <assimp/postprocess.h> 
 
 #include "Engine.h"
 #include "Input.h"
@@ -12,7 +14,6 @@
 
 using namespace std;
 using namespace glm;
-using namespace tinyobj;
 using namespace reng;
 
 vector<Drawable*> junk;
@@ -53,9 +54,7 @@ void addSineCosine()
 	junk.push_back(obj);
 	Engine::addToDisplayList(junk.back());
 
-	Engine::addToDisplayList(new NormalDrawer(*mesh, Model));
-	mesh = NULL;
-	obj = NULL;
+	//Engine::addToDisplayList(new NormalDrawer(*mesh, Model));
 }
 
 void addSphere()
@@ -76,29 +75,26 @@ void addSphere()
 	Engine::addToDisplayList(junk.back());
 
 	//Engine::addToDisplayList(new NormalDrawer(*sphereMesh));
-	sphereMesh = NULL;
 }
 
-void addObjFile(const string &path, const string &mtl_basepath = string(), const mat4 &Model = mat4())
+void addObjFile(const string &path, const string &folder, const mat4 &Model = mat4(1.0f))
 {
-	vector<shape_t> shapes;
-	string err;
-	if(mtl_basepath.empty())
-		err = LoadObj(shapes, path.c_str());
-	else
-		err = LoadObj(shapes, path.c_str(), mtl_basepath.c_str());
-	if(!err.empty())
+	Assimp::Importer importer;
+	const aiScene* scene = importer.ReadFile(path, aiProcessPreset_TargetRealtime_MaxQuality);
+
+	if(!scene)
 	{
-		cout << err << endl;
-		cleanUp();
-		exit(0);
+		printf("%s\n", importer.GetErrorString());
+		return;
 	}
 
-	for(int i = 0; i < shapes.size(); ++i)
+	for(int i = 0; i < scene->mNumMeshes; ++i)
 	{
-		junk.push_back(Engine::addLitObject(shapes[i], mtl_basepath, Model));
-		//Engine::addToDisplayList(new NormalDrawer(*((Object3D*)junk.back())->mesh, Model));
+		Object3D *obj = new Object3D(new Mesh(scene->mMeshes[i]), Material(scene->mMaterials[scene->mMeshes[i]->mMaterialIndex], folder), Model);
+		Engine::addToDisplayList(obj);
+		junk.push_back(obj);
 	}
+	
 }
 
 int main(int argc, char* argv[])
@@ -113,19 +109,20 @@ int main(int argc, char* argv[])
 	e.useStockCamera(vec3(0.0f, 0.0f, -30.0f), vec3(0.0f, 0.0f, 1.0f), 45.0f, 4.0f);
 	
 	
-	addSineCosine();
+	//addSineCosine();
 	//addSphere();
-
 	//addObjFile("../Resources/sponza/sponza.obj", "../Resources/sponza/");
+	//addObjFile("../Resources/nissan/nissan.obj", "../Resources/nissan/", scale(mat4(1.0f), vec3(0.05f, 0.05f, 0.05f)));
+	addObjFile("../Resources/demon/demon1_OBJ.obj", "../Resources/demon/", translate(mat4(1.0f), vec3(-10, 0, 0)));
+	
 	//addObjFile("../Resources/sibenik/sibenik.obj", "../Resources/sibenik/");
 	//addObjFile("../Resources/dragon/dragon.obj", "../Resources/dragon/", scale(mat4(1.0f), vec3(3.1f, 3.1f, 3.1f)));
-	//addObjFile("../Resources/rungholt/rungholt.obj", "../Resources/rungholt/");
+	//addObjFile("../Resources/rungholt/rungholt.obj", "../Resources/rungholt/", scale(mat4(1.0f), vec3(0.01f, 0.01f, 0.01f)));
 	//addObjFile("../Resources/head/head.obj", "../Resources/head/");
 	//addObjFile("../Resources/powerplant/powerplant.obj", "../Resources/powerplant/", scale(mat4(1.0f), vec3(0.1f, 0.1f, 0.1f)));
 	//addObjFile("../Resources/buddha/buddha.obj", "../Resources/buddha/", scale(mat4(1.0f), vec3(3.1f, 3.1f, 3.1f)));
 	//addObjFile("../Resources/cube/cube.obj", "../Resources/cube/");
 	//addObjFile("../Resources/conference/conference.obj", "../Resources/conference/", scale(mat4(1.0f), vec3(0.01f, 0.01f, 0.01f)));
-	//addObjFile("../Resources/polygon/polygon.obj", "../Resources/polygon/");
 
 	lights.push_back(new AmbientLight(vec4(0.3f, 0.3f, 0.3f, 1.0f)));
 	lights.push_back(new SpecularPointLight(vec3(5.0f, 4.0f, 0.0f), vec4(10.5f, 10.5f, 10.5f, 10.0f), 2.0f));

@@ -16,7 +16,8 @@ namespace reng
 
 	IndexContainer::~IndexContainer(void)
 	{
-		delete [] data;
+		if(data != NULL)
+			delete [] data;
 	}
 
 

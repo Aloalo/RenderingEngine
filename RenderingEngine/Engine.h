@@ -27,8 +27,6 @@ namespace reng
 		static void setWindowTitle(const char *name);
 
 		static void addToDisplayList(Drawable *d);
-		static Drawable* addToDisplayList(const tinyobj::shape_t &shape, const std::string &matlPath, const glm::mat4 &Model = glm::mat4(1.0f));
-		static Drawable* addLitObject(const tinyobj::shape_t &shape, const std::string &matlPath, const glm::mat4 &Model = glm::mat4(1.0f));
 
 		static void addToUpdateList(Updateable *u);
 		static void addLight(Light *light);

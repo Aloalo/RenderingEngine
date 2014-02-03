@@ -216,9 +216,6 @@
     <ClCompile Include="MathFunctions.cpp">
       <Filter>Source Files\Utilities</Filter>
     </ClCompile>
-    <ClCompile Include="tiny_obj_loader.cc">
-      <Filter>Source Files\Utilities</Filter>
-    </ClCompile>
     <ClCompile Include="Object3D.cpp">
       <Filter>Source Files\Geometry</Filter>
     </ClCompile>
@@ -355,9 +352,6 @@
     </ClInclude>
     <ClInclude Include="UnLitObject.h">
       <Filter>Header Files\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="tiny_obj_loader.h">
-      <Filter>Header Files\Utilities</Filter>
     </ClInclude>
     <ClInclude Include="Object3D.h">
       <Filter>Header Files\Geometry</Filter>

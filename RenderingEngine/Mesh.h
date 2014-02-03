@@ -3,7 +3,7 @@
 #include "IndexContainer.h"
 #include <glm/glm.hpp>
 #include <vector>
-#include "tiny_obj_loader.h"
+#include <assimp/mesh.h>
 
 namespace reng
 {
@@ -11,13 +11,13 @@ namespace reng
 	{
 	public:
 		Mesh(void);
-		Mesh(const tinyobj::mesh_t &mesh);
+		Mesh(const aiMesh *mesh);
 		Mesh(const std::vector<glm::vec3> &_vertexData,
 			const std::vector<glm::vec3> &_normalData = std::vector<glm::vec3>(),
 			const std::vector<glm::vec2> &_uvData = std::vector<glm::vec2>());
 		~Mesh(void);
 
-		void constructFromShape(const tinyobj::mesh_t &mesh);
+		void constructFromaiMesh(const aiMesh *mesh);
 		void makeUpUVData();
 		void clear();
 		void addTriangle(const glm::vec3 vert[3]);

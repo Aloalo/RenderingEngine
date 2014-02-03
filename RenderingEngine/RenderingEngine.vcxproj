@@ -40,14 +40,14 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(DEVIL_HOME)\include;$(GLEW_HOME)\include;$(GLM_HOME);$(GLFW_HOME)\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(ASSIMP_HOME)\include;$(DEVIL_HOME)\include;$(GLEW_HOME)\include;$(GLM_HOME);$(GLFW_HOME)\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LibraryPath>$(DEVIL_HOME)\lib;$(GLEW_HOME)\lib;$(GLFW_HOME)\lib-msvc110;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(ASSIMP_HOME)\lib;$(DEVIL_HOME)\lib;$(GLEW_HOME)\lib;$(GLFW_HOME)\lib-msvc110;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(DEVIL_HOME)\include;$(GLEW_HOME)\include;$(GLM_HOME);$(GLFW_HOME)\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(DEVIL_HOME)\lib;$(GLEW_HOME)\lib;$(GLFW_HOME)\lib-msvc110;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ASSIMP_HOME)\include;$(DEVIL_HOME)\include;$(GLEW_HOME)\include;$(GLM_HOME);$(GLFW_HOME)\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ASSIMP_HOME)\lib;$(DEVIL_HOME)\lib;$(GLEW_HOME)\lib;$(GLFW_HOME)\lib-msvc110;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -62,7 +62,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;glew32.lib;DevIL.lib;ILUT.lib;ILU.lib;</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;glew32.lib;DevIL.lib;ILUT.lib;ILU.lib;assimp.lib;</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -85,7 +85,7 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <Lib>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;glew32.lib;DevIL.lib;ILUT.lib;ILU.lib;</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;glew32.lib;DevIL.lib;ILUT.lib;ILU.lib;assimp.lib;</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -137,7 +137,6 @@
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TextureHandler.cpp" />
     <ClCompile Include="TextureSampler.cpp" />
-    <ClCompile Include="tiny_obj_loader.cc" />
     <ClCompile Include="Triangle.cpp" />
     <ClCompile Include="UniformBuffer.cpp" />
     <ClCompile Include="UnLitObject.cpp" />
@@ -186,7 +185,6 @@
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TextureHandler.h" />
     <ClInclude Include="TextureSampler.h" />
-    <ClInclude Include="tiny_obj_loader.h" />
     <ClInclude Include="Triangle.h" />
     <ClInclude Include="UniformBuffer.h" />
     <ClInclude Include="UnLitObject.h" />

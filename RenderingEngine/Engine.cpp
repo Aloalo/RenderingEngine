@@ -73,33 +73,6 @@ namespace reng
 		renderer.addObject(d);
 	}
 
-	Drawable* Engine::addToDisplayList(const tinyobj::shape_t &shape, const string &matlPath, const glm::mat4 &Model)
-	{
-		Drawable *obj;
-		Mesh *mesh = new Mesh(shape.mesh);
-		Material mat = shape.material.name.empty() ? Material::defaultWhite() : Material(shape.material, matlPath);
-		mat.print();
-		if(shape.mesh.normals.size() == 0)
-			obj = new UnlitObject3D(mesh, mat, Model);
-		else
-			obj = new Object3D(mesh, mat, Model);
-
-		addToDisplayList(obj);
-		return obj;
-	}
-
-	Drawable* Engine::addLitObject(const tinyobj::shape_t &shape, const std::string &matlPath, const glm::mat4 &Model)
-	{
-		Mesh *mesh = new Mesh(shape.mesh);
-		if(mesh->numOfNormals() == 0)
-			mesh->calculateNormals();
-		Material mat = shape.material.name.empty() ? Material::defaultWhite() : Material(shape.material, matlPath);
-		mat.print();
-		Drawable *obj = new Object3D(mesh, mat, Model);
-		addToDisplayList(obj);
-		return obj;
-	}
-
 	void Engine::addToUpdateList(Updateable *u)
 	{
 		u->initState();
