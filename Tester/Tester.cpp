@@ -111,9 +111,9 @@ int main(int argc, char* argv[])
 	
 	//addSineCosine();
 	//addSphere();
-	//addObjFile("../Resources/sponza/sponza.obj", "../Resources/sponza/");
+	addObjFile("../Resources/sponza/sponza.obj", "../Resources/sponza/");
 	//addObjFile("../Resources/nissan/nissan.obj", "../Resources/nissan/", scale(mat4(1.0f), vec3(0.05f, 0.05f, 0.05f)));
-	addObjFile("../Resources/demon/demon1_OBJ.obj", "../Resources/demon/", translate(mat4(1.0f), vec3(-10, 0, 0)));
+	//addObjFile("../Resources/demon/demon1_OBJ.obj", "../Resources/demon/", translate(mat4(1.0f), vec3(-10, 0, 0)));
 	
 	//addObjFile("../Resources/sibenik/sibenik.obj", "../Resources/sibenik/");
 	//addObjFile("../Resources/dragon/dragon.obj", "../Resources/dragon/", scale(mat4(1.0f), vec3(3.1f, 3.1f, 3.1f)));

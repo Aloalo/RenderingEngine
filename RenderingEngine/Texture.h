@@ -27,6 +27,7 @@ namespace reng
 		void texParamIiv(GLenum paramName, const GLint *param) const;
 		void texParamfv(GLenum paramName, const GLfloat *param) const;
 
+		unsigned int getTarget() const;
 
 	protected:
 		std::string name;

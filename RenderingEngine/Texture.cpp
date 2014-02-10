@@ -79,4 +79,9 @@ namespace reng
 		bind();
 		glTexParameterfv(target, paramName, param);
 	}
+
+	unsigned int Texture::getTarget() const
+	{
+		return target;
+	}
 }

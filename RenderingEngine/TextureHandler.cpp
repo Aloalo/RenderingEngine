@@ -23,7 +23,7 @@ namespace reng
 	}
 
 
-	Texture TextureHandler::getTexture(const std::string &path, const std::string &name)
+	Texture TextureHandler::getTexture(const std::string &path, const std::string &name, GLenum format)
 	{
 		if(existingTextures.find(name) != existingTextures.end())
 			return existingTextures[name];
@@ -54,7 +54,7 @@ namespace reng
 			}
 			ret.generate();
 			ret.bind();
-			ret.texImage(0, ilGetInteger(IL_IMAGE_FORMAT), vec3(ilGetInteger(IL_IMAGE_WIDTH), ilGetInteger(IL_IMAGE_HEIGHT), 0), ilGetInteger(IL_IMAGE_FORMAT), GL_FLOAT, ilGetData());
+			ret.texImage(0, format, vec3(ilGetInteger(IL_IMAGE_WIDTH), ilGetInteger(IL_IMAGE_HEIGHT), 0), ilGetInteger(IL_IMAGE_FORMAT), GL_FLOAT, ilGetData());
 		}
 		else
 		{
@@ -82,6 +82,13 @@ namespace reng
 	Texture TextureHandler::getDefaultTexture()
 	{
 		return defaultTexture;
+	}
+
+	bool TextureHandler::hasTexture(const std::string &name)
+	{
+		if(existingTextures.find(name) != existingTextures.end())
+			return true;
+		return false;
 	}
 
 	void TextureHandler::generateDefaultTex()
