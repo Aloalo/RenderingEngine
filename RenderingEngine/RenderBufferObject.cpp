@@ -1,45 +1,48 @@
 #include "RenderBufferObject.h"
 
-GLenum RenderBufferObject::target = GL_RENDERBUFFER;
-
-RenderBufferObject::RenderBufferObject(void)
+namespace reng
 {
-	generate();
-}
+	GLenum RenderBufferObject::target = GL_RENDERBUFFER;
 
-RenderBufferObject::~RenderBufferObject(void)
-{
-}
+	RenderBufferObject::RenderBufferObject(void)
+	{
+		generate();
+	}
 
-void RenderBufferObject::bind() const
-{
-	glBindRenderbuffer(target, ID);
-}
+	RenderBufferObject::~RenderBufferObject(void)
+	{
+	}
 
-void RenderBufferObject::destroy()
-{
-	glDeleteRenderbuffers(1, &ID);
-}
+	void RenderBufferObject::bind() const
+	{
+		glBindRenderbuffer(target, ID);
+	}
 
-void RenderBufferObject::generate()
-{
-	glGenRenderbuffers(1, &ID);
-}
+	void RenderBufferObject::destroy()
+	{
+		glDeleteRenderbuffers(1, &ID);
+	}
 
-void RenderBufferObject::allocateStorage(GLenum internalformat, GLsizei width, GLsizei height) const
-{
-	bind();
-	glRenderbufferStorage(target, internalformat, width, height);
-}
+	void RenderBufferObject::generate()
+	{
+		glGenRenderbuffers(1, &ID);
+	}
 
-void RenderBufferObject::allocateStorageMultisample(GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height) const
-{
-	bind();
-	glRenderbufferStorageMultisample(target, samples, internalformat, width, height);
-}
+	void RenderBufferObject::allocateStorage(GLenum internalformat, GLsizei width, GLsizei height) const
+	{
+		bind();
+		glRenderbufferStorage(target, internalformat, width, height);
+	}
 
-void RenderBufferObject::query(GLenum pname, GLint *ret) const
-{
-	bind();
-	glGetRenderbufferParameteriv(target, pname, ret);
+	void RenderBufferObject::allocateStorageMultisample(GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height) const
+	{
+		bind();
+		glRenderbufferStorageMultisample(target, samples, internalformat, width, height);
+	}
+
+	void RenderBufferObject::query(GLenum pname, GLint *ret) const
+	{
+		bind();
+		glGetRenderbufferParameteriv(target, pname, ret);
+	}
 }

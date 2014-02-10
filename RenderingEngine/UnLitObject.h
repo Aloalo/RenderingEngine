@@ -2,11 +2,13 @@
 
 #include "Drawable.h"
 
-class UnLitObject :
-	public Drawable
+namespace reng
 {
-public:
-	UnLitObject(void);
-	~UnLitObject(void);
-};
-
+	class UnLitObject :
+		public Drawable
+	{
+	public:
+		UnLitObject(void);
+		~UnLitObject(void);
+	};
+}

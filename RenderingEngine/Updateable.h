@@ -1,12 +1,14 @@
 #pragma once
 
-class Updateable
+namespace reng
 {
-public:
-	Updateable(void);
-	virtual ~Updateable(void);
+	class Updateable
+	{
+	public:
+		Updateable(void);
+		virtual ~Updateable(void);
 
-	virtual void initState();
-	virtual void update(float deltaTime) = 0;
-};
-
+		virtual void initState();
+		virtual void update(float deltaTime) = 0;
+	};
+}

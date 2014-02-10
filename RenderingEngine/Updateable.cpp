@@ -1,16 +1,18 @@
 
 #include "Updateable.h"
 
-
-Updateable::Updateable(void)
+namespace reng
 {
-}
+	Updateable::Updateable(void)
+	{
+	}
 
 
-Updateable::~Updateable(void)
-{
-}
+	Updateable::~Updateable(void)
+	{
+	}
 
-void Updateable::initState(void)
-{
+	void Updateable::initState(void)
+	{
+	}
 }

@@ -2,20 +2,22 @@
 
 #include "OGLobject.h"
 
-class VertexArrayObject
-	: public OGLobject
+namespace reng
 {
-public:
-	/*Also generates the VAO*/
-	VertexArrayObject(void);
-	~VertexArrayObject(void);
+	class VertexArrayObject
+		: public OGLobject
+	{
+	public:
+		/*Also generates the VAO*/
+		VertexArrayObject(void);
+		~VertexArrayObject(void);
 
-	static void unBind();
+		static void unBind();
 
-	void bind() const;
-	void destroy();
+		void bind() const;
+		void destroy();
 
-protected:
-	void generate();
-};
-
+	protected:
+		void generate();
+	};
+}

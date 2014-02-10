@@ -2,20 +2,22 @@
 
 #include <GL/glew.h>
 
-class Shader
+namespace reng
 {
-public:
-	int id;
+	class Shader
+	{
+	public:
+		int id;
 
-	virtual const char* getExtension() = 0;
-	virtual const char* getTypeString() = 0;
-	virtual int getGlType() = 0;
+		virtual const char* getExtension() = 0;
+		virtual const char* getTypeString() = 0;
+		virtual int getGlType() = 0;
 
-protected:
-	void init(const char *name);
-	void init(int idr, const char *name);
+	protected:
+		void init(const char *name);
+		void init(int idr, const char *name);
 
-private:
-	void init2(const char *src, const char *name, int len = 0);
-};
-
+	private:
+		void init2(const char *src, const char *name, int len = 0);
+	};
+}

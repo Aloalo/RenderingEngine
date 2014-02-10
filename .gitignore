@@ -1,5 +1,10 @@
 Thumbs.db
 *.obj
+*.mtl
+*.max
+*.png
+*.tga
+*.jpg
 *.exe
 *.pdb
 *.user

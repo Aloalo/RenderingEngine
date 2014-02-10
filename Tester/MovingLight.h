@@ -5,10 +5,10 @@
 #include <memory>
 
 class MovingLight :
-	public Updateable
+	public reng::Updateable
 {
 public:
-	MovingLight(Light *light);
+	MovingLight(reng::Light *light);
 	~MovingLight(void);
 
 	void initState();
@@ -17,6 +17,6 @@ public:
 private:
 	float angle;
 	float angularVel;
-	SpecularPointLight *light;
+	reng::SpecularPointLight *light;
 };
 

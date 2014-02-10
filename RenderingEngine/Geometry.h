@@ -2,4 +2,4 @@
 #include "FunctionGraph.h"
 #include "Mesh.h"
 #include "Sphere.h"
-#include "LitTriangleMesh.h"
+#include "Object3D.h"

@@ -1,16 +1,17 @@
 #include "OGLobject.h"
 
-
-OGLobject::OGLobject(void)
+namespace reng
 {
-}
+	OGLobject::OGLobject(void)
+	{
+	}
 
+	OGLobject::~OGLobject(void)
+	{
+	}
 
-OGLobject::~OGLobject(void)
-{
-}
-
-GLuint OGLobject::getID() const
-{
-	return ID;
+	GLuint OGLobject::getID() const
+	{
+		return ID;
+	}
 }

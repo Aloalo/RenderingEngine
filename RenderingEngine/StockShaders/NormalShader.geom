@@ -21,8 +21,7 @@ void main(void)
         EmitVertex();
  
         color = vec4 (0.f);
-        gl_Position = MVP * (gl_in[i].gl_Position + vec4 (vertexData[i].normal
-                    * .05f, 0.f));
+        gl_Position = MVP * (gl_in[i].gl_Position + vec4(normalize(vertexData[i].normal) * 0.05f, 0.f));
         EmitVertex();
         EndPrimitive();
     }

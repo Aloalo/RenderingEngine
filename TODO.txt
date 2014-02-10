@@ -1,17 +1,6 @@
-TO implement:
+-shader windows
+-scene graph
 
-1. texture
-   -napraviti dobre wrapere oko ogl objekata
-   -napraviti neko smisleno loadanje
-2. wrapati framebuffer i renderbuffer objekte
-3. mirror
+-normal / bump / shadow mapping
 
-3. 2D text
-4. fps counter
-
-
-
-TO fix
-- vertex klase!!
-- mesh!!
-- rendering loop?
+-physics?!

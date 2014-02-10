@@ -1,11 +1,14 @@
 #include "Light.h"
 
-Light::Light(const glm::vec4 &intensity)
-	: intensity(intensity)
+namespace reng
 {
+	Light::Light(const glm::vec4 &intensity)
+		: intensity(intensity)
+	{
 
-}
+	}
 
-Light::~Light(void)
-{
+	Light::~Light(void)
+	{
+	}
 }
