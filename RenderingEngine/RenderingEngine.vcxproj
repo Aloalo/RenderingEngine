@@ -43,11 +43,11 @@
     <IncludePath>$(ASSIMP_HOME)\include;$(DEVIL_HOME)\include;$(GLEW_HOME)\include;$(GLM_HOME);$(GLFW_HOME)\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LibraryPath>$(ASSIMP_HOME)\lib;$(DEVIL_HOME)\lib;$(GLEW_HOME)\lib;$(GLFW_HOME)\lib-msvc110;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(ASSIMP_HOME)\lib\x86;$(DEVIL_HOME)\lib;$(GLEW_HOME)\lib;$(GLFW_HOME)\lib-msvc100;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IncludePath>$(ASSIMP_HOME)\include;$(DEVIL_HOME)\include;$(GLEW_HOME)\include;$(GLM_HOME);$(GLFW_HOME)\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(ASSIMP_HOME)\lib;$(DEVIL_HOME)\lib;$(GLEW_HOME)\lib;$(GLFW_HOME)\lib-msvc110;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(ASSIMP_HOME)\lib\x86;$(DEVIL_HOME)\lib;$(GLEW_HOME)\lib;$(GLFW_HOME)\lib-msvc100;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -62,7 +62,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;glew32.lib;DevIL.lib;ILUT.lib;ILU.lib;assimp.lib;</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;glew32.lib;DevIL.lib;ILUT.lib;ILU.lib;assimp.lib</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -85,7 +85,7 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <Lib>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;glew32.lib;DevIL.lib;ILUT.lib;ILU.lib;assimp.lib;</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;glew32.lib;DevIL.lib;ILUT.lib;ILU.lib;assimp.lib</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
