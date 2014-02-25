@@ -28,6 +28,7 @@ RenderingEngine.lib
 *.sbr
 obj/
 [Rr]elease*/
+[Rr]esources*/
 _ReSharper*/
 [Tt]est[Rr]esult*
 *.vssscc
