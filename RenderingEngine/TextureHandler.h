@@ -11,10 +11,10 @@ namespace reng
 	{
 		friend class Engine;
 	public:
-		static Texture getTexture(const std::string &path, const std::string &name, GLenum formt = GL_RGBA32F_ARB);
+		static Texture getTexture(const std::string &path, const std::string &def = "../Resources/error.png", GLenum formt = GL_RGBA32F_ARB);
 		static Texture getDefaultTexture();
-		static Texture getTexture(const std::string &name, GLenum target);
-		static bool hasTexture(const std::string &name);
+		static Texture genTexture(const std::string &path, GLenum target);
+		static bool hasTexture(const std::string &path);
 
 	private:
 		TextureHandler(void);

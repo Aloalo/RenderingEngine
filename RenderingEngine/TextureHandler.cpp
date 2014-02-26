@@ -23,59 +23,64 @@ namespace reng
 	}
 
 
-	Texture TextureHandler::getTexture(const std::string &path, const std::string &name, GLenum format)
+	Texture TextureHandler::getTexture(const string &path, const string &def, GLenum format)
 	{
-		if(existingTextures.find(name) != existingTextures.end())
-			return existingTextures[name];
+		if(existingTextures.find(path) != existingTextures.end())
+			return existingTextures[path];
 
 
-		Texture ret(name);
+		Texture ret(path);
 		ILuint imageID;
 		ILboolean success;
 		ILenum error;
 		ilGenImages(1, &imageID);
 		ilBindImage(imageID);
-		success = ilLoadImage((const ILstring)(path + name).c_str());
+		success = ilLoadImage((const ILstring)path.c_str());
 
-		if (success)
-		{
-			ILinfo ImageInfo;
-			iluGetImageInfo(&ImageInfo);
-			if(ImageInfo.Origin == IL_ORIGIN_UPPER_LEFT)
-				iluFlipImage();
-
-			success = ilConvertImage(IL_RGBA, IL_FLOAT);
-
-			if (!success)
-			{
-				error = ilGetError();
-				cout << "Image conversion failed - IL reports error: " << error << " - " << iluErrorString(error) << endl;
-				exit(-1);
-			}
-			ret.generate();
-			ret.bind();
-			ret.texImage(0, format, vec3(ilGetInteger(IL_IMAGE_WIDTH), ilGetInteger(IL_IMAGE_HEIGHT), 0), ilGetInteger(IL_IMAGE_FORMAT), GL_FLOAT, ilGetData());
-		}
-		else
+		if(!success)
 		{
 			error = ilGetError();
 			std::cout << "Image load failed - IL reports error: " << error << " - " << iluErrorString(error) << std::endl;
+			success = ilLoadImage((const ILstring)def.c_str());
+			if(!success)
+			{
+				error = ilGetError();
+				std::cout << "Image load failed - IL reports error: " << error << " - " << iluErrorString(error) << std::endl;
+				exit(-1);
+			}
+		}
+
+		ILinfo ImageInfo;
+		iluGetImageInfo(&ImageInfo);
+		if(ImageInfo.Origin == IL_ORIGIN_UPPER_LEFT)
+			iluFlipImage();
+
+		success = ilConvertImage(IL_RGBA, IL_FLOAT);
+
+		if(!success)
+		{
+			error = ilGetError();
+			cout << "Image conversion failed - IL reports error: " << error << " - " << iluErrorString(error) << endl;
 			exit(-1);
 		}
+		ret.generate();
+		ret.bind();
+		ret.texImage(0, format, vec3(ilGetInteger(IL_IMAGE_WIDTH), ilGetInteger(IL_IMAGE_HEIGHT), 0), ilGetInteger(IL_IMAGE_FORMAT), GL_FLOAT, ilGetData());
+
 		ilDeleteImages(1, &imageID);
 
-		existingTextures[name] = ret;
+		existingTextures[path] = ret;
 		return ret;
 	}
 
-	Texture TextureHandler::getTexture(const std::string &name, GLenum target)
+	Texture TextureHandler::genTexture(const std::string &path, GLenum target)
 	{
-		if(existingTextures.find(name) != existingTextures.end())
-			return existingTextures[name];
+		if(existingTextures.find(path) != existingTextures.end())
+			return existingTextures[path];
 
-		Texture ret(name, target);
+		Texture ret(path, target);
 		ret.generate();
-		existingTextures[name] = ret;
+		existingTextures[path] = ret;
 		return ret;
 	}
 
@@ -84,9 +89,9 @@ namespace reng
 		return defaultTexture;
 	}
 
-	bool TextureHandler::hasTexture(const std::string &name)
+	bool TextureHandler::hasTexture(const std::string &path)
 	{
-		if(existingTextures.find(name) != existingTextures.end())
+		if(existingTextures.find(path) != existingTextures.end())
 			return true;
 		return false;
 	}
