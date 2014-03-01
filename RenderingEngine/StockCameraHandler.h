@@ -22,13 +22,12 @@ namespace reng
 		glm::mat4 getProjectionMatrix() const;
 		glm::mat4 getViewMatrix() const;
 
-	private:
-		glm::vec3 dir;
-
 		float speed;
 		float rotationSpeed;
-		float springiness;
 
+	private:
+		glm::vec3 dir;
+		float springiness;
 		float dx, dy;
 	};
 }

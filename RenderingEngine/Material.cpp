@@ -38,7 +38,7 @@ namespace reng
 		{
 			aiString name;
 			if(mat->GetTexture(aiTextureType_AMBIENT, 0, &name, NULL, NULL, NULL, NULL, NULL) == AI_SUCCESS) 
-				ambient_tex = TextureHandler::getTexture(path, name.C_Str());
+				ambient_tex = TextureHandler::getTexture(path + name.C_Str());
 		}
 		else
 			ambient_tex = TextureHandler::getDefaultTexture();
@@ -47,7 +47,7 @@ namespace reng
 		{
 			aiString name;
 			if(mat->GetTexture(aiTextureType_DIFFUSE, 0, &name, NULL, NULL, NULL, NULL, NULL) == AI_SUCCESS) 
-				diffuse_tex = TextureHandler::getTexture(path, name.C_Str());
+				diffuse_tex = TextureHandler::getTexture(path + name.C_Str());
 		}
 		else
 			diffuse_tex = TextureHandler::getDefaultTexture();
@@ -56,7 +56,7 @@ namespace reng
 		{
 			aiString name;
 			if(mat->GetTexture(aiTextureType_SPECULAR, 0, &name, NULL, NULL, NULL, NULL, NULL) == AI_SUCCESS) 
-				specular_tex = TextureHandler::getTexture(path, name.C_Str());
+				specular_tex = TextureHandler::getTexture(path + name.C_Str());
 		}
 		else
 			specular_tex = TextureHandler::getDefaultTexture();
@@ -65,7 +65,7 @@ namespace reng
 		{
 			aiString name;
 			if(mat->GetTexture(aiTextureType_NORMALS, 0, &name, NULL, NULL, NULL, NULL, NULL) == AI_SUCCESS) 
-				normal_tex = TextureHandler::getTexture(path, name.C_Str());
+				normal_tex = TextureHandler::getTexture(path + name.C_Str());
 		}
 		else
 			normal_tex = TextureHandler::getDefaultTexture();

@@ -1,33 +1,44 @@
 #include "Shader.h"
+#include <string>
+#include <iostream>
+#include <fstream>
+#include <cstdlib>
 #include <cstring>
-#include <cerrno>
-#include <cstdio>
+
+#ifdef _WIN32
 #include <Windows.h>
+#endif
+
+using namespace std;
 
 namespace reng
 {
 	void Shader::init(const char *name)
 	{
-		char sn[64];
-		strcpy(sn, name);
-		strcat(sn, getExtension());
+		string sn(name);
+	    sn += getExtension();
 
-		char source[2000];
-		memset(source, 0, sizeof source);
-		FILE *f = fopen(sn, "r");
-		if(f == 0)
+		ifstream in(sn, ifstream::in);
+		if(in)
 		{
-			printf("Could not open %s\n%s\n", sn, strerror(errno));
-			id = -1;
-			return;
+			unsigned long long int size = 0ull;
+			in.seekg(0, ios::end);
+			ifstream::pos_type szp = in.tellg();
+			in.seekg(0, ios::beg);
+			size = static_cast<unsigned long long int>(szp);
+
+			char *source = new char[static_cast<size_t>(size)];
+			memset(source, 0, static_cast<size_t>(size));
+			in.read(source, static_cast<streamsize>(size));
+
+			init2(source, name);
+			delete[] source;
 		}
-
-		int cnt = fread(source, 1, 2000, f);
-		if(cnt == 2000)
-			puts("omgomg, nemam dosta mem");
-		fclose(f);
-
-		init2(source, name);
+		else
+		{
+			cerr << "no shader file found\n";
+		}
+		in.close();
 	}
 
 	void Shader::init(int idr, const char *name)
