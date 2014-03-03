@@ -40,12 +40,12 @@ namespace reng
 		if(!success)
 		{
 			error = ilGetError();
-			std::cout << "Image load failed - IL reports error: " << error << " - " << iluErrorString(error) << std::endl;
+			std::cout << "Image load failed " + path + "- IL reports error: " << error << " - " << iluErrorString(error) << std::endl;
 			success = ilLoadImage((const ILstring)def.c_str());
 			if(!success)
 			{
 				error = ilGetError();
-				std::cout << "Image load failed - IL reports error: " << error << " - " << iluErrorString(error) << std::endl;
+				std::cout << "Image load failed " + def + "- IL reports error: " << error << " - " << iluErrorString(error) << std::endl;
 				exit(-1);
 			}
 		}
