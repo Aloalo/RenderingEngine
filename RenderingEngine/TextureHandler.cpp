@@ -22,6 +22,30 @@ namespace reng
 			(*it).second.destroy();
 	}
 
+	ILboolean convertAndGetType(GLenum format, GLenum &type)
+	{
+		switch(format)
+		{
+		case GL_RGBA32F_ARB:
+			type = GL_FLOAT;
+			return ilConvertImage(IL_RGBA, IL_FLOAT);
+			break;
+		case GL_RGBA8:
+			type = GL_UNSIGNED_BYTE;
+			return ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE);
+			break;
+		case GL_RGBA8UI:
+			type = GL_UNSIGNED_BYTE;
+			return ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE);
+			break;
+		case GL_RGBA16:
+			type = GL_UNSIGNED_SHORT;
+			return ilConvertImage(IL_RGBA, IL_UNSIGNED_SHORT);
+			break;
+		default:
+			throw new exception("Unsupported texture format");
+		}
+	}
 
 	Texture TextureHandler::getTexture(const string &path, const string &def, GLenum format)
 	{
@@ -40,12 +64,12 @@ namespace reng
 		if(!success)
 		{
 			error = ilGetError();
-			std::cout << "Image load failed - IL reports error: " << error << " - " << iluErrorString(error) << std::endl;
+			std::cout << "Image load failed " + path + "- IL reports error: " << error << " - " << iluErrorString(error) << std::endl;
 			success = ilLoadImage((const ILstring)def.c_str());
 			if(!success)
 			{
 				error = ilGetError();
-				std::cout << "Image load failed - IL reports error: " << error << " - " << iluErrorString(error) << std::endl;
+				std::cout << "Image load failed " + def + "- IL reports error: " << error << " - " << iluErrorString(error) << std::endl;
 				exit(-1);
 			}
 		}
@@ -55,7 +79,8 @@ namespace reng
 		if(ImageInfo.Origin == IL_ORIGIN_UPPER_LEFT)
 			iluFlipImage();
 
-		success = ilConvertImage(IL_RGBA, IL_FLOAT);
+		GLenum type;
+		success = convertAndGetType(format, type);
 
 		if(!success)
 		{
@@ -65,7 +90,7 @@ namespace reng
 		}
 		ret.generate();
 		ret.bind();
-		ret.texImage(0, format, vec3(ilGetInteger(IL_IMAGE_WIDTH), ilGetInteger(IL_IMAGE_HEIGHT), 0), ilGetInteger(IL_IMAGE_FORMAT), GL_FLOAT, ilGetData());
+		ret.texImage(0, format, vec3(ilGetInteger(IL_IMAGE_WIDTH), ilGetInteger(IL_IMAGE_HEIGHT), 0), ilGetInteger(IL_IMAGE_FORMAT), type, ilGetData());
 
 		ilDeleteImages(1, &imageID);
 

@@ -1,6 +1,9 @@
 -shader windows
 -scene graph
+-input events
+-active input observers
+-GUI
 
--normal / bump / shadow mapping
+-normal / parallax / shadow mapping
 
 -physics?!
