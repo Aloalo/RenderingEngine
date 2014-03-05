@@ -14,7 +14,6 @@ using namespace glm;
 
 namespace reng
 {
-
 	int Engine::windowWidth = 1024;
 	int Engine::windowHeight = 768;
 	float Engine::updateInterval = 1.f / 60.f;
