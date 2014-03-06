@@ -1,7 +1,10 @@
 #include "Engine.h"
 #include "Input.h"
 
+#include <glm/glm.hpp>
+
 using namespace std;
+using namespace glm;
 
 namespace reng
 {
@@ -11,8 +14,10 @@ namespace reng
 	{
 		glfwSetKeyCallback(Engine::getWindow(), keyPress);
 		glfwSetWindowSizeCallback(Engine::getWindow(), handleResize);
+		glfwSetCursorPosCallback(Engine::getWindow(), mouseMove); 
+		glfwSetMouseButtonCallback(Engine::getWindow(), mouseClick);
+		glfwSetScrollCallback(Engine::getWindow(), mouseWheelMove);
 	}
-
 
 	Input::~Input(void)
 	{
@@ -20,64 +25,46 @@ namespace reng
 
 	void Input::keyPress(GLFWwindow *window, int key, int scancode, int action, int mods)
 	{
-		if(key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-		{
-			glfwSetWindowShouldClose(window, GL_TRUE);
-			return;
-		}
-
-		for(auto i = observerList.begin(); i != observerList.end(); i++)
-			(*i)->keyPress(key, scancode, action, mods);
+		double x, y;
+		glfwGetCursorPos(Engine::getWindow(), &x, &y);
+		for(auto i = observerList.begin(); i != observerList.end(); ++i)
+			if((*i)->active)
+				(*i)->keyPress(KeyPressEvent(vec2(x, y), key, scancode, action, mods));
 	}
 
 	void Input::mouseMove(GLFWwindow *window, double x, double y)
 	{
-		for(auto i = observerList.begin(); i != observerList.end(); i++)
-			(*i)->mouseMove(x, y);
+		for(auto i = observerList.begin(); i != observerList.end(); ++i)
+			if((*i)->active)
+				(*i)->mouseMove(MouseMoveEvent(vec2(x, y)));
 	}
 
 	void Input::mouseClick(GLFWwindow *window, int button, int state, int mods)
 	{
-		for(auto i = observerList.begin(); i != observerList.end(); i++)
-			(*i)->mouseClick(button, state, mods);
+		double x, y;
+		glfwGetCursorPos(Engine::getWindow(), &x, &y);
+		for(auto i = observerList.begin(); i != observerList.end(); ++i)
+			if((*i)->active)
+				(*i)->mouseClick(MouseClickEvent(vec2(x, y), button, state, mods));
 	}
 
 	void Input::handleResize(GLFWwindow *window, int width, int height)
 	{
-		glViewport(0, 0, width, height);
-		Engine::setWindowSize(width, height);
-		for(auto i = observerList.begin(); i != observerList.end(); i++)
-			(*i)->windowResize(width, height);
+		for(auto i = observerList.begin(); i != observerList.end(); ++i)
+			if((*i)->active)
+				(*i)->windowResize(WindowResizeEvent(ivec2(width, height)));
 	}
 
 	void Input::mouseWheelMove(GLFWwindow *window, double posx, double posy)
 	{
-		for(auto i = observerList.begin(); i != observerList.end(); i++)
-			(*i)->mouseWheelMove(0);
+		for(auto i = observerList.begin(); i != observerList.end(); ++i)
+			if((*i)->active)
+				(*i)->mouseWheelMove(MouseWheelMoveEvent(vec2(posx, posy)));
 	}
 
 	void Input::addInputObserver(InputObserver *IO)
 	{
 		observerList.push_back(IO);
-	}
-
-	void Input::setMouseMoveCallback()
-	{
-		int windowWidth, windowHeight;
-		Engine::getWindowSize(windowWidth, windowHeight);
-
-		glfwSetCursorPos(Engine::getWindow(), windowWidth / 2, windowHeight / 2);
-		glfwSetCursorPosCallback(Engine::getWindow(), mouseMove); 
-	}
-
-	void Input::setMouseClickCallback()
-	{
-		glfwSetMouseButtonCallback(Engine::getWindow(), mouseClick);
-	}
-
-	void Input::setMouseWheelCallback()
-	{
-		glfwSetScrollCallback(Engine::getWindow(), mouseWheelMove);
 	}
 
 	void Input::setMousePosition(double x, double y)

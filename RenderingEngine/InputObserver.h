@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Events.h"
+
 namespace reng
 {
 	class InputObserver
@@ -8,10 +10,12 @@ namespace reng
 		InputObserver(void);
 		virtual ~InputObserver(void);
 
-		virtual void keyPress(int key, int scancode, int action, int mods);
-		virtual void mouseMove(double x, double y);
-		virtual void mouseClick(int button, int state, int mods);
-		virtual void mouseWheelMove(int pos);
-		virtual void windowResize(int width, int height);
+		virtual void keyPress(const KeyPressEvent &e);
+		virtual void mouseMove(const MouseMoveEvent &e);
+		virtual void mouseClick(const MouseClickEvent &e);
+		virtual void mouseWheelMove(const MouseWheelMoveEvent &e);
+		virtual void windowResize(const WindowResizeEvent &e);
+
+		bool active;
 	};
 }

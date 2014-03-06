@@ -24,15 +24,17 @@ namespace reng
 	vec4 Engine::backgroundColor = vec4(0.4);
 	char Engine::winTitle[150];
 	GLFWwindow *Engine::window = NULL;
+	bool Engine::mouseLocked;
 
 
-	Engine::Engine(float _updateInterval, int _windowWidth, int _windowHeight)
+	Engine::Engine(float updateInterval, int windowWidth, int windowHeight)
 	{
 		cam = NULL;
-		updateInterval = _updateInterval;
-		windowWidth = _windowWidth;
-		windowHeight = _windowHeight;
+		Engine::updateInterval = updateInterval;
+		Engine::windowWidth = windowWidth;
+		Engine::windowHeight = windowHeight;
 		initialize();
+		Input::addInputObserver(this);
 	}
 
 	Engine::~Engine()
@@ -119,6 +121,8 @@ namespace reng
 		ilutRenderer(ILUT_OPENGL);
 
 		TextureHandler::generateDefaultTex();
+
+		UIManager::get().d = vec2(windowWidth, windowHeight);
 	}
 
 	void Engine::enableVsync(bool on)
@@ -194,7 +198,7 @@ namespace reng
 		float deltaTime = float(currentTime - lastTime);
 		lastTime = currentTime;
 
-		glClearColor(backgroundColor.x, backgroundColor.y, backgroundColor.z, backgroundColor.w);
+		glClearColor(backgroundColor.r, backgroundColor.g, backgroundColor.b, backgroundColor.a);
 		glClear(mask);
 
 		for(list<Updateable*>::iterator i = updateList.begin(); i != updateList.end(); i++)
@@ -264,11 +268,42 @@ namespace reng
 	{
 		windowWidth = width;
 		windowHeight = height;
+		UIManager::get().d = vec2(width, height);
+		glViewport(0, 0, width, height);
 	}
-
 
 	void Engine::hideMouse(bool hide)
 	{
 		glfwSetInputMode(getWindow(), GLFW_CURSOR, hide ? GLFW_CURSOR_HIDDEN : GLFW_CURSOR_NORMAL);
+	}
+	
+	void Engine::windowResize(const WindowResizeEvent &e)
+	{
+		setWindowSize(e.size.x, e.size.y);
+	}
+
+	void Engine::keyPress(const KeyPressEvent &e)
+	{
+		if(e.action == GLFW_REPEAT)
+			return;
+
+		if(e.mods == GLFW_MOD_SHIFT && e.action == GLFW_PRESS)
+		{
+			mouseLocked = false;
+			cam->active = false;
+			Engine::hideMouse(false);
+		}
+		else
+		{
+			mouseLocked = true;
+			cam->active = true;
+			Engine::hideMouse(true);
+		}
+
+		if(e.key == GLFW_KEY_ESCAPE && e.action == GLFW_PRESS)
+		{
+			glfwSetWindowShouldClose(window, GL_TRUE);
+			return;
+		}
 	}
 }

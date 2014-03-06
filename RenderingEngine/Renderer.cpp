@@ -1,4 +1,5 @@
 #include "Renderer.h"
+#include "UIManager.h"
 
 using namespace glm;
 
@@ -15,11 +16,14 @@ namespace reng
 
 	void Renderer::draw(const mat4 &View, const mat4 &Projection)
 	{
+		glEnable(GL_CULL_FACE);
+		glDepthFunc(GL_LESS);
+		glDisable(GL_BLEND);
 		bool set = false;
-		for(auto k = lightList.begin(); k != lightList.end(); k++)
+		for(auto k = lightList.begin(); k != lightList.end(); ++k)
 		{
 			(*k)->renderingSetup(View, Projection);
-			for(auto i = litList.begin(); i != litList.end(); i++)
+			for(auto i = litList.begin(); i != litList.end(); ++i)
 			{
 				(*k)->collectData(*i, View, Projection);
 				(*i)->draw(View, Projection);
@@ -36,9 +40,10 @@ namespace reng
 
 		glDepthFunc(GL_LESS);
 		glDisable(GL_BLEND);
-		for(std::list<UnLitObject*>::iterator i = unLitList.begin(); i != unLitList.end(); i++)
+		for(auto i = unLitList.begin(); i != unLitList.end(); ++i)
 			(*i)->draw(View, Projection);
 
+		UIManager::get().draw();
 	}
 
 	void Renderer::addObject(Drawable *obj)

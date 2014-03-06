@@ -3,7 +3,8 @@
 
 namespace reng
 {
-	InputObserver::InputObserver(void)
+	InputObserver::InputObserver(void) :
+		active(1)
 	{
 	}
 
@@ -11,24 +12,24 @@ namespace reng
 	InputObserver::~InputObserver(void)
 	{
 	}
-
-	void InputObserver::keyPress(int key, int scancode, int action, int mods)
+	
+	void InputObserver::keyPress(const KeyPressEvent &e)
 	{
 	}
 
-	void InputObserver::mouseMove(double x, double y)
+	void InputObserver::mouseMove(const MouseMoveEvent &e)
 	{
 	}
 
-	void InputObserver::mouseClick(int button, int state, int mods)
+	void InputObserver::mouseClick(const MouseClickEvent &e)
 	{
 	}
 
-	void InputObserver::mouseWheelMove(int pos)
+	void InputObserver::mouseWheelMove(const MouseWheelMoveEvent &e)
 	{
 	}
 
-	void InputObserver::windowResize(int width, int height)
+	void InputObserver::windowResize(const WindowResizeEvent &e)
 	{
 	}
 }
