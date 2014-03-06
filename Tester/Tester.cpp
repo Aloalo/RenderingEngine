@@ -11,6 +11,8 @@
 #include "Geometry.h"
 #include "SineCosine.h"
 #include "NormalDrawer.h"
+#include "Button.h"
+#include "VerticalLayoutManager.h"
 
 using namespace std;
 using namespace glm;
@@ -97,6 +99,24 @@ void addObjFile(const string &path, const string &folder, const mat4 &Model = ma
 	
 }
 
+void blah()
+{
+	puts("trolololo");
+}
+
+struct TintChanger
+{
+	TintChanger(vec4 color) :
+		color(color) {}
+
+	void operator()()
+	{
+		UIManager::get().color = color;
+	}
+
+	vec4 color;
+};
+
 int main(int argc, char* argv[])
 {
 	Engine e(1.f / 80.f, 1280, 720);
@@ -105,13 +125,12 @@ int main(int argc, char* argv[])
 	Engine::enableMode(GL_DEPTH_TEST);
 	Engine::enableMode(GL_CULL_FACE); 
 
-	input.setMouseMoveCallback();
 	e.useStockCamera(vec3(0.0f, 0.0f, -30.0f), vec3(0.0f, 0.0f, 1.0f), 45.0f, 4.0f);
 	
 	
 	//addSineCosine();
 	//addSphere();
-	addObjFile("../Resources/sponza/sponza.obj", "../Resources/sponza/");
+	addObjFile("../Resources/crytek-sponza/sponza.obj", "../Resources/crytek-sponza/", scale(mat4(1.0f), vec3(0.01f, 0.01f, 0.01f)));
 	//addObjFile("../Resources/nissan/nissan.obj", "../Resources/nissan/", scale(mat4(1.0f), vec3(0.05f, 0.05f, 0.05f)));
 	//addObjFile("../Resources/demon/demon1_OBJ.obj", "../Resources/demon/", translate(mat4(1.0f), vec3(-10, 0, 0)));
 	
@@ -132,6 +151,40 @@ int main(int argc, char* argv[])
 	for(int i = 0; i < lights.size(); ++i)
 		Engine::addLight(lights[i]);
 
+	UIManager::get().lm = new VerticalLayoutManager;
+
+	Container *cont = new Container;
+	cont->lm = new VerticalLayoutManager;
+	cont->color = vec4(.4, .4, .4, 0.7);
+	UIManager::get().add(cont);
+	
+	Button *b1 = new Button;
+	b1->color = vec4(1, 0, 0, 1);
+	b1->setAction(new TintChanger(vec4(1, 0, 0, 0.2)));
+	cont->add(b1);
+
+	Button *b2 = new Button;
+	b2->color = vec4(0, 1, 0, 1);
+	b2->setAction(new TintChanger(vec4(0, 1, 0, 0.2)));
+	cont->add(b2);
+
+	Button *b3 = new Button;
+	b3->color = vec4(0, 0, 1, 1);
+	b3->setAction(new TintChanger(vec4(0, 0, 1, 0.2)));
+	cont->add(b3);
+
+	Button *b4 = new Button;
+	b4->color = vec4(1, 1, 1, 1);
+	b4->setAction(new TintChanger(vec4(1, 1, 1, 0)));
+	cont->add(b4);
+
+	Button *b5 = new Button;
+	b5->d = vec2(150, 150);
+	b5->color = vec4(1, 0, 1, 1);
+	b5->setAction(blah);
+	cont->add(b5);
+
+	cont->pack();
 
 	e.start();
 	cleanUp();

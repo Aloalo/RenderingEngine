@@ -6,6 +6,7 @@
 #include "Drawable.h"
 #include "Updateable.h"
 #include "StockCameraHandler.h"
+#include "UIManager.h"
 
 #include "Renderer.h"
 #include "Mesh.h"
@@ -14,14 +15,14 @@
 
 namespace reng
 {
-	class Engine
+	class Engine : public InputObserver
 	{
 	public:
-		Engine(float _updateInterval, int _windowWidth, int _windowHeight);
+		Engine(float updateInterval, int windowWidth, int windowHeight);
 		~Engine();
 
 		static void useStockCamera(const glm::vec3 &position, const glm::vec3 &direction, float FoV, float cameraSpeed);
-		static void setCamera(CameraHandler *_cam);
+		static void setCamera(CameraHandler *cam);
 		static CameraHandler* getCamera();
 		static Renderer& getRenderer();
 		static void setWindowTitle(const char *name);
@@ -47,6 +48,9 @@ namespace reng
 		static GLFWwindow* getWindow();
 
 		static void hideMouse(bool hide);
+		
+		void windowResize(const WindowResizeEvent &e);
+		void keyPress(const KeyPressEvent &e);
 
 	private:
 		static void initialize();
@@ -64,6 +68,8 @@ namespace reng
 		static GLbitfield mask;
 		static glm::vec4 backgroundColor;
 		static char winTitle[150];
+
+		static bool mouseLocked;
 
 		TextureHandler texHandler;
 	};

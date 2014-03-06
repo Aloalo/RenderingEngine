@@ -105,8 +105,11 @@
   <ItemGroup>
     <ClCompile Include="AmbientLight.cpp" />
     <ClCompile Include="BufferObject.cpp" />
+    <ClCompile Include="Button.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CameraHandler.cpp" />
+    <ClCompile Include="Component.cpp" />
+    <ClCompile Include="Container.cpp" />
     <ClCompile Include="DiffuseLight.cpp" />
     <ClCompile Include="Drawable.cpp" />
     <ClCompile Include="Engine.cpp" />
@@ -118,6 +121,7 @@
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="InputObserver.cpp" />
     <ClCompile Include="Function.cpp" />
+    <ClCompile Include="LayoutManager.cpp" />
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="LitObject.cpp" />
     <ClCompile Include="Material.cpp" />
@@ -138,6 +142,7 @@
     <ClCompile Include="TextureHandler.cpp" />
     <ClCompile Include="TextureSampler.cpp" />
     <ClCompile Include="Triangle.cpp" />
+    <ClCompile Include="UIManager.cpp" />
     <ClCompile Include="UniformBuffer.cpp" />
     <ClCompile Include="UnLitObject.cpp" />
     <ClCompile Include="UnlitObject3D.cpp" />
@@ -146,15 +151,20 @@
     <ClCompile Include="VertexArrayObject.cpp" />
     <ClCompile Include="VertexAttribArray.cpp" />
     <ClCompile Include="VertexShader.cpp" />
+    <ClCompile Include="VerticalLayoutManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AmbientLight.h" />
     <ClInclude Include="BufferObject.h" />
+    <ClInclude Include="Button.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CameraHandler.h" />
+    <ClInclude Include="Component.h" />
+    <ClInclude Include="Container.h" />
     <ClInclude Include="DiffuseLight.h" />
     <ClInclude Include="Drawable.h" />
     <ClInclude Include="Engine.h" />
+    <ClInclude Include="Events.h" />
     <ClInclude Include="FragmentShader.h" />
     <ClInclude Include="FrameBufferObject.h" />
     <ClInclude Include="FunctionGraph.h" />
@@ -164,6 +174,7 @@
     <ClInclude Include="Input.h" />
     <ClInclude Include="InputObserver.h" />
     <ClInclude Include="Function.h" />
+    <ClInclude Include="LayoutManager.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="Lights.h" />
     <ClInclude Include="LitObject.h" />
@@ -186,6 +197,7 @@
     <ClInclude Include="TextureHandler.h" />
     <ClInclude Include="TextureSampler.h" />
     <ClInclude Include="Triangle.h" />
+    <ClInclude Include="UIManager.h" />
     <ClInclude Include="UniformBuffer.h" />
     <ClInclude Include="UnLitObject.h" />
     <ClInclude Include="UnlitObject3D.h" />
@@ -194,6 +206,7 @@
     <ClInclude Include="VertexArrayObject.h" />
     <ClInclude Include="VertexAttribArray.h" />
     <ClInclude Include="VertexShader.h" />
+    <ClInclude Include="VerticalLayoutManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -14,14 +14,14 @@ namespace reng
 	StockCameraHandler::~StockCameraHandler(void)
 	{
 	}
-
-	void StockCameraHandler::keyPress(int key, int scancode, int action, int mods)
+	
+	void StockCameraHandler::keyPress(const KeyPressEvent &e)
 	{
-		if(action == GLFW_REPEAT)
+		if(e.action == GLFW_REPEAT)
 			return;
 
-		int mod = action == GLFW_PRESS ? 1 : -1;
-		switch(key)
+		int mod = e.action == GLFW_PRESS ? 1 : -1;
+		switch(e.key)
 		{
 		case 'W':
 			dir += vec3(0, 0, -mod);
@@ -46,12 +46,12 @@ namespace reng
 		}
 	}
 
-	void StockCameraHandler::mouseMove(double x, double y)
+	void StockCameraHandler::mouseMove(const MouseMoveEvent &e)
 	{
 		int w, h;
 		Engine::getWindowSize(w, h);
 
-		rotate(float(w / 2 - x) * rotationSpeed, float(h / 2 - y) * rotationSpeed);
+		rotate(float(w / 2 - e.pos.x) * rotationSpeed, float(h / 2 - e.pos.y) * rotationSpeed);
 		glfwSetCursorPos(Engine::getWindow(), w / 2, h / 2);
 	}
 
@@ -61,9 +61,9 @@ namespace reng
 		dy += pitch;
 	}
 
-	void StockCameraHandler::windowResize(int width, int height)
+	void StockCameraHandler::windowResize(const WindowResizeEvent &e)
 	{
-		cam.aspectRatio = (float)width / height;
+		cam.aspectRatio = (float)e.size.x / e.size.y;
 	}
 
 	void StockCameraHandler::update(float deltaTime)

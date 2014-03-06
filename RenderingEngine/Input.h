@@ -3,7 +3,6 @@
 #include "InputObserver.h"
 #include <GLFW/glfw3.h>
 #include <list>
-#include <memory>
 
 namespace reng
 {
@@ -21,9 +20,6 @@ namespace reng
 
 		static void addInputObserver(InputObserver *IO);
 
-		static void setMouseMoveCallback();
-		static void setMouseClickCallback();
-		static void setMouseWheelCallback();
 		static void setMousePosition(double x, double y);
 
 	private:
