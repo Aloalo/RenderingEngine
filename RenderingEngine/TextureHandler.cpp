@@ -42,6 +42,18 @@ namespace reng
 			type = GL_UNSIGNED_SHORT;
 			return ilConvertImage(IL_RGBA, IL_UNSIGNED_SHORT);
 			break;
+		case GL_R8:
+			type = GL_UNSIGNED_BYTE;
+			return ilConvertImage(IL_LUMINANCE, IL_UNSIGNED_BYTE);
+			break;
+		case GL_R8UI:
+			type = GL_UNSIGNED_BYTE;
+			return ilConvertImage(IL_LUMINANCE, IL_UNSIGNED_BYTE);
+			break;
+		case GL_R8I:
+			type = GL_BYTE;
+			return ilConvertImage(IL_LUMINANCE, IL_BYTE);
+			break;
 		default:
 			throw new exception("Unsupported texture format");
 		}

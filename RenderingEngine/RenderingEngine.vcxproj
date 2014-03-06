@@ -62,7 +62,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;glew32.lib;DevIL.lib;ILUT.lib;ILU.lib;assimp.lib</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;glew32.lib;DevIL.lib;ILUT.lib;ILU.lib;assimp.lib;opengl32.lib;</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -85,7 +85,7 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <Lib>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;glew32.lib;DevIL.lib;ILUT.lib;ILU.lib;assimp.lib</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;glew32.lib;DevIL.lib;ILUT.lib;ILU.lib;assimp.lib;opengl32.lib;</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
