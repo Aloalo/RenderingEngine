@@ -21,6 +21,7 @@ namespace reng
 		void texImage(GLint level, GLint internalFormat, const glm::vec3 &dimensions, GLenum format, GLenum type, const GLvoid *data) const;
 		const std::string& getName();
 
+		void generateMipmaps() const;
 		void texParami(GLenum paramName, GLuint param) const;
 		void texParamf(GLenum paramName, GLfloat param) const;
 		void texParamIuiv(GLenum paramName, const GLuint *param) const;
