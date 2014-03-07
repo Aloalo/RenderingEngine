@@ -25,10 +25,8 @@ void cleanUp()
 {
 	for(int i = 0; i < junk.size(); ++i)
 		delete junk[i];
-	junk.clear();
 	for(int i = 0; i < lights.size(); ++i)
 		delete lights[i];
-	lights.clear();
 }
 
 void addSineCosine()
@@ -157,7 +155,7 @@ int main(int argc, char* argv[])
 	cont->lm = new VerticalLayoutManager;
 	cont->color = vec4(.4, .4, .4, 0.7);
 	UIManager::get().add(cont);
-	
+
 	Button *b1 = new Button;
 	b1->color = vec4(1, 0, 0, 1);
 	b1->setAction(new TintChanger(vec4(1, 0, 0, 0.2)));
@@ -188,6 +186,7 @@ int main(int argc, char* argv[])
 
 	e.start();
 	cleanUp();
+	delete cont;
 
 	return 0;
 }

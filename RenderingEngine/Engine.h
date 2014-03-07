@@ -15,6 +15,9 @@
 
 namespace reng
 {
+	/*
+	owns the CameraHandler
+	*/
 	class Engine : public InputObserver
 	{
 	public:
