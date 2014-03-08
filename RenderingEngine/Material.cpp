@@ -37,7 +37,7 @@ namespace reng
 		if(mat->GetTextureCount(aiTextureType_AMBIENT) > 0)
 		{
 			aiString name;
-			if(mat->GetTexture(aiTextureType_AMBIENT, 0, &name, NULL, NULL, NULL, NULL, NULL) == AI_SUCCESS) 
+			if(mat->GetTexture(aiTextureType_AMBIENT, 0, &name, NULL, NULL, NULL, NULL, NULL) == AI_SUCCESS)
 				ambient_tex = TextureHandler::getTexture(path + name.C_Str());
 		}
 		else
@@ -69,6 +69,10 @@ namespace reng
 		}
 		else
 			normal_tex = TextureHandler::getDefaultTexture();
+
+		ambient_tex.generateMipmaps();
+		diffuse_tex.generateMipmaps();
+		specular_tex.generateMipmaps();
 	}
 
 	Material::~Material(void)

@@ -50,6 +50,13 @@ namespace reng
 		return name;
 	}
 
+	void Texture::generateMipmaps() const
+	{
+		bind();
+		glGenerateMipmap(target);
+	}
+
+
 	void Texture::texParami(GLenum paramName, GLuint param) const
 	{
 		bind();
