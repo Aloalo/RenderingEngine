@@ -1,6 +1,7 @@
 #pragma once
 
 #include <glm/glm.hpp>
+#include "BufferObject.h"
 #include "InputObserver.h"
 #include "Events.h"
 

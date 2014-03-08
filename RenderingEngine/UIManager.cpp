@@ -26,6 +26,8 @@ namespace reng
 
 	void UIManager::draw()
 	{
+		glBindTexture(GL_TEXTURE_2D, 0);
+
 		glUseProgram(0);
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);

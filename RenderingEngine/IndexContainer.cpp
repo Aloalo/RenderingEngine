@@ -13,13 +13,11 @@ namespace reng
 	{
 	}
 
-
 	IndexContainer::~IndexContainer(void)
 	{
 		if(data != NULL)
 			delete [] data;
 	}
-
 
 	unsigned int IndexContainer::get(int idx)
 	{

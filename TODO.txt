@@ -1,7 +1,5 @@
 -shader windows
 -scene graph
--input events
--active input observers
 -GUI
 
 -normal / parallax / shadow mapping
