@@ -118,6 +118,7 @@
     <ClCompile Include="FunctionGraph.cpp" />
     <ClCompile Include="GeometryShader.cpp" />
     <ClCompile Include="IndexContainer.cpp" />
+    <ClCompile Include="InitialSettings.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="InputObserver.cpp" />
     <ClCompile Include="Function.cpp" />
@@ -170,6 +171,9 @@
     <ClInclude Include="FunctionGraph.h" />
     <ClInclude Include="Geometry.h" />
     <ClInclude Include="GeometryShader.h" />
+    <ClInclude Include="InitialSettings.h" />
+    <ClInclude Include="Setting.h" />
+    <ClInclude Include="Singleton.h" />
     <ClInclude Include="IndexContainer.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="InputObserver.h" />
