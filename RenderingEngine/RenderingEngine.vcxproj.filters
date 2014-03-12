@@ -76,6 +76,12 @@
     <Filter Include="Source Files\Engine\Input">
       <UniqueIdentifier>{4ad189ac-f88b-4ff1-8d6b-37ce60468ed5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Settings">
+      <UniqueIdentifier>{f8f09bd5-b569-4c26-b8d1-2ebdbd372d37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Settings">
+      <UniqueIdentifier>{74f2b07e-077d-411e-8f4f-1a0fca57abb5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
@@ -261,6 +267,9 @@
     <ClCompile Include="VerticalLayoutManager.cpp">
       <Filter>Source Files\UI</Filter>
     </ClCompile>
+    <ClCompile Include="InitialSettings.cpp">
+      <Filter>Source Files\Settings</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Updateable.h">
@@ -421,6 +430,15 @@
     </ClInclude>
     <ClInclude Include="VerticalLayoutManager.h">
       <Filter>Header Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Singleton.h">
+      <Filter>Header Files\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="InitialSettings.h">
+      <Filter>Header Files\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="Setting.h">
+      <Filter>Header Files\Settings</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
