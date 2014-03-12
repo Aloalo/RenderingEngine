@@ -11,8 +11,10 @@
 #include "Geometry.h"
 #include "SineCosine.h"
 #include "NormalDrawer.h"
+
 #include "Button.h"
 #include "VerticalLayoutManager.h"
+#include "Label.h"
 
 using namespace std;
 using namespace glm;
@@ -148,6 +150,11 @@ int main(int argc, char* argv[])
 
 	for(int i = 0; i < lights.size(); ++i)
 		Engine::addLight(lights[i]);
+	
+	FontFace *ff = new FontFace("../DefaultTextures/font.png", 10, 10, ' ', 0.8);
+	Font *f = new Font(ff, 18);
+	f->halign = Font::HAlignment::Center;
+	f->valign = Font::VAlignment::Middle;
 
 	UIManager::get().lm = new VerticalLayoutManager;
 
@@ -159,27 +166,37 @@ int main(int argc, char* argv[])
 	Button *b1 = new Button;
 	b1->color = vec4(1, 0, 0, 1);
 	b1->setAction(new TintChanger(vec4(1, 0, 0, 0.2)));
+	b1->text = "Red";
+	b1->font = f;
 	cont->add(b1);
 
 	Button *b2 = new Button;
 	b2->color = vec4(0, 1, 0, 1);
 	b2->setAction(new TintChanger(vec4(0, 1, 0, 0.2)));
+	b2->text = "Green";
+	b2->font = f;
 	cont->add(b2);
 
 	Button *b3 = new Button;
 	b3->color = vec4(0, 0, 1, 1);
 	b3->setAction(new TintChanger(vec4(0, 0, 1, 0.2)));
+	b3->text = "Blue";
+	b3->font = f;
 	cont->add(b3);
 
 	Button *b4 = new Button;
 	b4->color = vec4(1, 1, 1, 1);
 	b4->setAction(new TintChanger(vec4(1, 1, 1, 0)));
+	b4->text = "White";
+	b4->font = f;
 	cont->add(b4);
 
 	Button *b5 = new Button;
 	b5->d = vec2(150, 150);
 	b5->color = vec4(1, 0, 1, 1);
 	b5->setAction(blah);
+	b5->text = "Trololo\nlololo\nlololo\nlolololo\nlololo";
+	b5->font = f;
 	cont->add(b5);
 
 	cont->pack();

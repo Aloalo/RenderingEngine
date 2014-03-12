@@ -11,6 +11,7 @@ namespace reng
 	UIManager::UIManager(void)
 	{
 		Input::addInputObserver(this);
+		shown = 0;
 	}
 
 	UIManager::~UIManager(void)
@@ -26,7 +27,8 @@ namespace reng
 
 	void UIManager::draw()
 	{
-		glBindTexture(GL_TEXTURE_2D, 0);
+		if(!shown)
+			return;
 
 		glUseProgram(0);
 		glEnable(GL_BLEND);
@@ -37,6 +39,8 @@ namespace reng
 		glPushMatrix();
 		glOrtho(0, d.x, d.y, 0, -1, 1);
 		Container::draw();
+
+
 		glPopMatrix();
 	}
 	

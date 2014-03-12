@@ -270,6 +270,15 @@
     <ClCompile Include="InitialSettings.cpp">
       <Filter>Source Files\Settings</Filter>
     </ClCompile>
+    <ClCompile Include="FontFace.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Font.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Label.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Updateable.h">
@@ -439,6 +448,15 @@
     </ClInclude>
     <ClInclude Include="Setting.h">
       <Filter>Header Files\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="FontFace.h">
+      <Filter>Header Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Font.h">
+      <Filter>Header Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Label.h">
+      <Filter>Header Files\UI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

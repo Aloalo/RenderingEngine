@@ -2,6 +2,8 @@
 
 #include "Component.h"
 #include <GLFW/glfw3.h>
+#include "Font.h"
+#include <string>
 
 namespace reng
 {
@@ -29,6 +31,16 @@ namespace reng
 				delete a;
 			a = new ActionT<F>(f);
 		}
+
+		virtual void draw()
+		{
+			Component::draw();
+			if(font)
+				font->draw(text, p, d);
+		}
+
+		std::string text;
+		Font *font;
 
 	private:
 		struct Action
