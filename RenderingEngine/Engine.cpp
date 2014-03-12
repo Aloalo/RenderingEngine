@@ -292,12 +292,17 @@ namespace reng
 			mouseLocked = false;
 			cam->active = false;
 			Engine::hideMouse(false);
+			UIManager::get().shown = true;
 		}
 		else
 		{
 			mouseLocked = true;
 			cam->active = true;
 			Engine::hideMouse(true);
+			UIManager::get().shown = false;
+			int w, h;
+			getWindowSize(w, h);
+			Input::setMousePosition(w / 2, h / 2);
 		}
 
 		if(e.key == GLFW_KEY_ESCAPE && e.action == GLFW_PRESS)

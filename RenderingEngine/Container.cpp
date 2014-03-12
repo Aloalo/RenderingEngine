@@ -50,6 +50,7 @@ namespace reng
 	void Container::drawComponents()
 	{
 		for(auto c = l.begin(); c != l.end(); ++c)
-			(*c)->draw();
+			if((*c)->shown)
+				(*c)->draw();
 	}
 }

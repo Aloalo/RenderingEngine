@@ -5,7 +5,8 @@ namespace reng
 {
 	using namespace glm;
 
-	Component::Component(void)
+	Component::Component(void) :
+		shown(true)
 	{
 	}
 
@@ -15,6 +16,7 @@ namespace reng
 
 	void Component::draw()
 	{
+		glBindTexture(GL_TEXTURE_2D, 0);
 		glBegin(GL_QUADS);
 		glColor4fv((float*)&color);
 		glVertex2f(p.x, p.y);

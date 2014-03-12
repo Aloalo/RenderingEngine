@@ -1,5 +1,6 @@
 #include "StockCameraHandler.h"
 #include "Engine.h"
+#include "Input.h"
 #include <GLFW/glfw3.h>
 
 using namespace glm;
@@ -52,7 +53,8 @@ namespace reng
 		Engine::getWindowSize(w, h);
 
 		rotate(float(w / 2 - e.pos.x) * rotationSpeed, float(h / 2 - e.pos.y) * rotationSpeed);
-		glfwSetCursorPos(Engine::getWindow(), w / 2, h / 2);
+		Input::setMousePosition(w / 2, h / 2);
+		//glfwSetCursorPos(Engine::getWindow(), w / 2, h / 2);
 	}
 
 	void StockCameraHandler::rotate(float yaw, float pitch)

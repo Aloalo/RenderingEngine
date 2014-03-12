@@ -61,9 +61,8 @@ namespace reng
 
 	Texture TextureHandler::getTexture(const string &path, const string &def, GLenum format)
 	{
-		if(existingTextures.find(path) != existingTextures.end())
+		if(hasTexture(path))
 			return existingTextures[path];
-
 
 		Texture ret(path);
 		ILuint imageID;
@@ -76,12 +75,12 @@ namespace reng
 		if(!success)
 		{
 			error = ilGetError();
-			std::cout << "Image load failed " + path + "- IL reports error: " << error << " - " << iluErrorString(error) << std::endl;
+			std::cout << "Image load failed " + path + " - IL reports error: " << error << " - " << iluErrorString(error) << std::endl;
 			success = ilLoadImage((const ILstring)def.c_str());
 			if(!success)
 			{
 				error = ilGetError();
-				std::cout << "Image load failed " + def + "- IL reports error: " << error << " - " << iluErrorString(error) << std::endl;
+				std::cout << "Image load failed " + def + " - IL reports error: " << error << " - " << iluErrorString(error) << std::endl;
 				exit(-1);
 			}
 		}
@@ -112,7 +111,7 @@ namespace reng
 
 	Texture TextureHandler::genTexture(const std::string &path, GLenum target)
 	{
-		if(existingTextures.find(path) != existingTextures.end())
+		if(hasTexture(path))
 			return existingTextures[path];
 
 		Texture ret(path, target);
@@ -128,9 +127,7 @@ namespace reng
 
 	bool TextureHandler::hasTexture(const std::string &path)
 	{
-		if(existingTextures.find(path) != existingTextures.end())
-			return true;
-		return false;
+		return existingTextures.find(path) != existingTextures.end();
 	}
 
 	void TextureHandler::generateDefaultTex()
