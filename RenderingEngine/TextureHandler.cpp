@@ -18,8 +18,8 @@ namespace reng
 
 	TextureHandler::~TextureHandler(void)
 	{
-		for(auto it = existingTextures.begin(); it != existingTextures.end(); ++it)
-			(*it).second.destroy();
+		for(auto texture : existingTextures)
+			texture.second.destroy();
 	}
 
 	ILboolean convertAndGetType(GLenum format, GLenum &type)

@@ -38,19 +38,19 @@ namespace reng
 
 	void Container::onClick(const MouseClickEvent &e)
 	{
-		for(auto c = l.begin(); c != l.end(); ++c)
-			if((*c)->contains(e.pos))
+		for(auto container : l)
+			if(container->contains(e.pos))
 			{
 				MouseClickEvent ne = e;
-				ne.pos -= (*c)->p;
-				(*c)->onClick(ne);
+				ne.pos -= container->p;
+				container->onClick(ne);
 			}
 	}
 
 	void Container::drawComponents()
 	{
-		for(auto c = l.begin(); c != l.end(); ++c)
-			if((*c)->shown)
-				(*c)->draw();
+		for(auto container : l)
+			if(container->shown)
+				container->draw();
 	}
 }

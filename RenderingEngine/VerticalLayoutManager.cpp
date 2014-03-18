@@ -19,9 +19,9 @@ namespace reng
 	void VerticalLayoutManager::add(Component *c, Container *l)
 	{
 		vec2 p(5, 5);
-		for(auto cli = l->l.begin(); cli != l->l.end(); ++cli)
+		for(auto cli : l->l)
 		{
-			auto &cl = **cli;
+			auto &cl = *cli;
 			p.y = max(p.y, cl.p.y + cl.d.y + 5);
 		}
 		c->p = p;
@@ -31,9 +31,9 @@ namespace reng
 	{
 		vec2 p(5, 5);
 		float mx = 0;
-		for(auto cli = l->l.begin(); cli != l->l.end(); ++cli)
+		for(auto cli : l->l)
 		{
-			auto &cl = **cli;
+			auto &cl = *cli;
 			cl.p = p;
 			p.y += cl.d.y + 5;
 			mx = max(mx, cl.d.x);

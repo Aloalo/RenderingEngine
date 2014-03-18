@@ -20,13 +20,13 @@ namespace reng
 		glDepthFunc(GL_LESS);
 		glDisable(GL_BLEND);
 		bool set = false;
-		for(auto k = lightList.begin(); k != lightList.end(); ++k)
+		for(auto light : lightList)
 		{
-			(*k)->renderingSetup(View, Projection);
-			for(auto i = litList.begin(); i != litList.end(); ++i)
+			light->renderingSetup(View, Projection);
+			for(auto litobject : litList)
 			{
-				(*k)->collectData(*i, View, Projection);
-				(*i)->draw(View, Projection);
+				light->collectData(litobject, View, Projection);
+				litobject->draw(View, Projection);
 			}
 
 			if(!set)
@@ -40,8 +40,8 @@ namespace reng
 
 		glDepthFunc(GL_LESS);
 		glDisable(GL_BLEND);
-		for(auto i = unLitList.begin(); i != unLitList.end(); ++i)
-			(*i)->draw(View, Projection);
+		for(auto object : unLitList)
+			object->draw(View, Projection);
 
 		UIManager::get().draw();
 	}

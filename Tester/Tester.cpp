@@ -25,10 +25,10 @@ vector<Light*> lights;
 
 void cleanUp()
 {
-	for(int i = 0; i < junk.size(); ++i)
-		delete junk[i];
-	for(int i = 0; i < lights.size(); ++i)
-		delete lights[i];
+	for(auto jnk : junk)
+		delete jnk;
+	for(auto light : lights)
+		delete light;
 }
 
 void addSineCosine()
@@ -99,11 +99,6 @@ void addObjFile(const string &path, const string &folder, const mat4 &Model = ma
 	
 }
 
-void blah()
-{
-	puts("trolololo");
-}
-
 struct TintChanger
 {
 	TintChanger(vec4 color) :
@@ -148,8 +143,8 @@ int main(int argc, char* argv[])
 	lights.push_back(new DiffuseLight(vec3(-1.0f, 1.0f, 1.0f)));
 	lights.push_back(new SpecularPointLight(vec3(-5.0f, 6.0f, 0.0f), vec4(10.0f, 10.0f, 10.0f, 1.0f), 3.0f));
 
-	for(int i = 0; i < lights.size(); ++i)
-		Engine::addLight(lights[i]);
+	for(auto light : lights)
+		Engine::addLight(light);
 	
 	FontFace *ff = new FontFace("../DefaultTextures/font.png", 10, 10, ' ', 0.8);
 	Font *f = new Font(ff, 18);
@@ -194,7 +189,8 @@ int main(int argc, char* argv[])
 	Button *b5 = new Button;
 	b5->d = vec2(150, 150);
 	b5->color = vec4(1, 0, 1, 1);
-	b5->setAction(blah);
+	auto func = [] () {puts("blah");};
+	b5->setAction(&func);
 	b5->text = "Trololo\nlololo\nlololo\nlolololo\nlololo";
 	b5->font = f;
 	cont->add(b5);

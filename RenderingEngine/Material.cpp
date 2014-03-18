@@ -105,15 +105,15 @@ namespace reng
 		if(unknown_parameter.size() == 0)
 			cout << "NONE" << endl;
 
-		for(auto i = unknown_parameter.begin(); i != unknown_parameter.end(); ++i)
-			cout << "unp[ " << i->first << " ] = " << i->second;
+		for(auto param : unknown_parameter)
+			cout << "unp[ " << param.first << " ] = " << param.second;
 
 		cout << endl << endl << endl;
 	}
 
 	void Material::printIfUnknown()
 	{
-		for(auto i = unknown_parameter.begin(); i != unknown_parameter.end(); ++i)
-			cout << "unp[ " << i->first << " ] = " << i->second;
+		for(auto param : unknown_parameter)
+			cout << "unp[ " << param.first << " ] = " << param.second;
 	}
 }

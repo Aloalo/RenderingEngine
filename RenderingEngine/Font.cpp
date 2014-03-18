@@ -81,10 +81,10 @@ namespace reng
 				++x;
 			rest = rest.substr(x);
 			pos.x = startx + halignOffset(line, dim);
-			for(int i = 0; i < line.size(); ++i)
+			for(char c : line)
 			{
-				draw(line[i], pos);
-				pos.x += charWidth(line[i]);
+				draw(c, pos);
+				pos.x += charWidth(c);
 			}
 			pos.y += size;
 		}

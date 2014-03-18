@@ -28,7 +28,7 @@ namespace reng
 		};
 
 		vector<vec3> *out = new vector<vec3>();
-		for (int i = 0; i < 20; i++)
+		for(int i = 0; i < 20; i++)
 			subdivide(vdata[tindices[i][0]], vdata[tindices[i][1]], vdata[tindices[i][2]], depth, *out);
 
 		return out;
