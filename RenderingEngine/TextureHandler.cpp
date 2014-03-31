@@ -18,7 +18,7 @@ namespace reng
 
 	TextureHandler::~TextureHandler(void)
 	{
-		for(auto texture : existingTextures)
+		for(auto &texture : existingTextures)
 			texture.second.destroy();
 	}
 

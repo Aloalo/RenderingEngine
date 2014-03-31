@@ -131,7 +131,7 @@ int main(int argc, char* argv[])
 	
 	//addObjFile("../Resources/sibenik/sibenik.obj", "../Resources/sibenik/");
 	//addObjFile("../Resources/dragon/dragon.obj", "../Resources/dragon/", scale(mat4(1.0f), vec3(3.1f, 3.1f, 3.1f)));
-	//addObjFile("../Resources/rungholt/rungholt.obj", "../Resources/rungholt/", scale(mat4(1.0f), vec3(0.1f, 0.1f, 0.1f)));
+	//addObjFile("../Resources/rungholt/rungholt.obj", "../Resources/rungholt/", scale(mat4(1.0f), vec3(1.1f, 1.1f, 1.1f)));
 	//addObjFile("../Resources/head/head.obj", "../Resources/head/");
 	//addObjFile("../Resources/powerplant/powerplant.obj", "../Resources/powerplant/", scale(mat4(1.0f), vec3(0.1f, 0.1f, 0.1f)));
 	//addObjFile("../Resources/buddha/buddha.obj", "../Resources/buddha/", scale(mat4(1.0f), vec3(3.1f, 3.1f, 3.1f)));
